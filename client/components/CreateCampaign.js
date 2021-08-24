@@ -25,11 +25,18 @@ export default class CreateCampaign extends React.Component {
                                 onChange={this.handleChange}
                             />
                             <label>Cause Category</label>
-                            <input
-                                type="text"
-                                name="name"
-                                onChange={this.handleChange}
-                            />
+                            <select name="category" id="category">
+                                <option value="select">Select</option>
+                                <option value="arts">Arts</option>
+                                <option value="community">Community</option>
+                                <option value="education">Education</option>
+                                <option value="emergency">Emergency</option>
+                                <option value="innovation">Innovation</option>
+                                <option value="family">Family</option>
+                                <option value="medical">Medical</option>
+                                <option value="housing">Housing</option>
+                                <option value="hunger">Hunger</option>
+                            </select>
                             <label>More</label>
                             <input
                                 type="text"
