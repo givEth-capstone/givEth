@@ -23,8 +23,28 @@ const useStyles = makeStyles(() => ({
     minWidth: 200,
     padding: 20,
     minWidth: 200,
-    position: 'absolute',
-    right: 20,
+    // position: 'absolute',
+    // right: 20,
+  },
+  // button: {
+
+  // },
+  container: {
+    display: 'flex',
+    // flexWrap: 'wrap'
+  },
+  root: {
+    borderRadius: 12,
+    minWidth: 256,
+    maxWidth: 345,
+    textAlign: 'center',
+    padding: 5,
+    margin: 12,
+  },
+  media: {
+    height: 270,
+    width: 270,
+    margin: '0 auto'
   },
   selectEmpty: {
     marginTop: 10,
@@ -32,13 +52,28 @@ const useStyles = makeStyles(() => ({
   gridContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    display: 'flex',
+    // position: 'clear'
+    alignItems: 'center',
+    alignContent: 'space-between'
+    
+  },
+  content: {
+    display: "flex",
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 75
+  },
+  action: {
+    display: 'flex',
+    justifyContent: 'space-around',
   },
 }));
 
 export default function Campaigns() {
   const classes = useStyles();
   const [campaigns, setCampaigns] = useState([]);
-  const [selectedCampaigns, setSelectedCampaigns] = useState([])
+  const [selectedCampaigns, setSelectedCampaigns] = useState([]);
   const [tag, setTag] = useState('All Campaigns');
 
   const tags = [
@@ -54,39 +89,34 @@ export default function Campaigns() {
     'Hunger',
   ];
 
-  useEffect(
-    () => {
-      async function fetchData() {
-          try {
-            console.log('in call');
-            const response = await axios.get('/api/campaigns');
-            setCampaigns(response.data);
-            setSelectedCampaigns(response.data)
-            console.log(campaigns);
-          } catch(err) {
-            console.log(err)
-          } 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        
+        const response = await axios.get('/api/campaigns');
+        setCampaigns(response.data);
+        setSelectedCampaigns(response.data);
+        
+      } catch (err) {
+        console.log(err);
       }
-      fetchData();
-    },
-    []
-  );
+    }
+    fetchData();
+  }, []);
 
-  useEffect(
-    ()=> {
-      if (tag === "All Campaigns") {
-        setSelectedCampaigns(campaigns)
-      } else {
-        let selected = campaigns.filter(campaign => campaign.tag === tag)
-      console.log(selected)
-      setSelectedCampaigns(selected)
-      }
-    }, 
-    [tag]
-  )
+  useEffect(() => {
+    if (tag === 'All Campaigns') {
+      setSelectedCampaigns(campaigns);
+    } else {
+      let selected = campaigns.filter((campaign) => campaign.tag === tag);
+      console.log(selected);
+      setSelectedCampaigns(selected);
+    }
+  }, [tag]);
 
   return (
-    <div>
+    <div className={classes.container}>
+      <div>
       <FormControl className={classes.formControl}>
         <InputLabel id='select-label'>
           Select a tag to view campaigns
@@ -106,34 +136,43 @@ export default function Campaigns() {
           ))}
         </Select>
       </FormControl>
+      
+      </div>
+      
 
       <div>
         {!selectedCampaigns.length ? (
           <h1>No Campaigns Yet</h1>
         ) : (
           <Grid container className={classes.gridContainer}>
-            
             {selectedCampaigns.map((campaign) => {
-              
               return (
                 <Grid item key={campaign.id}>
-                <Card>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.media}
-                      image={campaign.photoUrl}
-                      title={campaign.name}
-                    />
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size='small' color='primary'>
-                      See More
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-              )
-              
+                  <Card className={classes.root}>
+                    <CardActionArea>
+                      <CardMedia
+                        component='img'
+                        alt='Campaign Image'
+                        height='140'
+                        className={classes.media}
+                        image={campaign.imageUrl}
+                        className={classes.media}
+                        // title={campaign.name}
+                      />
+                    </CardActionArea>
+                    <CardContent className={classes.content}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {campaign.name}
+                      </Typography>
+                    </CardContent>
+                    <CardActions className={classes.action}>
+                      <Button color='default' variant='contained'>
+                        See More
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
             })}
           </Grid>
         )}
