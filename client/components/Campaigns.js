@@ -13,7 +13,14 @@ import axios from 'axios'
 const useStyles = makeStyles(() => ({
   formControl: {
     margin: 20,
+
     minWidth: 200,
+
+    padding: 20,
+    minWidth: 200,
+    position: 'absolute',
+    right: 20
+
   },
   selectEmpty: {
     marginTop: 10,
@@ -23,38 +30,47 @@ const useStyles = makeStyles(() => ({
 export default function Campaigns() {
   const classes = useStyles();
   const [campaigns, setCampaigns] = React.useState([]);
-  const [tag, setTag] = React.useState('');
-  const tags = ['Arts', 'Community', 'Education', 'Emergency', 'Innovation', 'Family', 'Medical', 'Housing', 'Hunger']
+  const [tag, setTag] = React.useState('All Campaigns');
+  const tags = ['All Campaigns', 'Arts', 'Community', 'Education', 'Emergency', 'Innovation', 'Family', 'Medical', 'Housing', 'Hunger']
   
-  // useEffect(()=> {
-  //   async getCamp = () => {
-  //     const campaigns = await axios.get('/api/campaigns')
-  //     setCampaigns(campaigns)
+  useEffect(async ()=> {
+    console.log(tag)
+    //if tag = all campaigns, or...
+    const campaigns = await axios.get('/api/campaigns')
+    console.log(campaigns)
+   
+   
+    //   const campaigns = await axios.get('/api/campaigns')
+    //   setCampaigns(campaigns)
+    
 
 
-  //   }
-  //   getCampaigns()
+  }, [tag])
 
+  
 
-  // }, [])
-
-  const handleChange = (event) => {
-    setTag(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   //console.log(event.target.value)
+  //   setTag(event.target.value)
+  //   console.log('tag, ', tag)
+    
+  // };
 
   
 
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel id='tag-select-label'>
+        <InputLabel id="select-label">
           Select a tag to view campaigns
         </InputLabel>
         <Select
-          labelId='tag-selectlabel'
-          id='tag-select'
+          labelId='select-label'
+          id='campaign-select'
           value={tag}
-          onChange={handleChange}
+          onChange={(event)=>{
+            setTag(event.target.value)
+          }}
         >
           {tags.map((tag, i) => (
             <MenuItem key={i} value={tag}>{tag}</MenuItem>
