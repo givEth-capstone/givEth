@@ -19,7 +19,7 @@ async function seed() {
   const campaigns = await Promise.all([
     Campaign.create({ 
       name: 'Support earthquake victims',
-      address: 'abc123', 
+      walletId: 'abc123', 
       location: 'Haiti',
       needed: 20,
       info: 'The earthquake has displaced many victims. Donate to support.',
@@ -30,7 +30,7 @@ async function seed() {
 
     Campaign.create({ 
       name: 'Rebuild the school',
-      address: 'efg123', 
+      walletId: 'efg123', 
       location: 'Brooklyn',
       needed: 10,
       info: 'The school caught on fire. Please help us get new furniture.',
@@ -40,7 +40,7 @@ async function seed() {
     }),
     Campaign.create({ 
       name: 'Help me pay my hospital bills',
-      address: 'hij123', 
+      walletId: 'hij123', 
       location: 'Queens',
       needed: 30,
       info: 'Due to the coronavirus, I have been in and out of the hospital. I lost my job also and have no health insurance. Please help me pay off my hospital debt.',
