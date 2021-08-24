@@ -7,53 +7,58 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: '80%',
   },
   media: {
-    height: 140,
+    height: 280,
   },
 });
 
-export default function SingleCampaign() {
+export default function SingleCampaign(props) {
 
-  const campaignID = this.props.match.params.id;
+  const campaignID = props.match.params.id;
   const classes = useStyles();
   let [campaign, setCampaign] = React.useState([])
 
   useEffect(() => {
-    // Update the document title using the browser API
-    return async () => {
+    async function getCampaign(id) {
       try {
-        const response = await axios.get(`/api/campaigns/${campaignID}`);
+        const response = await axios.get(`/api/campaigns/${id}`);
+        console.log(response)
         const data = response.data;
         setCampaign(data)
+        console.log(campaign)
       } catch (err) {
         console.log(err);
       }
-    };
-  });
+    }
+    getCampaign(campaignID)
+  }, []);
 
   
   
   
   return (
     <div>
-      {this.state.campaign.length < 1 ? <h1>Nothing to see.</h1>:
-      <Card className={classes.root}>
+      {campaign.length < 1 ? <h1>Nothing to see.</h1>:
+      <Grid container direction="column" alignItems="center" justify="center">
+        <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={campaign.photoUrl}
           title={campaign.title}
         />
+        
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {campaign.description}
+            {campaign.info}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2">
            {/* Amount raised: {campaign.amountRaised/campaign.needed} */}
@@ -66,6 +71,8 @@ export default function SingleCampaign() {
         </Button>
       </CardActions>
     </Card>
+      </Grid>
+      
       }
     </div>
   )
