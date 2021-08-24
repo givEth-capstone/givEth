@@ -28,6 +28,7 @@ export default function Campaigns() {
   const classes = useStyles();
   const [campaigns, setCampaigns] = React.useState([]);
   const [tag, setTag] = React.useState('All Campaigns');
+
   const tags = [
     'All Campaigns',
     'Arts',
@@ -59,6 +60,7 @@ export default function Campaigns() {
   }, [tag]);
 
   // useEffect(async () => {
+
 
   //   console.log(tag); //works
   //   //if tag = all campaigns, or...
