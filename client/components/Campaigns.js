@@ -47,7 +47,7 @@ export default function Campaigns() {
     //   const campaigns = await axios.get('/api/campaigns')
     //   setCampaigns(campaigns)
     
-  }, [tag, campaigns])
+  {}}, [tag, campaigns])
 
   
 
