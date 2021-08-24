@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
   formControl: {
     margin: 20,
 
-    minWidth: 200,
+
 
     padding: 20,
     minWidth: 200,
@@ -40,13 +40,14 @@ export default function Campaigns() {
     const campaigns = await axios.get('/api/campaigns')
     console.log(campaigns)
     setCampaigns(campaigns)
-    if (tag === "All ")
+    if (tag === "All ") {
+      return
+    }
 
    
    
     //   const campaigns = await axios.get('/api/campaigns')
     //   setCampaigns(campaigns)
-    
   }, [tag, campaigns])
 
   
