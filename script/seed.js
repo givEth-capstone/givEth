@@ -1,7 +1,8 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const {db, models: {User, Campaign} } = require('../server/db')
 
+const photo = 'https://www.pngitem.com/pimgs/m/145-1450643_providing-encouragement-and-support-to-help-people-icon.png'
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -14,6 +15,39 @@ async function seed() {
   const users = await Promise.all([
     User.create({ username: 'cody', password: '123' }),
     User.create({ username: 'murphy', password: '123' }),
+  ])
+  const campaigns = await Promise.all([
+    Campaign.create({ 
+      name: 'Support earthquake victims',
+      address: 'abc123', 
+      location: 'Haiti',
+      needed: 20,
+      info: 'The earthquake has displaced many victims. Donate to support.',
+      photoUrl: photo,
+      tag: 'Emergency',
+      status: true
+    }),
+
+    Campaign.create({ 
+      name: 'Rebuild the school',
+      address: 'efg123', 
+      location: 'Brooklyn',
+      needed: 10,
+      info: 'The school caught on fire. Please help us get new furniture.',
+      photoUrl: photo,
+      tag: 'Education',
+      status: true
+    }),
+    Campaign.create({ 
+      name: 'Help me pay my hospital bills',
+      address: 'hij123', 
+      location: 'Queens',
+      needed: 30,
+      info: 'Due to the coronavirus, I have been in and out of the hospital. I lost my job also and have no health insurance. Please help me pay off my hospital debt.',
+      photoUrl: photo,
+      tag: 'Medical',
+      status: true
+    }),
   ])
 
   console.log(`seeded ${users.length} users`)
