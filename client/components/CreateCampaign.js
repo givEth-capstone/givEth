@@ -17,6 +17,7 @@ export default class CreateCampaign extends React.Component {
                                 name="name"
                                 onChange={this.handleChange}
                             />
+
                             <label>Description</label>
                             <input
                                 type="text"
@@ -35,8 +36,20 @@ export default class CreateCampaign extends React.Component {
                                 name="name"
                                 onChange={this.handleChange}
                             />
-
                         </div>
+                        <img src="https://via.placeholder.com/150" />
+                        <input
+                            type="file"
+                            name="name"
+                            onChange={this.handleChange}
+                            placeholder="upload campaign image"
+                        />
+                        <input
+                            type="text"
+                            name="name"
+                            onChange={this.handleChange}
+                            placeholder="connect your wallet"
+                        />
                     </form>
                     <button type="submit">Create Cause</button>
                 </div>
