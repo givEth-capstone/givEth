@@ -6,7 +6,6 @@ import Home from './components/Home';
 import {me} from './store'
 import Campaigns from './components/Campaigns'
 
-
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
