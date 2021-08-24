@@ -2,7 +2,12 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Campaign = db.define('campaign', {
-  address: {
+  name: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
+  walletId: {
     type: Sequelize.STRING
   },
   location: {
