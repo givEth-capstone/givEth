@@ -16,20 +16,13 @@ class Routes extends Component {
 
     return (
       <div>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
-            <Route path="/campaigns" component={Campaigns} />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path='/' exact component={ Login } />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/campaigns" component={Campaigns} />
-          </Switch>
-        )}
+        <Route exact path="/" component={Home} />
+        <Route exact path="/campaigns" component={Campaigns} />
+
+        {/* route for profile */}
+        {/* route for single campaign */}
+        {/* route for create campaign */}
+
       </div>
     )
   }
