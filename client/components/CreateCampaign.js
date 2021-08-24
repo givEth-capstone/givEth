@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
+
 export default class CreateCampaign extends React.Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         return (
             <div>
@@ -17,7 +19,6 @@ export default class CreateCampaign extends React.Component {
                                 name="name"
                                 onChange={this.handleChange}
                             />
-
                             <label>Description</label>
                             <input
                                 type="text"
@@ -27,15 +28,15 @@ export default class CreateCampaign extends React.Component {
                             <label>Cause Category</label>
                             <select name="category" id="category">
                                 <option value="select">Select</option>
-                                <option value="arts">Arts</option>
-                                <option value="community">Community</option>
-                                <option value="education">Education</option>
-                                <option value="emergency">Emergency</option>
-                                <option value="innovation">Innovation</option>
-                                <option value="family">Family</option>
-                                <option value="medical">Medical</option>
-                                <option value="housing">Housing</option>
-                                <option value="hunger">Hunger</option>
+                                <option value="Arts">Arts</option>
+                                <option value="Community">Community</option>
+                                <option value="Education">Education</option>
+                                <option value="Emergency">Emergency</option>
+                                <option value="Innovation">Innovation</option>
+                                <option value="Family">Family</option>
+                                <option value="Medical">Medical</option>
+                                <option value="Housing">Housing</option>
+                                <option value="Hunger">Hunger</option>
                             </select>
                             <label>More</label>
                             <input
@@ -63,7 +64,7 @@ export default class CreateCampaign extends React.Component {
 
                 <div>
                     <h4>
-                        Not sure where to start? Take a look at some examples here!
+                        Not sure where to start? Take a look at some <a href="http://localhost:8080/campaigns">examples</a> here!
                     </h4>
                 </div>
             </div>
