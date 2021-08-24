@@ -12,8 +12,24 @@ router.get('/', async (req, res, next) => {
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //get routes for specific tags
 =======
+=======
+router.get('/:tag', async (req, res, next) => {
+  try {
+    const campaigns = await Campaign.findAll({
+      where: {
+        tag: tag
+      }
+    })
+    res.json(campaigns)
+  } catch (err) {
+    next(err)
+  }
+})
+
+>>>>>>> 03e99be05351d6175c22fac6b89114600866badd
 //get routes for specific tags
 
 //get route for individual 
