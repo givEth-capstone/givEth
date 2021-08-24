@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 // import {Container} from 'material-ui'
 import { Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,6 +9,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import axios from 'axios';
 import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   formControl: {
@@ -22,12 +29,17 @@ const useStyles = makeStyles(() => ({
   selectEmpty: {
     marginTop: 10,
   },
+  gridContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }));
 
 export default function Campaigns() {
   const classes = useStyles();
-  const [campaigns, setCampaigns] = React.useState([]);
-  const [tag, setTag] = React.useState('All Campaigns');
+  const [campaigns, setCampaigns] = useState([]);
+  const [selectedCampaigns, setSelectedCampaigns] = useState([])
+  const [tag, setTag] = useState('All Campaigns');
 
   const tags = [
     'All Campaigns',
@@ -42,46 +54,36 @@ export default function Campaigns() {
     'Hunger',
   ];
 
-  useEffect(() => {
-    async function fetchData() {
-      console.log(tag)
-      if (tag === 'All Campaigns') {
-        const response = await axios.get('/api/campaigns');
-        setCampaigns(response.data);
-        console.log(campaigns);
-      } else {
-        //this call is failing
-        const response = await axios.get(`/api/campaigns/${tag}`);
-        setCampaigns(response.data);
-        console.log(campaigns);
+  useEffect(
+    () => {
+      async function fetchData() {
+          try {
+            console.log('in call');
+            const response = await axios.get('/api/campaigns');
+            setCampaigns(response.data);
+            setSelectedCampaigns(response.data)
+            console.log(campaigns);
+          } catch(err) {
+            console.log(err)
+          } 
       }
-    }
-    fetchData();
-  }, [tag]);
+      fetchData();
+    },
+    []
+  );
 
-  // useEffect(async () => {
-
-
-  //   console.log(tag); //works
-  //   //if tag = all campaigns, or...
-
-  //   if (tag === 'All Campaigns') {
-  //     const campaigns = await axios.get('/api/campaigns');
-  //     console.log(campaigns);
-  //     setCampaigns(campaigns);
-  //   } else {
-  //     const campaigns = await axios.get(`/api/campaigns/${tag}`);
-  //     console.log(campaigns);
-  //     setCampaigns(campaigns);
-  //   }
-  // }, [tag, campaigns]);
-
-  // const handleChange = (event) => {
-  //   //console.log(event.target.value)
-  //   setTag(event.target.value)
-  //   console.log('tag, ', tag)
-
-  // };
+  useEffect(
+    ()=> {
+      if (tag === "All Campaigns") {
+        setSelectedCampaigns(campaigns)
+      } else {
+        let selected = campaigns.filter(campaign => campaign.tag === tag)
+      console.log(selected)
+      setSelectedCampaigns(selected)
+      }
+    }, 
+    [tag]
+  )
 
   return (
     <div>
@@ -104,13 +106,36 @@ export default function Campaigns() {
           ))}
         </Select>
       </FormControl>
+
       <div>
-        {!campaigns.length ? (
+        {!selectedCampaigns.length ? (
           <h1>No Campaigns Yet</h1>
         ) : (
-          campaigns.map((campaign) => {
-            <Card></Card>;
-          })
+          <Grid container className={classes.gridContainer}>
+            
+            {selectedCampaigns.map((campaign) => {
+              
+              return (
+                <Grid item key={campaign.id}>
+                <Card>
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.media}
+                      image={campaign.photoUrl}
+                      title={campaign.name}
+                    />
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size='small' color='primary'>
+                      See More
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+              )
+              
+            })}
+          </Grid>
         )}
       </div>
     </div>

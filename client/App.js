@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <Grid container justify="center" alignItems="center" direction="column">
+      <Grid container justifyContent="center" alignItems="center" direction="column">
       <Routes />
     </Grid>
     </div>
