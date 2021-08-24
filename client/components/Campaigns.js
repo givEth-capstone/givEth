@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 // import {Container} from 'material-ui'
 import { Select } from '@material-ui/core';
@@ -7,10 +7,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import axios from 'axios'
 
-//still need to add store/reducer!
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -26,6 +26,18 @@ export default function Campaigns() {
   const [tag, setTag] = React.useState('');
   const tags = ['Arts', 'Community', 'Education', 'Emergency', 'Innovation', 'Family', 'Medical', 'Housing', 'Hunger']
   
+  // useEffect(()=> {
+  //   async getCamp = () => {
+  //     const campaigns = await axios.get('/api/campaigns')
+  //     setCampaigns(campaigns)
+
+
+  //   }
+  //   getCampaigns()
+
+
+  // }, [])
+
   const handleChange = (event) => {
     setTag(event.target.value);
   };

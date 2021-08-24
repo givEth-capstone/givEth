@@ -4,12 +4,8 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
-import CreateCampaign from './components/CreateCampaign'
 import Campaigns from './components/Campaigns'
 
-/**
- * COMPONENT
- */
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -20,22 +16,13 @@ class Routes extends Component {
 
     return (
       <div>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
-            <Route path='/createcampaign' component={ CreateCampaign } />
-            <Route path="/campaigns" component={Campaigns} />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path='/' exact component={ Login } />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path='/createcampaign' component={ CreateCampaign } />
-            <Route path="/campaigns" component={Campaigns} />
-          </Switch>
-        )}
+        <Route exact path="/" component={Home} />
+        <Route exact path="/campaigns" component={Campaigns} />
+
+        {/* route for profile */}
+        {/* route for single campaign */}
+        {/* route for create campaign */}
+
       </div>
     )
   }
