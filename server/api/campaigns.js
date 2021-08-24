@@ -11,11 +11,8 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 //get routes for specific tags
-=======
-=======
+
 router.get('/:tag', async (req, res, next) => {
   try {
     const campaigns = await Campaign.findAll({
@@ -29,7 +26,7 @@ router.get('/:tag', async (req, res, next) => {
   }
 })
 
->>>>>>> 03e99be05351d6175c22fac6b89114600866badd
+
 //get routes for specific tags
 
 //get route for individual 
@@ -47,4 +44,12 @@ router.get('/:id', async (req, res, next) => {
 })
 
 //post route for individual campaign
->>>>>>> 09cfca4b1d4615ca5036f2b81f9eeb748abb3459
+
+router.post('/create', async (req, res, next) => {
+  try {
+    const campaign = await Campaign.create(req.body)
+    res.json(campaign);
+  } catch (error) {
+    next(error)
+  }
+})
