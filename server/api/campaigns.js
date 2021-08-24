@@ -17,6 +17,18 @@ router.get('/', async (req, res, next) => {
 //get routes for specific tags
 
 //get route for individual 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const campaign = await Campaign.findByPk(req.params.id)
+    if(campaign) {
+      res.json(campaign);
+    } else {
+      next({ message: "some problem occured", status: 404})
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 //post route for individual campaign
 >>>>>>> 09cfca4b1d4615ca5036f2b81f9eeb748abb3459

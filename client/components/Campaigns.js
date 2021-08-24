@@ -5,18 +5,23 @@ import { Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
+// import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import axios from 'axios'
+import Card from '@material-ui/core/Card';
 
 
 const useStyles = makeStyles(() => ({
   formControl: {
     margin: 20,
+
+    minWidth: 200,
+
     padding: 20,
     minWidth: 200,
     position: 'absolute',
     right: 20
+
   },
   selectEmpty: {
     marginTop: 10,
@@ -30,18 +35,19 @@ export default function Campaigns() {
   const tags = ['All Campaigns', 'Arts', 'Community', 'Education', 'Emergency', 'Innovation', 'Family', 'Medical', 'Housing', 'Hunger']
   
   useEffect(async ()=> {
-    console.log(tag)
+    console.log(tag) //works
     //if tag = all campaigns, or...
     const campaigns = await axios.get('/api/campaigns')
     console.log(campaigns)
+    setCampaigns(campaigns)
+    if (tag === "All ")
+
    
    
     //   const campaigns = await axios.get('/api/campaigns')
     //   setCampaigns(campaigns)
     
-
-
-  }, [tag])
+  }, [tag, campaigns])
 
   
 
@@ -73,6 +79,18 @@ export default function Campaigns() {
           ))}
         </Select>
       </FormControl>
+      <div>
+        {!campaigns.length
+        ? <h1>No Campaigns Yet</h1>
+        : campaigns.map(campaign => {
+          <Card>
+
+          </Card>
+
+        })
+      
+        }
+      </div>
     </div>
   );
 }
