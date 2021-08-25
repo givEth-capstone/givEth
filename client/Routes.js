@@ -5,6 +5,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
 import Campaigns from './components/Campaigns'
+import CreateCampaign from './components/CreateCampaign';
 import SingleCampaign from './components/SingleCampaign'
 import Profile from './components/Profile'
 import CreateCampaign from './components/CreateCampaign';
@@ -21,6 +22,7 @@ class Routes extends Component {
       <div>
         <Route exact path="/" component={Home} />
         <Route exact path="/campaigns" component={Campaigns} />
+        <Route exact path="/createcampaign" component={CreateCampaign} />
         <Route exact path="/campaigns/:id" component={SingleCampaign} />
         <Route exact path="/profile" component={Profile}/>
         <Route exact path="/createCampaign" component={CreateCampaign}/>
