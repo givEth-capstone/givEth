@@ -11,7 +11,8 @@ import { Login, Signup } from './AuthForm';
 export function Profile(props) {
     const token = window.localStorage.token;
     const {isLoggedIn} = props
-    let [user,setUser] = React.useState([]);
+   let [user,setUser] = React.useState([]);
+   //let user;
 
   useEffect(() => {
     async function fetchUser(token) {
@@ -21,6 +22,7 @@ export function Profile(props) {
             const data = response.data
             console.log(data);
             setUser(data)
+            //user = data
             console.log("what is user?", user)
           } 
           else{
@@ -32,21 +34,26 @@ export function Profile(props) {
     }
    fetchUser(token);
     }, []);
-      //const { name, photoUrl, username, wallet, location} = user;
      //console.log("USER HERE", user)
 
-    return(
+    return( 
         <div>
-            {isLoggedIn ? 
+            {user.length < 1 ? 
             <div>
-                {"Logged in"}
-            </div>
-                : 
-                <div>
-                    {"Please Log In or Sign Up"}
-                    <Login/>
-                    <Signup/>
-                </div>   
+                {"Please Log In or Sign Up"}
+                <Login/>
+                <Signup/>
+            </div>  
+            :
+            <div>
+                <div id="column"><img src={user.photoUrl}/></div>
+                <div id="column">
+                <h2>Name : {user.name}</h2>
+                <h2>UserName : {user.username}</h2>
+                <h2>Wallet Address : {user.wallet}</h2>
+                <h2>Location : {user.location}</h2>
+                </div>
+            </div> 
             }
         </div>
     )
