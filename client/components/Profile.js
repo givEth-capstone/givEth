@@ -34,21 +34,6 @@ let [User,setUser] = React.useState([]);
     }, []);
 
 
-    const onFieldChange = (field, value) => {
-        setUser({
-          ...User,
-          [field]: value
-        });
-      }
-    const onImageChange = (field, file) => {
-        if (file && file[0]) {
-            setUser( {...User,
-                [field]: (URL.createObjectURL(file[0]))
-            });
-        }
-    }
-       
-
     return( 
         <div>
             {User.length < 1 ? 
@@ -60,18 +45,7 @@ let [User,setUser] = React.useState([]);
             :
             <div>
                 <div id="column">
-                    <img src={User.photoUrl}/>
-                    <input name = "photoUrl" type="file" onChange={ ({target:{name, file}}) => {onImageChange(file,name )} } className="filetype" />
-                </div>
-                <div id="column">
-                    <h3>Name :</h3>
-                    <input name = "name" value = {User.name} onChange={({target:{name,value}}) => onFieldChange(name,value)} />
-                    <h3>Username :</h3>
-                    <input name = "username" value = {User.username} onChange={({target:{name,value}}) => onFieldChange(name,value)} />
-                    <h3>Wallet Address :</h3>
-                    <input name = "wallet" value = {User.wallet} onChange={({target:{name,value}}) => onFieldChange(name,value)} />
-                    <h3>Location : </h3> 
-                    <input name = "location" value = {User.location} onChange={({target:{name,value}}) => onFieldChange(name,value)} />
+                    <h3>Username : {User.username}</h3>
                 </div>
             </div> 
             }

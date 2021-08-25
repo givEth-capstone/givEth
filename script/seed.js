@@ -15,29 +15,23 @@ async function seed() {
 // Creating Users
 const users = await Promise.all([
   User.create({
-    username: "Rose",
+    username: "Nicky",
     password: "123",
-    name: "Rosandria Rosie",
-    photoUrl:"https://h2.commercev3.net/cdn.springhillnursery.com/images/400/75391A.jpg",
-    location: null,
-    wallet: null
   }),
   User.create({
-    username: "Tulip",
+    username: "Farha",
     password: "123",
-    name: null,
-    photoUrl: "https://h2.commercev3.net/cdn.springhillnursery.com/images/400/72599.jpg",
-    location: null,
-    wallet: null
   }),
   User.create({
-    username: "Wysteria",
+    username: "Amber",
     password: "123",
-    name: "Wysterian Wysteria",
-    location: null,
+  }),
+  User.create({
+    username: "Rachel",
+    password: "123",
   }),
 ])
-const [Rose, Tulip, Wysteria] = users;
+const [Nicky, Farha, Amber, Rachel] = users;
 // Creating Campaigns
   const campaigns = await Promise.all([
     Campaign.create({ 
