@@ -11,11 +11,34 @@ async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
-  // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
-  ])
+
+// Creating Users
+const users = await Promise.all([
+  User.create({
+    username: "Rose",
+    password: "123",
+    name: "Rosandria Rosie",
+    photoUrl:"https://h2.commercev3.net/cdn.springhillnursery.com/images/400/75391A.jpg",
+    location: null,
+    wallet: null
+  }),
+  User.create({
+    username: "Tulip",
+    password: "123",
+    name: null,
+    photoUrl: "https://h2.commercev3.net/cdn.springhillnursery.com/images/400/72599.jpg",
+    location: null,
+    wallet: null
+  }),
+  User.create({
+    username: "Wysteria",
+    password: "123",
+    name: "Wysterian Wysteria",
+    location: null,
+  }),
+])
+const [Rose, Tulip, Wysteria] = users;
+// Creating Campaigns
   const campaigns = await Promise.all([
     Campaign.create({ 
       name: 'Support earthquake victims',
@@ -52,12 +75,12 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1]
-    }
-  }
+  // return {
+  //   // users: {
+  //   //   cody: users[0],
+  //   //   murphy: users[1]
+  //   // }
+  // }
 }
 
 /*
