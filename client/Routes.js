@@ -6,6 +6,8 @@ import Home from './components/Home';
 import {me} from './store'
 import Campaigns from './components/Campaigns'
 import SingleCampaign from './components/SingleCampaign'
+import Profile from './components/Profile'
+import CreateCampaign from './components/CreateCampaign';
 
 class Routes extends Component {
   componentDidMount() {
@@ -20,6 +22,8 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/campaigns" component={Campaigns} />
         <Route exact path="/campaigns/:id" component={SingleCampaign} />
+        <Route exact path="/profile" component={Profile}/>
+        <Route exact path="/createCampaign" component={CreateCampaign}/>
 
         {/* route for profile */}
         {/* route for single campaign */}

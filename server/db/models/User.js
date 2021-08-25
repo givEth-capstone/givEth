@@ -14,10 +14,23 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
+  },
+  name:{
+    type: Sequelize.STRING
+  },
+  photoUrl:{
+    type: Sequelize.TEXT
+  },
+  location:{
+    type: Sequelize.STRING
+  },
+  wallet:{
+    type: Sequelize.STRING
   }
+
 })
 
-module.exports = User
+module.exports = User;
 
 /**
  * instanceMethods
