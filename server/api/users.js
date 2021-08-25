@@ -18,6 +18,8 @@ router.get('/',requireToken, async (req, res, next) => {
   }
 })
 
+//get campaign(s) associated with User & User
+
 router.get('/campaigns',requireToken, async (req, res, next) => {
   try{
     const userId = req.user.id; 
