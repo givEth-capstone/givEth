@@ -12,7 +12,6 @@ router.get('/', async (req, res, next) => {
 })
 
 
-
 //get routes for specific tags
 
 //get route for individual 
@@ -30,3 +29,12 @@ router.get('/:id', async (req, res, next) => {
 })
 
 //post route for individual campaign
+
+router.post('/create', async (req, res, next) => {
+  try {
+    const campaign = await Campaign.create(req.body)
+    res.json(campaign);
+  } catch (error) {
+    next(error)
+  }
+})

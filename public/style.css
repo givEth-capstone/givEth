@@ -19,3 +19,13 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+header {
+  color: rgb(46, 255, 46);
+}
+
+.image-placeholder-1 {
+  width: 293px;
+  height: 173px;
+  background: #e6e6e6;
+}
