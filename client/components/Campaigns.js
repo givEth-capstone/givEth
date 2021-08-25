@@ -115,4 +115,4 @@ export default function Campaigns() {
       </div>
     </div>
   );
-}
+};

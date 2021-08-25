@@ -1,29 +1,46 @@
 import React, { useEffect, useState } from 'react';
 
 
-export default class CreateCampaign extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+export default function CreateCampaign(props){
 
-    render() {
+    // const campaignID = props.match.params.id;
+    // let [campaign, setCampaign] = React.useState([])
+
+    // make a function 
+    // async function createCampaign(id) {
+    //     try {
+    //       const response = await axios.post(`/api/campaigns/create`, {id});
+    //       console.log(response)
+    //       const data = response.data;
+    //       setCampaign(data)
+    //       console.log(campaign)
+    //     } catch (err) {
+    //       console.log(err);
+    //     }
+    //   }
+    //   createCampaign(campaignID)
+
+    // useEffect(() => {
+    //     //
+    //   }, []);
+
         return (
             <div>
                 <h1>Create Your Cause</h1>
                 <div>
-                    <form onSubmit={this.handleSubmit}>
+                    <form>
                         <div>
                             <label> Cause Name </label>
                             <input
                                 type="text"
                                 name="name"
-                                onChange={this.handleChange}
+                                // onChange={this.handleChange}
                             />
                             <label>Description</label>
                             <input
                                 type="text"
                                 name="name"
-                                onChange={this.handleChange}
+                                // onChange={this.handleChange}
                             />
                             <label>Cause Category</label>
                             <select name="category" id="category">
@@ -42,20 +59,20 @@ export default class CreateCampaign extends React.Component {
                             <input
                                 type="text"
                                 name="name"
-                                onChange={this.handleChange}
+                                // onChange={this.handleChange}
                             />
                         </div>
                         <img src="https://via.placeholder.com/150" />
                         <input
                             type="file"
                             name="name"
-                            onChange={this.handleChange}
+                            // onChange={this.handleChange}
                             placeholder="upload campaign image"
                         />
                         <input
                             type="text"
                             name="name"
-                            onChange={this.handleChange}
+                            // onChange={this.handleChange}
                             placeholder="connect your wallet"
                         />
                     </form>
@@ -71,6 +88,4 @@ export default class CreateCampaign extends React.Component {
 
         )
     }
-}
-
 
