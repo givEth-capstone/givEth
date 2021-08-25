@@ -19,67 +19,51 @@ import { Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
+  action: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+  container: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+    maxWidth: '100vw',
+  },
+  content: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   formControl: {
     margin: 20,
     minWidth: 200,
     padding: 20,
     minWidth: 200,
-    // position: 'absolute',
-    // right: 20,
   },
-  // button: {
-
-  // },
-  container: {
+  gridContainer: {
+    justifyContent: 'flex-start',
     display: 'flex',
-    // flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    flexDirection: 'row',
-    maxWidth: '100vw',
-    //margin: 10
-    // flexWrap: 'wrap'
-  },
-  root: {
-    
-    borderRadius: 12,
-    //minWidth: 256,
-    width: 345,
-    height: 345,
-    textAlign: 'center',
-    padding: 5,
-    margin: 10,
+    alignItems: 'center',
+    alignContent: 'space-between',
+    margin: 20,
+    padding: 20,
+    flexFlow: 'row wrap',
+    spacing: 0
   },
   media: {
     height: 270,
     width: 270,
     margin: '0 auto',
   },
-  selectEmpty: {
-    marginTop: 10,
+  message: {
+    alignSelf: 'center'
   },
-  gridContainer: {
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    justifyContent: 'flex-start',
-    display: 'flex',
-    // position: 'clear'
-    alignItems: 'center',
-    alignContent: 'space-between',
-    margin: 20,
-    padding: 20,
-    // flexWrap: 'wrap',
-    flexFlow: 'row wrap',
-    spacing: 0
-  },
-  content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 75,
-  },
-  action: {
-    display: 'flex',
-    justifyContent: 'space-around',
+  root: {
+    borderRadius: 12,
+    width: 345,
+    height: 400,
+    textAlign: 'center',
+    margin: 10,
   },
 }));
 
@@ -151,7 +135,7 @@ export default function Campaigns() {
 
       <div className={classes.gridContainer}>
         {!selectedCampaigns.length ? (
-          <h1>No Campaigns Yet</h1>
+          <h1 className={classes.message}>No Campaigns Yet!</h1>
         ) : (
           <Grid container>
             {selectedCampaigns.map((campaign) => {
