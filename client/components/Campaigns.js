@@ -16,6 +16,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   formControl: {
@@ -31,38 +32,50 @@ const useStyles = makeStyles(() => ({
   // },
   container: {
     display: 'flex',
+    // flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+    maxWidth: '100vw',
+    //margin: 10
     // flexWrap: 'wrap'
   },
   root: {
+    
     borderRadius: 12,
-    minWidth: 256,
-    maxWidth: 345,
+    //minWidth: 256,
+    width: 345,
+    height: 345,
     textAlign: 'center',
     padding: 5,
-    margin: 12,
+    margin: 10,
   },
   media: {
     height: 270,
     width: 270,
-    margin: '0 auto'
+    margin: '0 auto',
   },
   selectEmpty: {
     marginTop: 10,
   },
   gridContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    justifyContent: 'flex-start',
     display: 'flex',
     // position: 'clear'
     alignItems: 'center',
-    alignContent: 'space-between'
-    
+    alignContent: 'space-between',
+    margin: 20,
+    padding: 20,
+    // flexWrap: 'wrap',
+    flexFlow: 'row wrap',
+    spacing: 0
   },
   content: {
-    display: "flex",
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 75
+    height: 75,
   },
   action: {
     display: 'flex',
@@ -92,11 +105,9 @@ export default function Campaigns() {
   useEffect(() => {
     async function fetchData() {
       try {
-        
         const response = await axios.get('/api/campaigns');
         setCampaigns(response.data);
         setSelectedCampaigns(response.data);
-        
       } catch (err) {
         console.log(err);
       }
@@ -117,34 +128,32 @@ export default function Campaigns() {
   return (
     <div className={classes.container}>
       <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel id='select-label'>
-          Select a tag to view campaigns
-        </InputLabel>
-        <Select
-          labelId='select-label'
-          id='campaign-select'
-          value={tag}
-          onChange={(event) => {
-            setTag(event.target.value);
-          }}
-        >
-          {tags.map((tag, i) => (
-            <MenuItem key={i} value={tag}>
-              {tag}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      
+        <FormControl className={classes.formControl}>
+          <InputLabel id='select-label'>
+            Select a tag to view campaigns
+          </InputLabel>
+          <Select
+            labelId='select-label'
+            id='campaign-select'
+            value={tag}
+            onChange={(event) => {
+              setTag(event.target.value);
+            }}
+          >
+            {tags.map((tag, i) => (
+              <MenuItem key={i} value={tag}>
+                {tag}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </div>
-      
 
-      <div>
+      <div className={classes.gridContainer}>
         {!selectedCampaigns.length ? (
           <h1>No Campaigns Yet</h1>
         ) : (
-          <Grid container className={classes.gridContainer}>
+          <Grid container>
             {selectedCampaigns.map((campaign) => {
               return (
                 <Grid item key={campaign.id}>
@@ -155,20 +164,22 @@ export default function Campaigns() {
                         alt='Campaign Image'
                         height='140'
                         className={classes.media}
-                        image={campaign.imageUrl}
+                        image={campaign.photoUrl}
                         className={classes.media}
                         // title={campaign.name}
                       />
                     </CardActionArea>
                     <CardContent className={classes.content}>
-                      <Typography gutterBottom variant="h5" component="h2">
+                      <Typography gutterBottom variant='h5' component='h2'>
                         {campaign.name}
                       </Typography>
                     </CardContent>
                     <CardActions className={classes.action}>
-                      <Button color='default' variant='contained'>
-                        See More
-                      </Button>
+                      <Link to={`/campaigns/${campaign.id}`}>
+                        <Button color='default' variant='contained'>
+                          See More
+                        </Button>
+                      </Link>
                     </CardActions>
                   </Card>
                 </Grid>
