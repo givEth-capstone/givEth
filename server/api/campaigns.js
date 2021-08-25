@@ -11,11 +11,8 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 7dcc74166dff75daf16c8bf81f45945906ff1ef6
 //get routes for specific tags
 
 //get route for individual 
