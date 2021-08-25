@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const { models: { Campaign }} = require('../db')
+const { models: { Campaign, User }} = require('../db')
+const {requireToken} = require('./gatekeepingMiddleware')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -39,3 +40,20 @@ router.post('/create', async (req, res, next) => {
     next(error)
   }
 })
+
+//get route for campaign(s) associated with User
+
+// router.get('/profile/',requireToken, async (req, res, next) => {
+//   try{
+//     const userId = req.user.id; 
+//     const campaigns = await Campaign.findAll({
+//       where: {
+//         userId : userId
+//       },
+//       include: User
+//     })
+//     res.json(campaigns)
+//   }catch(error){ 
+//     next(error)
+//   }
+// })

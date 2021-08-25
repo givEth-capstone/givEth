@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { models: { User }} = require('../db')
+const { models: { User , Campaign}} = require('../db')
 module.exports = router
 const {requireToken} = require('./gatekeepingMiddleware')
 
@@ -15,5 +15,20 @@ router.get('/',requireToken, async (req, res, next) => {
     res.json(user)
   } catch (err) {
     next(err)
+  }
+})
+
+router.get('/campaigns',requireToken, async (req, res, next) => {
+  try{
+    const userId = req.user.id; 
+    const campaigns = await Campaign.findAll({
+      where: {
+        userId : userId
+      },
+      include: User
+    })
+    res.json(campaigns)
+  }catch(error){ 
+    next(error)
   }
 })
