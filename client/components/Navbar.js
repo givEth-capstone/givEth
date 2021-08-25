@@ -1,27 +1,33 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <h1>givEth</h1>
     <nav>
-      {isLoggedIn ? (
+        {isLoggedIn ?
         <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+        <Link to="/home">Home</Link>
+        <Link to="/createCampaign">Create A Campaign</Link>
+        {/*Link to Donate// Can link to All campaigns with header that says Choose a campaign to donate to */}
+        <Link to="/campaigns">All Campaigns</Link>
+        <Link to="/profile">Profile</Link>
+        <a href="#" onClick={handleClick}>
+          Logout
+        </a>
         </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          :
+        <div> 
+          {/* Don't display logout button if not logged in! */}
+        <Link to="/home">Home</Link>
+        <Link to="/createCampaign">Create A Campaign</Link>
+        {/*Link to Donate// Can link to All campaigns with header that says Choose a campaign to donate to */}
+        <Link to="/campaigns">All Campaigns</Link>
+        <Link to="/profile">Profile</Link>
         </div>
-      )}
+        }
     </nav>
     <hr />
   </div>

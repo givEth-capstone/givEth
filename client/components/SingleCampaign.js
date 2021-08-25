@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+
+import DonateButton from './DonateButton'
+
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -47,7 +50,7 @@ export default function SingleCampaign(props) {
   return (
     <div>
       {campaign.length < 1 ? <h1>Nothing to see.</h1>:
-      <Grid container direction="column" alignItems="center" justify="center">
+      <Grid container direction="column" alignItems="center" justifyContent="center">
         <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
@@ -66,9 +69,7 @@ export default function SingleCampaign(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Donate
-        </Button>
+        <DonateButton campaign={campaign}/>
       </CardActions>
     </Card>
       </Grid>

@@ -11,11 +11,28 @@ async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
-  // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
-  ])
+
+// Creating Users
+const users = await Promise.all([
+  User.create({
+    username: "Nicky",
+    password: "123",
+  }),
+  User.create({
+    username: "Farha",
+    password: "123",
+  }),
+  User.create({
+    username: "Amber",
+    password: "123",
+  }),
+  User.create({
+    username: "Rachel",
+    password: "123",
+  }),
+])
+const [Nicky, Farha, Amber, Rachel] = users;
+// Creating Campaigns
   const campaigns = await Promise.all([
     Campaign.create({ 
       name: 'Support earthquake victims',
@@ -49,16 +66,22 @@ async function seed() {
       status: true
     }),
   ])
+  const [EarthquakeVictims, RebuildSchool, HospitalBills] = campaigns;
+
+  await Nicky.addCampaign(EarthquakeVictims)
+  await Amber.addCampaign(RebuildSchool)
+  await Rachel.addCampaign(HospitalBills)
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1]
-    }
-  }
+  // return {
+  //   // users: {
+  //   //   cody: users[0],
+  //   //   murphy: users[1]
+  //   // }
+  // }
 }
+
 
 /*
  We've separated the `seed` function from the `runSeed` function.
