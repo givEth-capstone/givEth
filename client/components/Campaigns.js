@@ -92,7 +92,7 @@ export default function Campaigns() {
   useEffect(() => {
     async function fetchData() {
       try {
-        
+
         const response = await axios.get('/api/campaigns');
         setCampaigns(response.data);
         setSelectedCampaigns(response.data);

@@ -32,9 +32,11 @@ router.get('/:id', async (req, res, next) => {
 //post route for individual campaign
 
 router.post('/create', async (req, res, next) => {
+  
+  console.log('Here is the req.body', req.body)
   try {
     const createCampaign = await Campaign.create(req.body)
-    res.json(createCampaign);
+    res.status(201).send(createCampaign);
   } catch (error) {
     next(error)
   }
