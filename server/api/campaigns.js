@@ -11,18 +11,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:tag', async (req, res, next) => {
-  try {
-    const campaigns = await Campaign.findAll({
-      where: {
-        tag: tag
-      }
-    })
-    res.json(campaigns)
-  } catch (err) {
-    next(err)
-  }
-})
+// router.get('/:tag', async (req, res, next) => {
+//   try {
+//     const campaigns = await Campaign.findAll({
+//       where: {
+//         tag: req.params.tag
+//       }
+//     })
+//     res.json(campaigns)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 //get routes for specific tags
 
