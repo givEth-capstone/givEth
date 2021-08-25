@@ -21,10 +21,9 @@ class Routes extends Component {
       <div>
         <Route exact path="/" component={Home} />
         <Route exact path="/campaigns" component={Campaigns} />
-        <Route exact path="/createcampaign" component={CreateCampaign} />
         <Route exact path="/campaigns/:id" component={SingleCampaign} />
         <Route exact path="/profile" component={Profile}/>
-        <Route exact path="/createCampaign" component={CreateCampaign}/>
+        <Route exact path="/createcampaign" component={CreateCampaign}/>
 
         {/* route for profile */}
         {/* route for single campaign */}
