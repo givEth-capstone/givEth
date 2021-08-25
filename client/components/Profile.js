@@ -11,29 +11,36 @@ import { Login, Signup } from './AuthForm';
 export function Profile(props) {
     const token = window.localStorage.token;
     const {isLoggedIn} = props
-    let currentUser ;
+    let [user,setUser] = React.useState([]);
 
-    //fetch user data 
-    useEffect(() => {
-        async function fetchUser() {
-          if (token) {
-              console.log("LOGGED IN")
-              const { data } = await axios.get(`/api/users`, {headers: { Authorization: token }});
-              currentUser = data;
-              console.log('DATA', currentUser)
-          } else {
-                console.log("NOT LOGGED IN")
+  useEffect(() => {
+    async function fetchUser(token) {
+        try{
+          if(token){
+            const response = await axios.get(`/api/users`, {headers: { Authorization: token }});
+            const data = response.data
+            console.log(data);
+            setUser(data)
+            console.log("what is user?", user)
+          } 
+          else{
+            console.log("NOT LOGGED IN", window.localStorage);
           }
+        }catch(err){
+            console.log(err);
         }
-        fetchUser();
-      }, []);
+    }
+   fetchUser(token);
+    }, []);
+      //const { name, photoUrl, username, wallet, location} = user;
+     //console.log("USER HERE", user)
 
     return(
         <div>
             {isLoggedIn ? 
-                <div>
-                    
-                </div>
+            <div>
+                {"Logged in"}
+            </div>
                 : 
                 <div>
                     {"Please Log In or Sign Up"}
