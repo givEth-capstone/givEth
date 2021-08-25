@@ -8,7 +8,6 @@ import Campaigns from './components/Campaigns'
 import CreateCampaign from './components/CreateCampaign';
 import SingleCampaign from './components/SingleCampaign'
 import Profile from './components/Profile'
-import CreateCampaign from './components/CreateCampaign';
 
 class Routes extends Component {
   componentDidMount() {

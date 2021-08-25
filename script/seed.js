@@ -66,6 +66,11 @@ const [Nicky, Farha, Amber, Rachel] = users;
       status: true
     }),
   ])
+  const [EarthquakeVictims, RebuildSchool, HospitalBills] = campaigns;
+
+  await Nicky.addCampaign(EarthquakeVictims)
+  await Amber.addCampaign(RebuildSchool)
+  await Rachel.addCampaign(HospitalBills)
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
@@ -76,6 +81,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
   //   // }
   // }
 }
+
 
 /*
  We've separated the `seed` function from the `runSeed` function.

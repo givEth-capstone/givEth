@@ -21,6 +21,7 @@ let [User,setUser] = React.useState([]);
             const data = response.data
             console.log(data);
             setUser(data)
+            
             console.log("what is User?", User) //why is this empty?
           } 
           else{
