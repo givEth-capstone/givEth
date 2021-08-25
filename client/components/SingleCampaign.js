@@ -47,7 +47,7 @@ export default function SingleCampaign(props) {
   return (
     <div>
       {campaign.length < 1 ? <h1>Nothing to see.</h1>:
-      <Grid container direction="column" alignItems="center" justify="center">
+      <Grid container direction="column" alignItems="center" justifyContent="center">
         <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
