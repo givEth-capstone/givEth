@@ -5,24 +5,13 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const campaigns = await Campaign.findAll()
-    res.json(campaigns)
+    res.send(campaigns)
   } catch (err) {
     next(err)
   }
 })
 
-// router.get('/:tag', async (req, res, next) => {
-//   try {
-//     const campaigns = await Campaign.findAll({
-//       where: {
-//         tag: req.params.tag
-//       }
-//     })
-//     res.json(campaigns)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+
 
 //get routes for specific tags
 
@@ -41,3 +30,12 @@ router.get('/:id', async (req, res, next) => {
 })
 
 //post route for individual campaign
+
+router.post('/create', async (req, res, next) => {
+  try {
+    const campaign = await Campaign.create(req.body)
+    res.json(campaign);
+  } catch (error) {
+    next(error)
+  }
+})
