@@ -5,22 +5,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const campaigns = await Campaign.findAll()
-    res.json(campaigns)
-  } catch (err) {
-    next(err)
-  }
-})
-
-//get routes for specific tags
-
-router.get('/:tag', async (req, res, next) => {
-  try {
-    const campaigns = await Campaign.findAll({
-      where: {
-        tag: tag
-      }
-    })
-    res.json(campaigns)
+    res.send(campaigns)
   } catch (err) {
     next(err)
   }
