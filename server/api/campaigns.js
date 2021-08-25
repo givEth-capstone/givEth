@@ -5,12 +5,17 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const campaigns = await Campaign.findAll()
-    res.json(campaigns)
+    res.send(campaigns)
   } catch (err) {
     next(err)
   }
 })
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7dcc74166dff75daf16c8bf81f45945906ff1ef6
 //get routes for specific tags
 
 //get route for individual 
