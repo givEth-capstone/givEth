@@ -43,9 +43,6 @@ export default function SingleCampaign(props) {
     }
     getCampaign(campaignID)
   }, []);
-
-  
-  
   
   return (
     <div>
