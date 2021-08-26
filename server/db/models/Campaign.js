@@ -23,13 +23,15 @@ const Campaign = db.define('campaign', {
     type: Sequelize.TEXT
   },
   photoUrl: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    defaultValue: 'https://via.placeholder.com/150'
   },
   tag: {
     type: Sequelize.ENUM('Arts', 'Community', 'Education', 'Emergency', 'Innovation', 'Family', 'Medical', 'Housing', 'Hunger')
   },
   status: {
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN, 
+    defaultValue: true
   }
 })
 
