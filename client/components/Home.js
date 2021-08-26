@@ -21,6 +21,7 @@ export const Home = props => {
   }, []);
 
 let campaignsLength = campaigns.length-1
+console.log(campaignsLength);
 
 // function getRandomInt(campaignsLength) {
 //   let num1 = 0;
@@ -41,15 +42,21 @@ let campaignsLength = campaigns.length-1
 //     console.log(randomNums)
 //   }
 
+let num = 0;
+
 if(campaignsLength){
-let num = Math.floor(Math.random() * campaignsLength);
-return num
+let num = Math.floor(Math.random() * 10);
 }
-  return (
-    <div>
-      <h1>GivEth</h1>
-      <h1>FEATURED CAMPAIGNS</h1>
-      
+
+console.log(campaigns);
+let campaign = campaigns[num];
+return (
+  <div>
+      <h1>Anonymous, Ethereum-based Crowdfunding</h1>
+      <h2>Starting A Campaign Is Easy</h2>
+      <h1>Featured Campaigns</h1>
+      <h3>{campaign.name}</h3>
+      <h3>Get In Touch</h3>
     </div>
   )
 }
