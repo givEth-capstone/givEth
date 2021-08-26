@@ -10,6 +10,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input'
 import { Button } from '@material-ui/core';
 
+import history from '../history'
+
 
 
 const useStyles = makeStyles(() => ({
@@ -25,13 +27,12 @@ const useStyles = makeStyles(() => ({
 export default function DonateButton(props) {
   const classes = useStyles();
   const [donation, setDonation] = useState(0)
+  const [transactionNumber, setTransactionNumber] = useState([])
   let accounts = []
   const {active, account, library, connector, activate, deactivate} = useWeb3React()
   
   useEffect(()=> {
     function showDonation(){
-      console.log("donation", donation)
-      console.log("recipient", props.campaign.walletId)
     }
     showDonation()
   }, [donation])
@@ -54,7 +55,7 @@ export default function DonateButton(props) {
     }
   }
   async function handleDonation() {
-    const letsseethis = window.ethereum
+    window.ethereum
       .request({
         method: 'eth_sendTransaction',
         params: [
@@ -68,9 +69,9 @@ export default function DonateButton(props) {
           },
         ],
       })
-      .then((txHash) => console.log(txHash))
-      .catch((error) => console.error);
-      console.log(letsseethis)
+      .then((txHash) => setTransactionNumber(txHash))
+      .then((transactionNumber, donation)=> history.push({pathname: `campaigns/${props.id}/success`, state:{donation, transactionNumber}}))
+      .catch((error) => console.error(error));
   }
   
 

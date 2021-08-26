@@ -9,6 +9,7 @@ import CreateCampaign from './components/CreateCampaign';
 import SingleCampaign from './components/SingleCampaign'
 import Profile from './components/Profile'
 import history from './history'
+import Success from './components/Success'
 
 class Routes extends Component {
   componentDidMount() {
@@ -23,9 +24,10 @@ class Routes extends Component {
         <Router history={history}>
         <Route exact path="/" component={Home} />
         <Route exact path="/campaigns" component={Campaigns} />
-        <Route exact path="/campaigns/:id" component={SingleCampaign} />
+        <Route exact path="/campaigns/:id" render={(routeProps) => <SingleCampaign {...routeProps} /> }/>
         <Route exact path="/profile" component={Profile}/>
         <Route exact path="/createcampaign" component={CreateCampaign}/>
+        <Route exact path="/campaigns/:id/success" component={Success}/>
 
         {/* route for profile */}
         {/* route for single campaign */}
