@@ -1,11 +1,16 @@
 import React, {useState, useEffect} from 'react'
 
+import {injected} from './Connectors'
+import { useWeb3React } from '@web3-react/core'
+
 
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input'
 import { Button } from '@material-ui/core';
+
+import history from '../history'
 
 
 
@@ -22,21 +27,34 @@ const useStyles = makeStyles(() => ({
 export default function DonateButton(props) {
   const classes = useStyles();
   const [donation, setDonation] = useState(0)
+  const [transactionNumber, setTransactionNumber] = useState([])
+  let accounts = []
+  const {active, account, library, connector, activate, deactivate} = useWeb3React()
   
   useEffect(()=> {
     function showDonation(){
-      console.log("donation", donation)
-      console.log("recipient", props.campaign.walletId)
     }
     showDonation()
   }, [donation])
   
+  async function getAccount() {
+    console.log("we are in getAccount function")
+    try {
+      accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      console.log(accounts[0])
+    } catch (error) {
+      console.log(error)
+    }
+    if (accounts[0]){
+      // console.log("account is connected")
+      // window.ethereum.on('accountsChanged', handler: (accounts: Array<string>) => void)
+      handleDonation()
+    }else {
+      alert("MetaMask account is not connected")
+      connectToMetaMask()
+    }
+  }
   async function handleDonation() {
-    
-    let accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    console.log("wallet", props.campaign.walletId)
-      //gives back an array with one object
-
     window.ethereum
       .request({
         method: 'eth_sendTransaction',
@@ -51,15 +69,33 @@ export default function DonateButton(props) {
           },
         ],
       })
-      .then((txHash) => console.log(txHash))
-      .catch((error) => console.error);
+      .then((txHash) => setTransactionNumber(txHash))
+      .then((transactionNumber, donation)=> history.push({pathname: `campaigns/${props.id}/success`, state:{donation, transactionNumber}}))
+      .catch((error) => console.error(error));
+  }
+  
+
+  async function connectToMetaMask() {
+    console.log("we are in the connect to meta mask function")
+    try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function checkMetaMask(){
+    if (typeof window.ethereum !== 'undefined') {
+      console.log('MetaMask is installed!');
+      getAccount()
+    }else{
+      alert("It seems like MetaMask is not installed. Please refer to the MetaMask website to install MetaMask and begin to donate!")
+    }
   }
   
   
 
-  if (typeof window.ethereum !== 'undefined') {
-    console.log('MetaMask is installed!');
-  }
+  
 
 
   return (
@@ -77,7 +113,7 @@ export default function DonateButton(props) {
           type="submit"
           variant="contained"
           color="inherit"
-          onClick={handleDonation}
+          onClick={checkMetaMask}
         >
           Donate
         </Button>
@@ -104,8 +140,6 @@ export default function DonateButton(props) {
 //we can get their public key and that can go in the object. 
 
 //NEW CURRENT GAME PLAN UPDATES:
-//IT WORKS! YAY!!! I, AMBER, PERSONALLY HAVE TO FIGURE OUT HOW TO CONNECT MY METAMASK TO THE TESTING NETWORK. NOT WORKING
-//FOR SOME STRANGE REASON. TEAM MEMBERS: I WANT YOU TO SEE IF YOU CAN CONNECT TO TESTNET AND SEND ETHER.
 
 //MODIFYING CODE:
 //FLOW: onClick -> function CHECK IF USER HAS METAMASK INSTALLED. IF THEY DO NOT HAVE IT, THEN DIRECT THEM TO THE METAMASK INSTALLATION DOCS.
@@ -123,7 +157,7 @@ export default function DonateButton(props) {
 // this functions but im gonna start over
 //import React, {useEffect, useState} from 'react'
 // // import web3 from 'web3'
-// import {injected} from './Connectors'
+
 
 // import { useWeb3React } from '@web3-react/core'
 
@@ -160,26 +194,7 @@ export default function DonateButton(props) {
 //     }
     
 //   })
-//   async function handleClick() {
-//     const user_address = web3.eth.accounts[0];
 
-//     try {
-//       const transactionHash = await ethereum.request({
-//         method: "eth_sendTransaction",
-//         params: [
-//           {
-//             to: { wallet },
-//             from: user_address,
-//             value: web3.toWei("1", "ether"),
-//           },
-//         ],
-//       });
-//       // Handle the result
-//       console.log(transactionHash);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
 
 
 //   return (

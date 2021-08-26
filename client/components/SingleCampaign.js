@@ -66,7 +66,7 @@ export default function SingleCampaign(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <DonateButton campaign={campaign}/>
+        <DonateButton campaign={campaign} id={campaignID}/>
       </CardActions>
     </Card>
       </Grid>
