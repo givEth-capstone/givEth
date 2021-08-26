@@ -39,9 +39,7 @@ router.post('/create', requireToken, async (req, res, next) => {
     const user = User.findByPk(req.body.userId);
     console.log('this is the user', user);
     console.log('this is the req.body', req.body);
-    const createCampaign = await Campaign.create(req.body, {
-      include: user,
-    })
+    const createCampaign = await Campaign.create(req.body, user)
     console.log("this is the campaign", createCampaign);
     res.status(201).send(createCampaign);
   } catch (error) {

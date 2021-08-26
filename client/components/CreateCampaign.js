@@ -11,8 +11,10 @@ export default function CreateCampaign(props) {
     const [tag, setCategory] = React.useState('')
     const [info, setDescription] = React.useState('')
     const [walletId, setWalletID] = React.useState('')
-    const [picture, setPicture] = React.useState('https://via.placeholder.com/150')
+    const [photoUrl, setPhotoUrl] = React.useState('https://via.placeholder.com/150')
     const [userId, setUserId] = React.useState(null)
+    const [needed, setNeeded] = React.useState('')
+    const [status, setStatus] = React.useState('')
 
     const token = window.localStorage.token;
     console.log(window.localStorage.token);
@@ -23,16 +25,20 @@ export default function CreateCampaign(props) {
         let input = {
             name,
             location,
+            needed,
             tag,
             info,
             walletId, 
-            picture,
+            photoUrl,
+            status,
             userId
         }
         console.log('this is the onSubmit token', token)
         createCampaign(input, token)
     }
-//comment
+
+    //we are setting userId in handleSubmit after it's already been passed, so it never gets set. 
+    //move around axios.get user 
 
     async function createCampaign(body, token) {
         // console.log('this is the body', body);
@@ -45,7 +51,7 @@ export default function CreateCampaign(props) {
                 const data = await axios.post(`/api/campaigns/create`, body, {headers: {authorization: token}});
                 props.history.push('/campaigns');
             } else {
-                // props.history.push('/profile');
+                props.history.push('/profile');
                 console.log('token doesnt exist');
             }
         } catch (err) {
@@ -73,6 +79,12 @@ export default function CreateCampaign(props) {
                             onChange={(evt) => { setlocation(evt.target.value) }}
 
                         />
+                         <label> How much do you need to raise?</label>
+                        <input
+                            type="text"
+                            name="name"
+                            onChange={(evt) => { setNeeded(evt.target.value) }}
+                        />
                         <label>Category</label>
                         <select onChange={(evt) => { setCategory(evt.target.value) }}
                             name="category" id="category">
@@ -95,13 +107,19 @@ export default function CreateCampaign(props) {
                             onChange={(evt) => { setDescription(evt.target.value) }}
                         />
                     </div>
-                    <img src={picture} />
-                    <input onChange={(evt) => { setPicture(evt.target.value)}}
-                        type="file"
+                    <img src={photoUrl} />
+                    <input onChange={(evt) => { setPhotoUrl(evt.target.value)}}
+                        type="file "
                         id="img"
                         accept="image/*"
                         placeholder="upload campaign image"
                     />
+                     <label> Status </label>
+                        <input
+                            type="radio"
+                            name="name"
+                            onChange={(evt) => { setStatus(evt.target.value) }}
+                        />
                     <input
                         type="text"
                         name="name"
