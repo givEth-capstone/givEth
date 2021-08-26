@@ -13,26 +13,42 @@ export default function CreateCampaign(props) {
     const [walletId, setWalletID] = React.useState('')
     const [picture, setPicture] = React.useState('https://via.placeholder.com/150')
 
-    // console.log(name, location, tag, info, walletId);
-    // check/use token to make sure a user is creating a new one 
+    const [userId, setUserId] = React.useState(null)
 
-    function onSubmit(e) {
+    const token = window.localStorage.token;
+    console.log(window.localStorage.token);
+    // console.log(name, location, tag, info, walletId);
+    function onSubmit(e, token) {
+        
         e.preventDefault();
-       let input = {
+        let input = {
             name,
             location,
             tag,
             info,
             walletId, 
-            picture
+            picture,
+            userId
         }
-        createCampaign(input)
+        console.log('this is the onSubmit token', token)
+        createCampaign(input, token)
     }
-    async function createCampaign(something) {
-        console.log('this is the body', something);
+
+    async function createCampaign(body, token) {
+        // console.log('this is the body', body);
         try {
-            const data = await axios.post(`/api/campaigns/create`, something);
-            props.history.push('/campaigns');
+            if (token){
+                const response = await axios.get(`/api/users`, {headers: {authorization: token}});
+                console.log('this is the response', response.data.id);
+                setUserId(response.data.id);
+                console.log('this is the body', body);
+                const data = await axios.post(`/api/campaigns/create`, body, {headers: {authorization: token}});
+                props.history.push('/campaigns');
+            } else {
+                // props.history.push('/profile');
+                console.log('token doesnt exist');
+            }
+
         } catch (err) {
             console.log(err);
         }
@@ -43,7 +59,7 @@ export default function CreateCampaign(props) {
             <h1>Create Your Cause</h1>
             <div>
             <Container maxWidth="sm">
-                <form onSubmit={onSubmit}>
+                <form onSubmit={(e) => onSubmit(e, token)}>
                     <div>
                         <label> Cause Name </label>
                         <input
@@ -83,7 +99,8 @@ export default function CreateCampaign(props) {
                     <img src={picture} />
                     <input onChange={(evt) => { setPicture(evt.target.value)}}
                         type="file"
-                        name="name"
+                        id="img"
+                        accept="image/*"
                         placeholder="upload campaign image"
                     />
                     <input
