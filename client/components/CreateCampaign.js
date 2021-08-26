@@ -30,7 +30,7 @@ export default function CreateCampaign(props) {
         console.log('this is the onSubmit token', token)
         createCampaign(input, token)
     }
-
+//comment
     async function createCampaign(body, token) {
         console.log('this is the body', body);
         console.log('this is the inside token', token);
