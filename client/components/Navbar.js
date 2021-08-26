@@ -65,7 +65,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
           ) : (
             <div>
               {/* Don't display logout button if not logged in! */}
-              <Link to='/home'>
+              <Link to='/'>
                 <Typography className={classes.link}>Home</Typography>
               </Link>
               <Link to='/createCampaign'>

@@ -24,7 +24,7 @@ const Campaign = db.define('campaign', {
   },
   photoUrl: {
     type: Sequelize.TEXT,
-    defaultValue: 'https://via.placeholder.com/150'
+    defaultValue: 'https://www.pngitem.com/pimgs/m/145-1450643_providing-encouragement-and-support-to-help-people-icon.png'
   },
   tag: {
     type: Sequelize.ENUM('Arts', 'Community', 'Education', 'Emergency', 'Innovation', 'Family', 'Medical', 'Housing', 'Hunger')
