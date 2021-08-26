@@ -36,7 +36,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
   const campaigns = await Promise.all([
     Campaign.create({ 
       name: 'Support earthquake victims',
-      walletId: 'abc123', 
+      walletId: '0x309608B5649407f9865Bc95B44475909B77BBEE9', 
       location: 'Haiti',
       needed: 20,
       info: 'The earthquake has displaced many victims. Donate to support.',
@@ -47,7 +47,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
 
     Campaign.create({ 
       name: 'Rebuild the school',
-      walletId: 'efg123', 
+      walletId: '0x1D1c5410C8A96d62Af3fF02A158FcA44A0336517', 
       location: 'Brooklyn',
       needed: 10,
       info: 'The school caught on fire. Please help us get new furniture.',
@@ -57,7 +57,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
     }),
     Campaign.create({ 
       name: 'Help me pay my hospital bills',
-      walletId: 'hij123', 
+      walletId: '0x336eac30F175ea91cC78445E7dDb8E14c7312B9d', 
       location: 'Queens',
       needed: 30,
       info: 'Due to the coronavirus, I have been in and out of the hospital. I lost my job also and have no health insurance. Please help me pay off my hospital debt.',
@@ -67,7 +67,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
     }),
     Campaign.create({
       name: 'Plane tickets for refugees',
-      walletId: 'hij123', 
+      walletId: '0xB0BA04CAbA844f4094207B6577DB603002F61125', 
       location: 'Global',
       needed: 40,
       info: 'We are trying to help refugees of global crises reunite with their families. Please donate so we can get them plane tickets!',
@@ -77,7 +77,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
     }),
     Campaign.create({
       name: 'Temporary housing for flood victims',
-      walletId: 'hij123', 
+      walletId: '0x200E547fc82208014850E4b75959C96B6a6273BE', 
       location: 'Tennessee',
       needed: 40,
       info: 'Many people lost their homes in the devastating floods recently. Please help them to pay for temporary housing while they get back on their feet.',
