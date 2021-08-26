@@ -14,10 +14,9 @@ export default function CreateCampaign(props) {
     const [photoUrl, setPhotoUrl] = React.useState('https://via.placeholder.com/150')
     const [userId, setUserId] = React.useState(null)
     const [needed, setNeeded] = React.useState('')
-    const [status, setStatus] = React.useState('')
 
     const token = window.localStorage.token;
-    console.log(window.localStorage.token);
+    // console.log(window.localStorage.token);
     // console.log(name, location, tag, info, walletId);
     function onSubmit(e, token) {
         
@@ -30,7 +29,6 @@ export default function CreateCampaign(props) {
             info,
             walletId, 
             photoUrl,
-            status,
             userId
         }
         console.log('this is the onSubmit token', token)
@@ -44,11 +42,8 @@ export default function CreateCampaign(props) {
         // console.log('this is the body', body);
         try {
             if (token){
-                const response = await axios.get(`/api/users`, {headers: {authorization: token}});
-                console.log('this is the response', response.data.id);
-                setUserId(response.data.id);
-                console.log('this is the body', body);
-                const data = await axios.post(`/api/campaigns/create`, body, {headers: {authorization: token}});
+                const {data} = await axios.post(`/api/campaigns/create`, body, {headers: {authorization: token}});
+                console.log(data);
                 props.history.push('/campaigns');
             } else {
                 props.history.push('/profile');
@@ -81,7 +76,7 @@ export default function CreateCampaign(props) {
                         />
                          <label> How much do you need to raise?</label>
                         <input
-                            type="text"
+                            type="number"
                             name="name"
                             onChange={(evt) => { setNeeded(evt.target.value) }}
                         />
@@ -99,7 +94,6 @@ export default function CreateCampaign(props) {
                             <option value="Housing">Housing</option>
                             <option value="Hunger">Hunger</option>
                         </select>
-
                         <label>Description</label>
                         <input
                             type="text"
@@ -109,23 +103,16 @@ export default function CreateCampaign(props) {
                     </div>
                     <img src={photoUrl} />
                     <input onChange={(evt) => { setPhotoUrl(evt.target.value)}}
-                        type="file "
+                        type="file"
                         id="img"
                         accept="image/*"
                         placeholder="upload campaign image"
                     />
-                     <label> Status </label>
-                        <input
-                            type="radio"
-                            name="name"
-                            onChange={(evt) => { setStatus(evt.target.value) }}
-                        />
                     <input
                         type="text"
                         name="name"
                         placeholder="input wallet id"
                         onChange={(evt) => { setWalletID(evt.target.value) }}
-
                     />
                 <Button color='primary' type="submit" >Create Cause</Button>
                 </form>
