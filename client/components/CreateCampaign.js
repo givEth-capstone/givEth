@@ -5,13 +5,14 @@ import axios from 'axios';
 
 
 export default function CreateCampaign(props) {
-    
+
     const [name, setname] = React.useState('')
     const [location, setlocation] = React.useState('')
     const [tag, setCategory] = React.useState('')
     const [info, setDescription] = React.useState('')
     const [walletId, setWalletID] = React.useState('')
     const [picture, setPicture] = React.useState('https://via.placeholder.com/150')
+
     const [userId, setUserId] = React.useState(null)
 
     const token = window.localStorage.token;
@@ -32,7 +33,6 @@ export default function CreateCampaign(props) {
         console.log('this is the onSubmit token', token)
         createCampaign(input, token)
     }
-//comment
 
     async function createCampaign(body, token) {
         // console.log('this is the body', body);
@@ -48,6 +48,7 @@ export default function CreateCampaign(props) {
                 // props.history.push('/profile');
                 console.log('token doesnt exist');
             }
+
         } catch (err) {
             console.log(err);
         }

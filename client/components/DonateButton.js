@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+
 
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,38 +19,22 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-
-
-
-// const transactionParameters = {
-//   nonce: '0x00', // ignored by MetaMask
-//   gasPrice: '0x09184e72a000', // customizable by user during MetaMask confirmation.
-//   gas: '0x2710', // customizable by user during MetaMask confirmation.
-//   to: {props.campaign.walletId}, // Required except during contract publications.
-//   from: accounts[0], // must match user's active address.
-//   value: '0x00', // Only required to send ether to the recipient from the initiating external account.
-//   data:
-//     '0x7f7465737432000000000000000000000000000000000000000000000000000000600057', // Optional, but used for defining smart contract creation and interaction.
-//   chainId: '0x3', // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
-// };
-
-// txHash is a hex string
-// As with any RPC call, it may throw an error
-// const txHash = await ethereum.request({
-//   method: 'eth_sendTransaction',
-//   params: [transactionParameters],
-// });
-
 export default function DonateButton(props) {
   const classes = useStyles();
   const [donation, setDonation] = useState(0)
-
   
-
+  useEffect(()=> {
+    function showDonation(){
+      console.log("donation", donation)
+      console.log("recipient", props.campaign.walletId)
+    }
+    showDonation()
+  }, [donation])
+  
   async function handleDonation() {
     
     let accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    console.log("accounts",accounts)
+    console.log("wallet", props.campaign.walletId)
       //gives back an array with one object
 
     window.ethereum
@@ -59,9 +44,10 @@ export default function DonateButton(props) {
           {
             from: accounts[0],
             to: props.campaign.walletId,
-            value: `${donation}`,
-            gasPrice: '0x09184e72a000',
-            gas: '0x2710',
+
+            value: `${donation*1000000000000000000}`,
+            // gasPrice: '0x09184e72a000',
+            // gas: '0x2710',
           },
         ],
       })
@@ -83,8 +69,8 @@ export default function DonateButton(props) {
         <Input 
         id="my-input" 
         aria-describedby="my-helper-text"
-        onChange={(event) => {
-          setDonation(event.target.value);
+        onChange={(event) => { 
+           setDonation(event.target.value);
         }}
         />
         <Button
@@ -100,7 +86,7 @@ export default function DonateButton(props) {
   );
 }
 
-//game plan currently:
+//game plan:
 
 //CONNECTING TO METAMASK WALLET:
 //maybe have an alert and the alert tells user to connect to wallet. if window.ethereum is true
@@ -111,16 +97,23 @@ export default function DonateButton(props) {
 //create a input field where user can put in a number. put it on state. [x]
 //refer to metamask docs https://docs.metamask.io/guide/sending-transactions.html#example
 //create the object that is in the docs and hook up the method to the button.
-//maybe get some help understading the language in the docs? I'm not too familiar with the 
-// .then and .catch, would that be similar to a try catch block?
+
 
 //we get the user (person browsing) information from metamask docs https://docs.metamask.io/guide/getting-started.html#basic-considerations
-//ex:
-//const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-//const account = accounts[0];
 
 //we can get their public key and that can go in the object. 
-//docs were last updated 8/23 so hopefully this works!! GO TEAM!
+
+//NEW CURRENT GAME PLAN UPDATES:
+//IT WORKS! YAY!!! I, AMBER, PERSONALLY HAVE TO FIGURE OUT HOW TO CONNECT MY METAMASK TO THE TESTING NETWORK. NOT WORKING
+//FOR SOME STRANGE REASON. TEAM MEMBERS: I WANT YOU TO SEE IF YOU CAN CONNECT TO TESTNET AND SEND ETHER.
+
+//MODIFYING CODE:
+//FLOW: onClick -> function CHECK IF USER HAS METAMASK INSTALLED. IF THEY DO NOT HAVE IT, THEN DIRECT THEM TO THE METAMASK INSTALLATION DOCS.
+// IF THEY DO HAVE IT, CHECK IF THEY ARE LOGGED IN. IF THEY ARE NOT LOGGED IN, LOG THEM IN.
+// IF THEY ARE LOGGED IN, THEN DO WHAT THE CODE IS DOING (ALLOW THEM TO SEND ETHER THROUGH METAMASK)
+
+//plan:
+//click on button -> calls function that checks if metamask is there. --> calls function that checks if logged in --> calls function that allows request
 
 
 
@@ -197,5 +190,3 @@ export default function DonateButton(props) {
 //     </div>
 //   )
 // }
-
-// //find a way to get the users wallet.
