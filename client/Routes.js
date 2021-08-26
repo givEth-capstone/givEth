@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
+import {withRouter, Route, Switch, Redirect, Router} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
@@ -8,6 +8,7 @@ import Campaigns from './components/Campaigns'
 import CreateCampaign from './components/CreateCampaign';
 import SingleCampaign from './components/SingleCampaign'
 import Profile from './components/Profile'
+import history from './history'
 
 class Routes extends Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ class Routes extends Component {
 
     return (
       <div>
+        <Router history={history}>
         <Route exact path="/" component={Home} />
         <Route exact path="/campaigns" component={Campaigns} />
         <Route exact path="/campaigns/:id" component={SingleCampaign} />
@@ -28,7 +30,7 @@ class Routes extends Component {
         {/* route for profile */}
         {/* route for single campaign */}
         {/* route for create campaign */}
-
+        </Router>
       </div>
     )
   }

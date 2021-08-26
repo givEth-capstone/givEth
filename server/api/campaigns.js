@@ -33,7 +33,6 @@ router.get('/:id', async (req, res, next) => {
 //post route for individual campaign
 
 router.post('/create', requireToken, async (req, res, next) => {
-
   console.log('Here is the req.body', req.body)
   try {
     const user = User.findByPk(req.body.userId);
