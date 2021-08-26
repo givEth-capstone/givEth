@@ -65,12 +65,34 @@ const [Nicky, Farha, Amber, Rachel] = users;
       tag: 'Medical',
       status: true
     }),
+    Campaign.create({
+      name: 'Plane tickets for refugees',
+      walletId: 'hij123', 
+      location: 'Global',
+      needed: 40,
+      info: 'We are trying to help refugees of global crises reunite with their families. Please donate so we can get them plane tickets!',
+      photoUrl: photo,
+      tag: 'Emergency',
+      status: true
+    }),
+    Campaign.create({
+      name: 'Temporary housing for flood victims',
+      walletId: 'hij123', 
+      location: 'Tennessee',
+      needed: 40,
+      info: 'Many people lost their homes in the devastating floods recently. Please help them to pay for temporary housing while they get back on their feet.',
+      photoUrl: photo,
+      tag: 'Emergency',
+      status: true
+    })
   ])
-  const [EarthquakeVictims, RebuildSchool, HospitalBills] = campaigns;
+  const [EarthquakeVictims, RebuildSchool, HospitalBills, PlaneTickets, FloodHousing] = campaigns;
 
   await Nicky.addCampaign(EarthquakeVictims)
   await Amber.addCampaign(RebuildSchool)
   await Rachel.addCampaign(HospitalBills)
+  await Farha.addCampaign(PlaneTickets)
+  await Nicky.addCampaign(FloodHousing)
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
