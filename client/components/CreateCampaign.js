@@ -1,11 +1,12 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button, Container } from '@material-ui/core';
+import {Redirect} from 'react-router-dom'
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-
-export default function CreateCampaign(props) {
-    
+export function CreateCampaign(props) {
+    const {isLoggedIn} = props
     const [name, setname] = React.useState('')
     const [location, setlocation] = React.useState('')
     const [tag, setCategory] = React.useState('')
@@ -55,6 +56,12 @@ export default function CreateCampaign(props) {
     }
 
     return (
+        <div>
+        { !isLoggedIn ? 
+        <div>
+        <Redirect to ='/profile'> </Redirect>
+        </div>
+            :
         <div>
             <h1>Create Your Cause</h1>
             <div>
@@ -125,7 +132,19 @@ export default function CreateCampaign(props) {
                 </h4>
             </div>
         </div>
-
+        }
+    </div>
     )
 }
 
+
+const mapState = state => {
+    return {
+      // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
+      // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
+      isLoggedIn: !!state.auth.id
+    }
+  }
+
+  export default connect(mapState, null)(CreateCampaign)
+  
