@@ -12,7 +12,7 @@ export function CreateCampaign(props) {
     const [tag, setCategory] = React.useState('')
     const [info, setDescription] = React.useState('')
     const [walletId, setWalletID] = React.useState('')
-    const [photoUrl, setPhotoUrl] = React.useState('https://via.placeholder.com/150')
+    const [photoUrl, setPhotoUrl] = React.useState('https://www.pngitem.com/pimgs/m/145-1450643_providing-encouragement-and-support-to-help-people-icon.png')
     const [userId, setUserId] = React.useState(null)
     const [needed, setNeeded] = React.useState('')
 
@@ -108,7 +108,7 @@ export function CreateCampaign(props) {
                             onChange={(evt) => { setDescription(evt.target.value) }}
                         />
                     </div>
-                    <img src={photoUrl} />
+                    <img src={photoUrl} width="150" height="150"/>
                     <input onChange={(evt) => { setPhotoUrl(evt.target.value)}}
                         type="file"
                         id="img"
