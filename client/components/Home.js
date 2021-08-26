@@ -1,5 +1,6 @@
 import React, {useEffect,useState} from 'react'
 import {connect} from 'react-redux'
+import { Button, Container } from '@material-ui/core';
 
 
 /**
@@ -8,11 +9,9 @@ import {connect} from 'react-redux'
 export const Home = props => {
   const {username} = props
   
-
-
   return (
     <div>
-      <h3>Welcome, {username}</h3>
+      <h2>HOME</h2>
     </div>
   )
 }

@@ -83,16 +83,49 @@ const [Nicky, Farha, Amber, Rachel] = users;
       info: 'Many people lost their homes in the devastating floods recently. Please help them to pay for temporary housing while they get back on their feet.',
       photoUrl: photo,
       tag: 'Emergency',
+      status: false
+    }),
+    Campaign.create({
+      name: 'Safe shelther for LGBTQ youth',
+      walletId: 'hij123', 
+      location: 'Kabul',
+      needed: 40,
+      info: 'We are trying to raise money to continue running our safe shelter for homeless and struggling LGBTQ youth in our city. Please donate to keep us safe!',
+      photoUrl: photo,
+      tag: 'Emergency',
+      status: false
+    }),
+    Campaign.create({
+      name: 'Wild Elephant Fund',
+      walletId: 'hij123', 
+      location: 'Botswana',
+      needed: 40,
+      info: 'We are in need of funds to help rehabilitate and protect the wild elephants in our area that have been targeted by poachers',
+      photoUrl: photo,
+      tag: 'Community',
       status: true
-    })
+    }),
+    Campaign.create({
+      name: 'Food for Children',
+      walletId: 'hij123', 
+      location: 'USA',
+      needed: 40,
+      info: '1 in 3 children go to bed without dinner. Please donate to help us continue providing free school lunches to children who need it.',
+      photoUrl: photo,
+      tag: 'Hunger',
+      status: false
+    }),
   ])
-  const [EarthquakeVictims, RebuildSchool, HospitalBills, PlaneTickets, FloodHousing] = campaigns;
+  const [EarthquakeVictims, RebuildSchool, HospitalBills, PlaneTickets, FloodHousing, LGBTShelter, WildElephant, FoodChildren] = campaigns;
 
   await Nicky.addCampaign(EarthquakeVictims)
   await Amber.addCampaign(RebuildSchool)
   await Rachel.addCampaign(HospitalBills)
   await Farha.addCampaign(PlaneTickets)
   await Nicky.addCampaign(FloodHousing)
+  await Nicky.addCampaign(LGBTShelter)
+  await Nicky.addCampaign(WildElephant)
+  await Amber.addCampaign(FoodChildren)
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)

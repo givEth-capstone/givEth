@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
+
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -17,10 +18,6 @@ const useStyles = makeStyles(() => ({
     // right: 20,
   },
 }));
-
-
-
-
 
 export default function DonateButton(props) {
   const classes = useStyles();
@@ -47,6 +44,7 @@ export default function DonateButton(props) {
           {
             from: accounts[0],
             to: props.campaign.walletId,
+
             value: `${donation*1000000000000000000}`,
             // gasPrice: '0x09184e72a000',
             // gas: '0x2710',
