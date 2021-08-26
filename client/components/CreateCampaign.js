@@ -5,20 +5,21 @@ import axios from 'axios';
 
 
 export default function CreateCampaign(props) {
-
+    
     const [name, setname] = React.useState('')
     const [location, setlocation] = React.useState('')
     const [tag, setCategory] = React.useState('')
     const [info, setDescription] = React.useState('')
     const [walletId, setWalletID] = React.useState('')
     const [picture, setPicture] = React.useState('https://via.placeholder.com/150')
-
+    
+    
+    const token = window.localStorage.token;
+    console.log(window.localStorage.token);
     // console.log(name, location, tag, info, walletId);
-    // check/use token to make sure a user is creating a new one 
-
-    function onSubmit(e) {
+    function onSubmit(e, token) {
         e.preventDefault();
-       let input = {
+        let input = {
             name,
             location,
             tag,
@@ -26,13 +27,20 @@ export default function CreateCampaign(props) {
             walletId, 
             picture
         }
-        createCampaign(input)
+        console.log('this is the onSubmit token', token)
+        createCampaign(input, token)
     }
-    async function createCampaign(something) {
-        console.log('this is the body', something);
+
+    async function createCampaign(body, token) {
+        console.log('this is the body', body);
+        console.log('this is the inside token', token);
         try {
-            const data = await axios.post(`/api/campaigns/create`, something);
-            props.history.push('/campaigns');
+            if (token){
+                const data = await axios.post(`/api/campaigns/create`, body, {headers: {authorization: token}});
+                props.history.push('/campaigns');
+            } else {
+                console.log('token doesnt exist');
+            }
         } catch (err) {
             console.log(err);
         }
@@ -83,7 +91,8 @@ export default function CreateCampaign(props) {
                     <img src={picture} />
                     <input onChange={(evt) => { setPicture(evt.target.value)}}
                         type="file"
-                        name="name"
+                        id="img"
+                        accept="image/*"
                         placeholder="upload campaign image"
                     />
                     <input

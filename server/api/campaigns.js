@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { models: { Campaign }} = require('../db')
 module.exports = router
+const {requireToken} = require('./gateKeepingMiddleware');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -31,11 +32,16 @@ router.get('/:id', async (req, res, next) => {
 
 //post route for individual campaign
 
-router.post('/create', async (req, res, next) => {
-  
+router.post('/create', requireToken, async (req, res, next) => {
+
   console.log('Here is the req.body', req.body)
   try {
-    const createCampaign = await Campaign.create(req.body)
+    const user = req.user
+    console.log('this is the user', user);
+    const createCampaign = await Campaign.create(req.body, {
+      include: [user],
+    })
+    console.log("this is the campaign", createCampaign);
     res.status(201).send(createCampaign);
   } catch (error) {
     next(error)
