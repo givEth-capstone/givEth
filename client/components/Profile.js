@@ -1,6 +1,6 @@
-//import isLoggedIn from User model
+//import isLoggedIn from user model
 //import Login and Signup
-//if there's no logged in User (either by checking state or local host token)
+//if there's no logged in user (either by checking state or local host token)
 //then display <Login /> and/or <Signup />
 
 import React, { useEffect, useState } from 'react';
@@ -12,19 +12,20 @@ import { NavLink } from "react-router-dom";
 export function Profile(props) {
 const token = window.localStorage.token;
 const {isLoggedIn} = props
-let [User, setUser] = React.useState([]); //User holds campaigns associated with User and user info in key 'user'
+let [user, setUser] = React.useState(); 
 
 //initial state, runs right after first render to get user obj
-  useEffect(() => {
+ useEffect( () => {
     async function fetchUser(token) {
         try{
           if(token){
-            const response = await axios.get(`/api/users/campaigns`, {headers: { Authorization: token }});
+            const response = await axios.get(`/api/users`, {headers: { Authorization: token }});
             const data = response.data
+            console.log("RESPONSE", response)
             console.log("ASSOCIATED DATA", data);
             setUser(data)
             
-            console.log("what is User?", User) //why is this empty?
+            console.log("what is user?", user) //why is this empty?
           } 
           else{
             console.log("NOT LOGGED IN", window.localStorage);
@@ -33,18 +34,33 @@ let [User, setUser] = React.useState([]); //User holds campaigns associated with
             console.log(err);
         }
     }
-   fetchUser(token);
+ fetchUser(token);
     }, []);
+    
 
-    console.log("OBJECT?", User[0])
-    
-    const campaigns = User[0]
-    console.log(campaigns)
-    
+   console.log("state user", user)
+
+    function currentCampaigns(user) {
+        user.campaigns.map(campaign => {
+          if(campaign.status) {
+            console.log(campaign.status)
+            console.log(campaign.name)
+            const cn = campaign.name
+          return(
+            <p>Campaign Name: </p>
+          );
+          }else{
+            return(
+              <p key={campaign.id}>Campaign Name{campaign.name}</p>
+            );
+          }
+
+        })
+    }
 
     return( 
         <div>
-            {User.length < 1 ? 
+            { !isLoggedIn ? 
             <div>
                 {"Please Log In or Sign Up"}
                 <Login/>
@@ -52,34 +68,39 @@ let [User, setUser] = React.useState([]); //User holds campaigns associated with
             </div>  
             :
             <div>
-               <h2>User: {campaigns.user.username} </h2>
-               {campaigns.status ? 
-               
-                <div id="column">
-                  <h1>-----------------------------------</h1>
-                    <h2>Campaigns In Progress:</h2>
-                    <h3>{campaigns.name}</h3>
-                    <h3>{campaigns.location}</h3>
-                    <h3>Total Needed : ${campaigns.needed}</h3>
-                    <NavLink to={`/campaigns/${campaigns.id}`}>
-                      <button type="button"> See More Here </button>
-                    </NavLink>
-                </div>
-                :
-                <div id="column">
-                  <h1>-----------------------------------</h1>
-                    <h2>Past Campaigns:</h2>
-                    <h3>{campaigns.name}</h3>
-                    <h3>{campaigns.location}</h3>
-                    <h3>Total Needed : ${campaigns.needed}</h3>
-                    {/* <h3>Total Raised: Can include in future </h3> */}
-                    <NavLink to={`/campaigns/${campaigns.id}`}>
-                      <button type="button"> See More Here </button>
-                    </NavLink>
-                </div>
-               }
+              { user ? 
+                <div>
+                  <h2>user is Truthy </h2>
+                  <h2>{user.username}</h2>
+                  <h3>Current Campaigns</h3>
+                  {/* <div>{campaignRender(user)}</div> */}
+                  {user.campaigns.map ((campaigns) => {
+                  return(
+                    campaigns.status ? 
+                      <div key={campaigns.id}>
+                        <h3>{campaigns.name}</h3>
+                        <h4>{campaigns.location}</h4>
+                        <h4>{campaigns.tag}</h4>
+                        <h4>Amount Needed: ${campaigns.needed}</h4>
+                      </div>
+                    :
+                      <div>
+                        <h3>Past Campaigns</h3>
+                        <h4>{campaigns.name}</h4>
+                        <h4>{campaigns.location}</h4>
+                        <h4>{campaigns.tag}</h4>
+                        <h4>Amount Needed: ${campaigns.needed}</h4>
+                      </div>
+                  )}
+                  )}
+              </div>
+              :
+              <div>
+                <h4>user is Falsey</h4>
+              </div>
+              }
             </div> 
-            }
+            } 
         </div>
     )
 }
