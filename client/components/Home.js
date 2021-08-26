@@ -41,15 +41,27 @@ let campaignsLength = campaigns.length-1
 //     console.log(randomNums)
 //   }
 
-if(campaignsLength){
-let num = Math.floor(Math.random() * campaignsLength);
-return num
+function random (max) {
+  let num = Math.floor(Math.random() * max);  
 }
   return (
     <div>
-      <h1>GivEth</h1>
-      <h1>FEATURED CAMPAIGNS</h1>
-      
+      <h1>Anonymous, Ethereum-based Crowdfunding</h1>
+
+      <h2>Starting A Campaign Is Easy</h2>
+
+      <h1>Featured Campaigns</h1>
+      {!campaigns.length ?
+        <div>
+        <h2>Nothing Here, Sorry!</h2>
+        </div>
+      :
+        <div>
+          {campaigns[random(campaigns.length-1)].name}
+        </div>
+      }
+
+      <h3>Get In Touch</h3>
     </div>
   )
 }
