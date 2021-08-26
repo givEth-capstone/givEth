@@ -40,22 +40,35 @@ let [user, setUser] = React.useState();
 
    console.log("state user", user)
 
-    function currentCampaigns(user) {
-        user.campaigns.map(campaign => {
-          if(campaign.status) {
-            console.log(campaign.status)
-            console.log(campaign.name)
-            const cn = campaign.name
-          return(
-            <p>Campaign Name: </p>
-          );
-          }else{
-            return(
-              <p key={campaign.id}>Campaign Name{campaign.name}</p>
-            );
-          }
+    // function currentCampaigns(user) {
+    //     user.campaigns.map(campaign => {
+    //       if(campaign.status) {
+    //         console.log(campaign.status)
+    //         console.log(campaign.name)
+    //         const cn = campaign.name
+    //       return(
+    //         <p>Campaign Name: </p>
+    //       );
+    //       }else{
+    //         return(
+    //           <p key={campaign.id}>Campaign Name{campaign.name}</p>
+    //         );
+    //       }
 
-        })
+    //     })
+    // }
+
+    let currentCampaigns = []
+    let pastCampaigns = []
+
+    function campaignRender (user) {
+      user.campaigns.map(campaign => {
+        if(campaign.status) {
+          currentCampaigns.push(campaign)
+        } else {
+          pastCampaigns.push(campaign)
+        }
+      })
     }
 
     return( 
@@ -70,33 +83,35 @@ let [user, setUser] = React.useState();
             <div>
               { user ? 
                 <div>
-                  <h2>user is Truthy </h2>
+                  {/* <h2>user is Truthy </h2> */}
                   <h2>{user.username}</h2>
-                  <h3>Current Campaigns</h3>
-                  {/* <div>{campaignRender(user)}</div> */}
-                  {user.campaigns.map ((campaigns) => {
-                  return(
-                    campaigns.status ? 
+                  <div>{campaignRender(user)}</div>
+                  <h2>Current Campaigns</h2>
+                  {currentCampaigns.map ((campaigns) => {
+                    return(
                       <div key={campaigns.id}>
-                        <h3>{campaigns.name}</h3>
-                        <h4>{campaigns.location}</h4>
-                        <h4>{campaigns.tag}</h4>
-                        <h4>Amount Needed: ${campaigns.needed}</h4>
-                      </div>
-                    :
-                      <div>
-                        <h3>Past Campaigns</h3>
-                        <h4>{campaigns.name}</h4>
-                        <h4>{campaigns.location}</h4>
-                        <h4>{campaigns.tag}</h4>
-                        <h4>Amount Needed: ${campaigns.needed}</h4>
-                      </div>
-                  )}
-                  )}
+                      <h3> Name: {campaigns.name}</h3>
+                      <h4>Location: {campaigns.location}</h4>
+                      <h4>Category: {campaigns.tag}</h4>
+                      <h4>Amount Needed: ${campaigns.needed}</h4>
+                    </div>
+                    ); 
+                  })}
+                  <h2>Past Campaigns</h2>
+                  {pastCampaigns.map ((campaigns) => {
+                    return(
+                      <div key={campaigns.id}>
+                      <h3> Name: {campaigns.name}</h3>
+                      <h4>Location: {campaigns.location}</h4>
+                      <h4>Category: {campaigns.tag}</h4>
+                      <h4>Amount Needed: ${campaigns.needed}</h4>
+                    </div>
+                    ); 
+                  })}
               </div>
               :
               <div>
-                <h4>user is Falsey</h4>
+                <h4>User is Falsey</h4>
               </div>
               }
             </div> 
