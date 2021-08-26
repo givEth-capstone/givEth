@@ -12,12 +12,13 @@ export default function CreateCampaign(props) {
     const [info, setDescription] = React.useState('')
     const [walletId, setWalletID] = React.useState('')
     const [picture, setPicture] = React.useState('https://via.placeholder.com/150')
-    
-    
+    const [userId, setUserId] = React.useState(null)
+
     const token = window.localStorage.token;
     console.log(window.localStorage.token);
     // console.log(name, location, tag, info, walletId);
     function onSubmit(e, token) {
+        
         e.preventDefault();
         let input = {
             name,
@@ -25,20 +26,26 @@ export default function CreateCampaign(props) {
             tag,
             info,
             walletId, 
-            picture
+            picture,
+            userId
         }
         console.log('this is the onSubmit token', token)
         createCampaign(input, token)
     }
 //comment
+
     async function createCampaign(body, token) {
-        console.log('this is the body', body);
-        console.log('this is the inside token', token);
+        // console.log('this is the body', body);
         try {
             if (token){
+                const response = await axios.get(`/api/users`, {headers: {authorization: token}});
+                console.log('this is the response', response.data.id);
+                setUserId(response.data.id);
+                console.log('this is the body', body);
                 const data = await axios.post(`/api/campaigns/create`, body, {headers: {authorization: token}});
                 props.history.push('/campaigns');
             } else {
+                // props.history.push('/profile');
                 console.log('token doesnt exist');
             }
         } catch (err) {
@@ -51,7 +58,7 @@ export default function CreateCampaign(props) {
             <h1>Create Your Cause</h1>
             <div>
             <Container maxWidth="sm">
-                <form onSubmit={onSubmit}>
+                <form onSubmit={(e) => onSubmit(e, token)}>
                     <div>
                         <label> Cause Name </label>
                         <input
