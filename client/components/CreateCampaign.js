@@ -5,18 +5,18 @@ import axios from 'axios';
 
 
 export default function CreateCampaign(props) {
-
+    
     const [name, setname] = React.useState('')
     const [location, setlocation] = React.useState('')
     const [tag, setCategory] = React.useState('')
     const [info, setDescription] = React.useState('')
     const [walletId, setWalletID] = React.useState('')
-    const [picture, setPicture] = React.useState('https://via.placeholder.com/150')
-
+    const [photoUrl, setPhotoUrl] = React.useState('https://via.placeholder.com/150')
     const [userId, setUserId] = React.useState(null)
+    const [needed, setNeeded] = React.useState('')
 
     const token = window.localStorage.token;
-    console.log(window.localStorage.token);
+    // console.log(window.localStorage.token);
     // console.log(name, location, tag, info, walletId);
     function onSubmit(e, token) {
         
@@ -24,31 +24,31 @@ export default function CreateCampaign(props) {
         let input = {
             name,
             location,
+            needed,
             tag,
             info,
             walletId, 
-            picture,
+            photoUrl,
             userId
         }
         console.log('this is the onSubmit token', token)
         createCampaign(input, token)
     }
 
+    //we are setting userId in handleSubmit after it's already been passed, so it never gets set. 
+    //move around axios.get user 
+
     async function createCampaign(body, token) {
         // console.log('this is the body', body);
         try {
             if (token){
-                const response = await axios.get(`/api/users`, {headers: {authorization: token}});
-                console.log('this is the response', response.data.id);
-                setUserId(response.data.id);
-                console.log('this is the body', body);
-                const data = await axios.post(`/api/campaigns/create`, body, {headers: {authorization: token}});
+                const {data} = await axios.post(`/api/campaigns/create`, body, {headers: {authorization: token}});
+                console.log(data);
                 props.history.push('/campaigns');
             } else {
-                // props.history.push('/profile');
+                props.history.push('/profile');
                 console.log('token doesnt exist');
             }
-
         } catch (err) {
             console.log(err);
         }
@@ -74,6 +74,12 @@ export default function CreateCampaign(props) {
                             onChange={(evt) => { setlocation(evt.target.value) }}
 
                         />
+                         <label> How much do you need to raise?</label>
+                        <input
+                            type="number"
+                            name="name"
+                            onChange={(evt) => { setNeeded(evt.target.value) }}
+                        />
                         <label>Category</label>
                         <select onChange={(evt) => { setCategory(evt.target.value) }}
                             name="category" id="category">
@@ -88,7 +94,6 @@ export default function CreateCampaign(props) {
                             <option value="Housing">Housing</option>
                             <option value="Hunger">Hunger</option>
                         </select>
-
                         <label>Description</label>
                         <input
                             type="text"
@@ -96,8 +101,8 @@ export default function CreateCampaign(props) {
                             onChange={(evt) => { setDescription(evt.target.value) }}
                         />
                     </div>
-                    <img src={picture} />
-                    <input onChange={(evt) => { setPicture(evt.target.value)}}
+                    <img src={photoUrl} />
+                    <input onChange={(evt) => { setPhotoUrl(evt.target.value)}}
                         type="file"
                         id="img"
                         accept="image/*"
@@ -108,7 +113,6 @@ export default function CreateCampaign(props) {
                         name="name"
                         placeholder="input wallet id"
                         onChange={(evt) => { setWalletID(evt.target.value) }}
-
                     />
                 <Button color='primary' type="submit" >Create Cause</Button>
                 </form>
