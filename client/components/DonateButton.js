@@ -45,8 +45,8 @@ export default function DonateButton(props) {
       console.log(error)
     }
     if (accounts[0]){
-      console.log("account is connected")
-      window.ethereum.on('accountsChanged', handler: (accounts: Array<string>) => void)
+      // console.log("account is connected")
+      // window.ethereum.on('accountsChanged', handler: (accounts: Array<string>) => void)
       handleDonation()
     }else {
       alert("MetaMask account is not connected")
@@ -54,7 +54,7 @@ export default function DonateButton(props) {
     }
   }
   async function handleDonation() {
-    window.ethereum
+    const letsseethis = window.ethereum
       .request({
         method: 'eth_sendTransaction',
         params: [
@@ -70,7 +70,9 @@ export default function DonateButton(props) {
       })
       .then((txHash) => console.log(txHash))
       .catch((error) => console.error);
+      console.log(letsseethis)
   }
+  
 
   async function connectToMetaMask() {
     console.log("we are in the connect to meta mask function")
