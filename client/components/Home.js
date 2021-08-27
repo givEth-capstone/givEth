@@ -52,13 +52,13 @@ function random (max) {
       <h2>Starting A Campaign Is Easy</h2>
 
       <h1>Featured Campaigns</h1>
-      {!campaigns.length ?
+      {/* {!campaigns.length ? */}
         <div>
         <h2>Nothing Here, Sorry!</h2>
         </div>
       :
         <div>
-          {campaigns[random(campaigns.length-1)].name}
+          {/* {campaigns[random(campaigns.length-1)].name} */}
         </div>
       }
 
