@@ -47,7 +47,7 @@ export default function DonateButton(props) {
     }
     if (accounts[0]){
       // console.log("account is connected")
-      // window.ethereum.on('accountsChanged', handler: (accounts: Array<string>) => void)
+      window.ethereum.on('accountsChanged', ()=>{console.log("account changed")})
       handleDonation()
     }else {
       alert("MetaMask account is not connected")
@@ -63,7 +63,7 @@ export default function DonateButton(props) {
             from: accounts[0],
             to: props.campaign.walletId,
 
-            value: `${donation*1000000000000000000}`,
+            value: `${donation *1000000000000000000}`,
             // gasPrice: '0x09184e72a000',
             // gas: '0x2710',
           },
@@ -113,6 +113,7 @@ export default function DonateButton(props) {
            setDonation(event.target.value);
         }}
         />
+        <span>ETHER</span>
         <Button
           type="submit"
           variant="contained"
@@ -141,17 +142,6 @@ export default function DonateButton(props) {
 
 //we get the user (person browsing) information from metamask docs https://docs.metamask.io/guide/getting-started.html#basic-considerations
 
-//we can get their public key and that can go in the object. 
-
-//NEW CURRENT GAME PLAN UPDATES:
-
-//MODIFYING CODE:
-//FLOW: onClick -> function CHECK IF USER HAS METAMASK INSTALLED. IF THEY DO NOT HAVE IT, THEN DIRECT THEM TO THE METAMASK INSTALLATION DOCS.
-// IF THEY DO HAVE IT, CHECK IF THEY ARE LOGGED IN. IF THEY ARE NOT LOGGED IN, LOG THEM IN.
-// IF THEY ARE LOGGED IN, THEN DO WHAT THE CODE IS DOING (ALLOW THEM TO SEND ETHER THROUGH METAMASK)
-
-//plan:
-//click on button -> calls function that checks if metamask is there. --> calls function that checks if logged in --> calls function that allows request
 
 
 
