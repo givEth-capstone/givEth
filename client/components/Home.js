@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react'
 import {connect} from 'react-redux'
 import { Button, Container } from '@material-ui/core';
 import axios from 'axios';
-
+//import backgroud from "./img/"
 
 export const Home = props => {
   const [campaigns, setCampaigns] = useState([]);
@@ -20,7 +20,7 @@ export const Home = props => {
     fetchData();
   }, []);
 
-let campaignsLength = campaigns.length-1
+// let campaignsLength = campaigns.length-1
 
 // function getRandomInt(campaignsLength) {
 //   let num1 = 0;
@@ -41,9 +41,9 @@ let campaignsLength = campaigns.length-1
 //     console.log(randomNums)
 //   }
 
-function random (max) {
-  let num = Math.floor(Math.random() * max);  
-}
+// function random (max) {
+//   let num = Math.floor(Math.random() * max);  
+// }
   return (
     <div>
       <h1>Anonymous, Ethereum-based Crowdfunding</h1>
@@ -51,15 +51,7 @@ function random (max) {
       <h2>Starting A Campaign Is Easy</h2>
 
       <h1>Featured Campaigns</h1>
-      {!campaigns.length ?
-        <div>
-        <h2>Nothing Here, Sorry!</h2>
-        </div>
-      :
-        <div>
-          {campaigns[random(campaigns.length-1)].name}
-        </div>
-      }
+
 
       <h3>Get In Touch</h3>
     </div>
