@@ -12,19 +12,43 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
+import { LinearProgress } from '@material-ui/core/LinearProgress'
 
 
 const useStyles = makeStyles({
   root: {
     maxWidth: '80%',
+    flexGrow: 1,
+    height: '100%',
   },
   media: {
     height: 280,
   },
+  progress: {
+    width: '37.5%',
+    float: 'left',
+    borderRadius: '6px',
+    height: '20px',
+    background: '#36B8E9', /* For browsers that do not support gradients */
+    // background: '-webkit-linear-gradient(-90deg, #71F7F2, #36B8E9)', /* For Safari 5.1 to 6.0 */
+    zIndex: 333,
+    boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08)'
+  },
+  glass: {
+    width: '80%',
+    height: '20px',
+    borderRadius: '6px',
+    background: '#ee0e0',
+    float: 'left',
+    overflow: 'hidden',
+    backgroundColor: '#dee0e0',
+    boxShadow: '0 2px 3px rgba(0,0,0,.5) inset',
+  }
 });
 
 export default function SingleCampaign(props) {
 
+  //const progress = props.campaign
   const campaignID = props.match.params.id;
   const classes = useStyles();
   let [campaign, setCampaign] = React.useState([])
@@ -33,7 +57,6 @@ export default function SingleCampaign(props) {
     async function getCampaign(id) {
       try {
         const response = await axios.get(`/api/campaigns/${id}`);
-        console.log(response)
         const data = response.data;
         setCampaign(data)
         console.log(campaign)
@@ -46,32 +69,49 @@ export default function SingleCampaign(props) {
   
   return (
     <div>
-      {campaign.length < 1 ? <h1>Nothing to see.</h1>:
-      <Grid container direction="column" alignItems="center" justifyContent="center">
-        <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={campaign.photoUrl}
-          title={campaign.title}
-        />
-        
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {campaign.info}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
-           {/* Amount raised: {campaign.amountRaised/campaign.needed} */}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <DonateButton campaign={campaign} id={campaignID}/>
-      </CardActions>
-    </Card>
-      </Grid>
-      
-      }
+      {campaign.length < 1 ? (
+        <h1>Nothing to see.</h1>
+      ) : (
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Card className={classes.root}>
+            <CardActionArea>
+              <CardMedia
+                className={classes.media}
+                image={campaign.photoUrl}
+                title={campaign.title}
+              />
+
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {campaign.title}
+                </Typography>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {campaign.info}
+                </Typography>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Goal: {campaign.needed} ETHER
+                </Typography>
+
+                <div className={classes.glass}>
+                  <div className={classes.progress} style={{width: `${(campaign.raised/campaign.needed)*100}%`}}></div>
+                </div>
+
+                <Typography gutterBottom variant="h5" component="h2">
+                  {/* Amount raised: {campaign.amountRaised/campaign.needed} */}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <DonateButton campaign={campaign} id={campaignID} />
+            </CardActions>
+          </Card>
+        </Grid>
+      )}
     </div>
-  )
+  );
 }

@@ -24,7 +24,7 @@ class Routes extends Component {
         <Router history={history}>
         <Route exact path="/" component={Home} />
         <Route exact path="/campaigns" component={Campaigns} />
-        <Route exact path="/campaigns/:id" render={(routeProps) => <SingleCampaign {...routeProps} /> }/>
+        <Route exact path="/campaigns/:id" component={SingleCampaign}/>
         <Route exact path="/profile" component={Profile}/>
         <Route exact path="/createcampaign" component={CreateCampaign}/>
         <Route exact path="/campaigns/:id/success" component={Success}/>

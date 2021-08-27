@@ -18,14 +18,14 @@ const App = () => {
     <Web3ReactProvider>
       <div>
         <Navbar />
-        <Grid
+        {/* <Grid
           container
           justifyContent="center"
           alignItems="center"
           direction="column"
-        >
+        > */}
           <Routes />
-        </Grid>
+        {/* </Grid> */}
       </div>
     </Web3ReactProvider>
   ); 

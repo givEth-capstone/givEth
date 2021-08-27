@@ -38,7 +38,6 @@ const useStyles = makeStyles(() => ({
     margin: 20,
     minWidth: 200,
     padding: 20,
-    minWidth: 200,
   },
   gridContainer: {
     justifyContent: 'flex-start',
