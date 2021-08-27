@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react'
 import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-//import background from '../../public/assets/paper-globe-hands.jpg'
+// import background from 'assets/paper-globe-hands.jpg'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -49,16 +49,22 @@ const useStyles = makeStyles(() => ({
     alignSelf: 'center'
   },
   root: {
-    maxWidth: 345,
-    maxHeight: 400,
+    maxWidth: 500,
+    maxHeight: 600,
+    borderRadius: 12,
   },
   media: {
     maxHeight: 200,
   },
-  sub: {
-    maxWidth: 200,
-    maxHeight: 200,
+  subroot: {
+    maxWidth: 340,
+    maxHeight: 400,
+    borderRadius: 12,
+    margin: 10,
   },
+  submedia: {
+    maxHeight: 200,
+  }
 }));
 
 
@@ -88,11 +94,53 @@ randomFunc()
 
 
   return (
-    // <div style = {{ backgroundImage: `url(${background})`}}>
+
       <div>
+      <img src='assets/paper-globe-hands.jpg' width='900' height='500'></img>
       <h1>Anonymous, Ethereum-based Crowdfunding</h1>
 
-      <h2>Starting A Campaign Is Easy</h2>
+      <h1>Starting A Campaign Is Easy</h1>
+      <Grid container direction="row" alignItems="center" justifyContent="center">
+	      <Card className={classes.subroot}>
+            <CardActionArea>
+              <CardContent>
+              <Typography gutterBottom variant='h6' component='h3'>
+                Step 1 
+              </Typography>
+              <Typography variant='body2' component='p'>
+                Tell us about the cause
+              </Typography>
+            </CardContent>
+            </CardActionArea>
+            </Card>
+
+            <Card className={classes.subroot}>
+            <CardActionArea>
+              <CardContent>
+              <Typography gutterBottom variant='h6' component='h3'>
+                Step 2
+              </Typography>
+              <Typography variant='body2' component='p'>
+                Link your MetaMask Wallet
+              </Typography>
+            </CardContent>
+            </CardActionArea>
+            </Card>
+
+            <Card className={classes.subroot}>
+            <CardActionArea>
+              <CardContent>
+              <Typography gutterBottom variant='h6' component='h3'>
+                Step 3 
+              </Typography>
+              <Typography variant='body2' component='p'>
+                Tell the World!
+              </Typography>
+            </CardContent>
+            </CardActionArea>
+            </Card>
+
+        </Grid>
       <h1>Featured Campaigns</h1>
       {!campaigns.length ? (
         <h1>No Campaigns Yet</h1>
@@ -119,7 +167,7 @@ randomFunc()
           </CardContent>
           <CardActions>
             <Link to={`/campaigns/${campaigns[random].id}`}>
-              <Button size="small" color='primary' >
+              <Button size="small" color='primary' variant= 'contained'>
                 See More
               </Button>
             </Link>
@@ -136,21 +184,21 @@ randomFunc()
       ) : (
         <div>
           <Grid container direction="row" alignItems="center" justifyContent="center">
-            <Card className={classes.sub}>
+            <Card className={classes.subroot}>
             <CardActionArea>
             <CardMedia
               component='img'
               alt='Campaign Image'
               height='200'
-              className={classes.media}
+              className={classes.submedia}
               image={campaigns[campaigns.length-1].photoUrl}
               title={campaigns[campaigns.length-1].name}
             />
               <CardContent>
-              <Typography gutterBottom variant='h5' component='h2'>
+              <Typography gutterBottom variant='h6' component='h3'>
                 {campaigns[campaigns.length-1].name}
               </Typography>
-              <Typography variant='body2' component='p'>
+              <Typography variant='body2' component='p' textOverflow="ellipsis">
                 {campaigns[campaigns.length-1].info}
               </Typography>
             </CardContent>
@@ -164,21 +212,21 @@ randomFunc()
             </CardActionArea>
             </Card>
 
-            <Card className={classes.root}>
+            <Card className={classes.subroot}>
             <CardActionArea>
             <CardMedia
               component='img'
               alt='Campaign Image'
               height='200'
-              className={classes.media}
+              className={classes.submedia}
               image={campaigns[campaigns.length-2].photoUrl}
               title={campaigns[campaigns.length-2].name}
             />
               <CardContent>
-              <Typography gutterBottom variant='h5' component='h2'>
+              <Typography gutterBottom variant='h6' component='h3'>
                 {campaigns[campaigns.length-2].name}
               </Typography>
-              <Typography variant='body2' component='p'>
+              <Typography variant='body2' component='p' textOverflow="ellipsis">
                 {campaigns[campaigns.length-2].info}
               </Typography>
             </CardContent>
@@ -192,21 +240,21 @@ randomFunc()
             </CardActionArea>
             </Card>
 
-            <Card className={classes.root}>
+            <Card className={classes.subroot}>
             <CardActionArea>
             <CardMedia
               component='img'
               alt='Campaign Image'
               height='200'
-              className={classes.media}
+              className={classes.submedia}
               image={campaigns[campaigns.length-3].photoUrl}
               title={campaigns[campaigns.length-3].name}
             />
               <CardContent>
-              <Typography gutterBottom variant='h5' component='h2'>
+              <Typography gutterBottom variant='h6' component='h3'>
                 {campaigns[campaigns.length-3].name}
               </Typography>
-              <Typography variant='body2' component='p'>
+              <Typography variant='body2' component='p' textOverflow="ellipsis">
                 {campaigns[campaigns.length-3].info}
               </Typography>
             </CardContent>
@@ -219,35 +267,14 @@ randomFunc()
             </CardActions>
             </CardActionArea>
             </Card>
-
           </Grid>
-          <div>
-            <h2>{campaigns[campaigns.length-1].name}</h2>
-            <img src={campaigns[campaigns.length-1].photoUrl} width="200" height="200"/>
-            <h3>{campaigns[campaigns.length-1].info}</h3>
-            <h3>{campaigns[campaigns.length-1].location}</h3>
-            <h3>Needed: {campaigns[campaigns.length-1].needed}</h3>
-          </div>
-          <div>
-            <h2>{campaigns[campaigns.length-2].name}</h2>
-            <img src={campaigns[campaigns.length-2].photoUrl} width="200" height="200"/>
-            <h3>{campaigns[campaigns.length-2].info}</h3>
-            <h3>{campaigns[campaigns.length-2].location}</h3>
-            <h3>Needed: {campaigns[campaigns.length-2].needed}</h3>
-          </div>
-          <div>
-            <h2>{campaigns[campaigns.length-3].name}</h2>
-            <img src={campaigns[campaigns.length-3].photoUrl} width="200" height="200"/>
-            <h3>{campaigns[campaigns.length-3].info}</h3>
-            <h3>{campaigns[campaigns.length-3].location}</h3>
-            <h3>Needed: {campaigns[campaigns.length-3].needed}</h3>
-          </div>
         </div>
       )
     }
       
       <h3>Get In Touch</h3>
     </div>
+
   );
 }
 
