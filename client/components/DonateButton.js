@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
 export default function DonateButton(props) {
   const classes = useStyles();
   const [donation, setDonation] = useState(0)
-  const [transactionNumber, setTransactionNumber] = useState([])
+  const [transactionNumber, setTransactionNumber] = useState('')
   let accounts = []
   const {active, account, library, connector, activate, deactivate} = useWeb3React()
   
@@ -69,8 +69,12 @@ export default function DonateButton(props) {
           },
         ],
       })
-      .then((txHash) => setTransactionNumber(txHash))
-      .then((transactionNumber, donation)=> history.push({pathname: `campaigns/${props.id}/success`, state:{donation, transactionNumber}}))
+      .then(
+        (txHash)=> {
+          console.log("this is donation", typeof donation)
+          console.log("this is transaction", transactionNumber)
+          history.push({pathname: `/campaigns/${props.id}/success`, state:{donation, txHash}})
+        })
       .catch((error) => console.error(error));
   }
   

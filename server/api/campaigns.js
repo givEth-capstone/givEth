@@ -40,3 +40,19 @@ router.post('/create', requireToken, async (req, res, next) => {
     next(error)
   }
 })
+
+//put route for updating donation amount
+
+router.put('/:id/success', async (req, res, next) => {
+  try {
+    const campaign = await Campaign.findByPk(req.params.id)
+    console.log("this is type of req body", req.body)
+    const updatedReceived = Number(campaign.received) + Number(req.body.receiveAmt)
+    console.log(updatedReceived)
+    await campaign.update({received: updatedReceived})
+    console.log(campaign)
+    res.sendStatus(200)
+  } catch (error) {
+    next(error)
+  }
+})
