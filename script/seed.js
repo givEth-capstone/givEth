@@ -42,7 +42,8 @@ const [Nicky, Farha, Amber, Rachel] = users;
       info: 'The earthquake has displaced many victims. Donate to support.',
       photoUrl: photo,
       tag: 'Emergency',
-      status: true
+      status: true,
+      received: 2
     }),
 
     Campaign.create({ 

@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     height: 280,
   },
   progress: {
-    width: '37.5%',
+    // width: '37.5%',
     float: 'left',
     borderRadius: '6px',
     height: '20px',
@@ -52,6 +52,7 @@ export default function SingleCampaign(props) {
   const campaignID = props.match.params.id;
   const classes = useStyles();
   let [campaign, setCampaign] = React.useState([])
+  let [width, setWidth] = useState(0)
 
   useEffect(() => {
     async function getCampaign(id) {
@@ -59,13 +60,22 @@ export default function SingleCampaign(props) {
         const response = await axios.get(`/api/campaigns/${id}`);
         const data = response.data;
         setCampaign(data)
-        console.log(campaign)
       } catch (err) {
         console.log(err);
       }
     }
     getCampaign(campaignID)
   }, []);
+
+  useEffect(() => {
+    function getWidth() {
+      const received = campaign.received 
+      const needed = campaign.needed
+      const progress = (received/needed)*100
+      setWidth(progress)
+    }
+    getWidth()
+  }, [campaign]);
   
   return (
     <div>
@@ -98,7 +108,7 @@ export default function SingleCampaign(props) {
                 </Typography>
 
                 <div className={classes.glass}>
-                  <div className={classes.progress} style={{width: `${(campaign.raised/campaign.needed)*100}%`}}></div>
+                  <div className={classes.progress} style={{width: `${width}%`}}></div>
                 </div>
 
                 <Typography gutterBottom variant="h5" component="h2">
