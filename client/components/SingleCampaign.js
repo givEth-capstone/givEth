@@ -19,10 +19,10 @@ const useStyles = makeStyles({
   root: {
     maxWidth: '80%',
     flexGrow: 1,
-    height: '100%',
+    height: '100vh',
   },
   media: {
-    height: 280,
+    height: '70vh',
   },
   progress: {
     width: '37.5%',
@@ -43,7 +43,8 @@ const useStyles = makeStyles({
     overflow: 'hidden',
     backgroundColor: '#dee0e0',
     boxShadow: '0 2px 3px rgba(0,0,0,.5) inset',
-  }
+  },
+  
 });
 
 export default function SingleCampaign(props) {
