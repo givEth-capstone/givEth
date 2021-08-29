@@ -27,7 +27,9 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexGrow: 1,
     alignContent: 'row',
-    alignItem: 'space-between'
+    margin: '10px',
+    justifyContent: 'space-between',
+    alignItems: 'baseline'
   },
   button: {
     background: '#55E9AE'
@@ -116,26 +118,24 @@ export default function DonateButton(props) {
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="my-input">Donation amount</InputLabel>
         <div className={classes.input}>
-        <Input 
-        id="my-input" 
-        aria-describedby="my-helper-text"
-        onChange={(event) => { 
-           setDonation(event.target.value);
-        }}
-        />
-        <span>ETHER</span>
-        <Button
-          type="submit"
-          variant="contained"
-          color="inherit"
-          onClick={checkMetaMask}
-          className={classes.button}
-        >
-          Donate
-        </Button>
+          <Input
+            id="my-input"
+            aria-describedby="my-helper-text"
+            onChange={(event) => {
+              setDonation(event.target.value);
+            }}
+          />
+          <span>ETHER</span>
+          <Button
+            type="submit"
+            variant="contained"
+            color="inherit"
+            onClick={checkMetaMask}
+            className={classes.button}
+          >
+            Donate
+          </Button>
         </div>
-        
-        
       </FormControl>
     </div>
   );
