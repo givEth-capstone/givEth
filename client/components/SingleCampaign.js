@@ -23,12 +23,14 @@ const useStyles = makeStyles({
   },
   root: {
     flexGrow: 1,
-    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    // height: '80vh',
   },
   media: {
-    height: '70vh', 
-    // height: 400,
-    // width: 600,
+    // height: '70vh', 
+    height: 400,
+    width: 600,
     margin: '0 auto',
   },
   progress: {
