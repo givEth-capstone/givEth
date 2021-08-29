@@ -15,19 +15,17 @@ import { Web3ReactProvider } from '@web3-react/core'
 
 const App = () => {
   return (
-
-    // <Web3ReactProvider getLibrary={getLibrary}>
     <Web3ReactProvider>
       <div>
         <Navbar />
-        <Grid
+        {/* <Grid
           container
           justifyContent="center"
           alignItems="center"
           direction="column"
-        >
+        > */}
           <Routes />
-        </Grid>
+        {/* </Grid> */}
       </div>
     </Web3ReactProvider>
   ); 

@@ -17,8 +17,6 @@ export default function About() {
       </Typography>
    
         <img src='assets/pexels-artem-podrez-7048016.jpg' width='700' height='500'></img>
- 
-
         <Grid container spacing={2} justify='center'>
           <Grid item>
             <Typography variant='h4'> Step 1 </Typography>

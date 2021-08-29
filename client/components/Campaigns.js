@@ -38,7 +38,6 @@ const useStyles = makeStyles(() => ({
     margin: 20,
     minWidth: 200,
     padding: 20,
-    minWidth: 200,
   },
   gridContainer: {
     justifyContent: 'flex-start',
@@ -60,11 +59,15 @@ const useStyles = makeStyles(() => ({
   },
   root: {
     borderRadius: 12,
-    width: 345,
-    height: 400,
+    width: 400,
+    height: 425,
     textAlign: 'center',
     margin: 10,
   },
+  button: {
+    background: '#00C3E3',
+    marginBottom: 20
+  }
 }));
 
 export default function Campaigns() {
@@ -162,7 +165,7 @@ export default function Campaigns() {
                     </CardContent>
                     <CardActions className={classes.action}>
                       <Link to={`/campaigns/${campaign.id}`}>
-                        <Button color='default' variant='contained'>
+                        <Button className={classes.button} variant='contained'>
                           See More
                         </Button>
                       </Link>

@@ -32,6 +32,10 @@ const Campaign = db.define('campaign', {
   status: {
     type: Sequelize.BOOLEAN, 
     defaultValue: true
+  },
+  received: {
+    type: Sequelize.STRING,
+    defaultValue: '0'
   }
 })
 
