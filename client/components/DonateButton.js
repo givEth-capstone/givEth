@@ -19,9 +19,19 @@ const useStyles = makeStyles(() => ({
     margin: 20,
     minWidth: 200,
     padding: 20,
+    
     // position: 'absolute',
     // right: 20,
   },
+  input: {
+    display: 'flex',
+    flexGrow: 1,
+    alignContent: 'row',
+    alignItem: 'space-between'
+  },
+  button: {
+    background: '#55E9AE'
+  }
 }));
 
 export default function DonateButton(props) {
@@ -38,7 +48,6 @@ export default function DonateButton(props) {
   }, [donation])
   
   async function getAccount() {
-    console.log("we are in getAccount function")
     try {
       accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       console.log(accounts[0])
@@ -106,6 +115,7 @@ export default function DonateButton(props) {
     <div>
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="my-input">Donation amount</InputLabel>
+        <div className={classes.input}>
         <Input 
         id="my-input" 
         aria-describedby="my-helper-text"
@@ -119,83 +129,14 @@ export default function DonateButton(props) {
           variant="contained"
           color="inherit"
           onClick={checkMetaMask}
+          className={classes.button}
         >
           Donate
         </Button>
+        </div>
+        
+        
       </FormControl>
     </div>
   );
 }
-
-//game plan:
-
-//CONNECTING TO METAMASK WALLET:
-//maybe have an alert and the alert tells user to connect to wallet. if window.ethereum is true
-//then go ahead and log them in. If it is false, then lead them to the metamask page.
-
-
-//MAKING A TRANSACTION:
-//create a input field where user can put in a number. put it on state. [x]
-//refer to metamask docs https://docs.metamask.io/guide/sending-transactions.html#example
-//create the object that is in the docs and hook up the method to the button.
-
-
-//we get the user (person browsing) information from metamask docs https://docs.metamask.io/guide/getting-started.html#basic-considerations
-
-
-
-
-
-
-
-// this functions but im gonna start over
-//import React, {useEffect, useState} from 'react'
-// // import web3 from 'web3'
-
-
-// import { useWeb3React } from '@web3-react/core'
-
-// import Button from '@material-ui/core/Button';
-
-// export default function DonateButton(props) {
-
-
-//   const ethereum = window.ethereum
-//   if (ethereum){
-//     ethereum.on('accountsChanged', handler: (accounts: Array<string>) => void)
-//   }
-//   const {active, account, library, connector, activate, deactivate} = useWeb3React()
-//   console.log("ethereum window", window.ethereum)
-
-  
-//   async function connect() {
-//     try {
-//       await activate(injected)
-//     } catch (error) {
-//       console.log(error)
-//     }
-//   }
-//   let wallet = props.campaign
-  
-//   useEffect(()=> {
-//     async function setWeb3() {
-//       if (typeof web3 !== 'undefined') {
-//         web3 = new Web3(web3.currentProvider);
-//        } else {
-//         // set the provider you want from Web3.providers
-//         web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-//        }
-//     }
-    
-//   })
-
-
-
-//   return (
-//     <div>
-//       <Button size="small" color="primary" onClick={connect}>
-//         Donate
-//       </Button>
-//     </div>
-//   )
-// }
