@@ -23,10 +23,12 @@ const useStyles = makeStyles({
   },
   root: {
     flexGrow: 1,
+    height: '100vh',
   },
   media: {
-    height: 400,
-    width: 600,
+    height: '70vh', 
+    // height: 400,
+    // width: 600,
     margin: '0 auto',
   },
   progress: {
