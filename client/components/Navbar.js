@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(() => ({
   container: {
-    backgroundColor: '#29abe2',
+    backgroundColor: '#00457C',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -39,21 +39,24 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
   return (
     <div>
       <nav className={classes.container}>
-        <img className={classes.img} src='https://i.imgur.com/hPqLWJx.png' />
+        <img className={classes.img} src='https://i.imgur.com/hPqLWJx.png'/>
         <div className={classes.navLinks}>
           {isLoggedIn ? (
             <div>
-              <Link to='/home'>
+              <Link to='/'>
                 <Typography className={classes.link}>Home</Typography>
               </Link>
               <Link to='/createCampaign'>
                 <Typography className={classes.link}>
-                  Create A Campaign
+                  Start A Campaign
                 </Typography>
               </Link>
               {/*Link to Donate// Can link to All campaigns with header that says Choose a campaign to donate to */}
               <Link to='/campaigns'>
-                <Typography className={classes.link}>All Campaigns</Typography>
+                <Typography className={classes.link}>Donate</Typography>
+              </Link>
+              <Link to='/about'>
+                <Typography className={classes.link}>About</Typography>
               </Link>
               <Link to='/profile'>
                 <Typography className={classes.link}>Profile</Typography>
@@ -70,12 +73,15 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
               </Link>
               <Link to='/createCampaign'>
                 <Typography className={classes.link}>
-                  Create A Campaign
+                  Start A Campaign
                 </Typography>
               </Link>
               {/*Link to Donate// Can link to All campaigns with header that says Choose a campaign to donate to */}
               <Link to='/campaigns'>
-                <Typography className={classes.link}>All Campaigns</Typography>
+                <Typography className={classes.link}>Donate</Typography>
+              </Link>
+              <Link to='/about'>
+                <Typography className={classes.link}>About</Typography>
               </Link>
               <Link to='/profile'>
                 <Typography className={classes.link}>Profile</Typography>
