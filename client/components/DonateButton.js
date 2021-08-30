@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 
 import {injected} from './Connectors'
 import { useWeb3React } from '@web3-react/core'
+//import Web3 from "web3";
 
 
 import FormControl from '@material-ui/core/FormControl';
@@ -42,17 +43,14 @@ export default function DonateButton(props) {
   const [transactionNumber, setTransactionNumber] = useState('')
   let accounts = []
   const {active, account, library, connector, activate, deactivate} = useWeb3React()
+  let web3;
   
-  useEffect(()=> {
-    function showDonation(){
-    }
-    showDonation()
-  }, [donation])
+ 
   
   async function getAccount() {
     try {
       accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      console.log(accounts[0])
+      console.log(accounts)
     } catch (error) {
       console.log(error)
     }
@@ -60,12 +58,17 @@ export default function DonateButton(props) {
       // console.log("account is connected")
       window.ethereum.on('accountsChanged', ()=>{console.log("account changed")})
       handleDonation()
+      
     }else {
       alert("MetaMask account is not connected")
       connectToMetaMask()
     }
   }
   async function handleDonation() {
+    // const amountEthToWei = await web3.utils.toHex(
+    //   web3.utils.toWei(donation.toString(), "ether"),
+    //   console.log("amount eth to wei", amountEthToWei)
+  //);
     window.ethereum
       .request({
         method: 'eth_sendTransaction',
@@ -73,18 +76,16 @@ export default function DonateButton(props) {
           {
             from: accounts[0],
             to: props.campaign.walletId,
-
-            value: `${donation *1000000000000000000}`,
-            // gasPrice: '0x09184e72a000',
-            // gas: '0x2710',
+            //value: amountEthToWei
           },
         ],
       })
       .then(
         (txHash)=> {
           console.log("this is donation", typeof donation)
-          console.log("this is transaction", transactionNumber)
-          history.push({pathname: `/campaigns/${props.id}/success`, state:{donation, txHash}})
+          console.log("this is transaction", txHash)
+          setTransactionNumber(txHash)
+          history.push({pathname: `/campaigns/${props.id}/success`, state:{donation, txHash, accounts}})
         })
       .catch((error) => console.error(error));
   }
@@ -102,6 +103,8 @@ export default function DonateButton(props) {
   function checkMetaMask(){
     if (typeof window.ethereum !== 'undefined') {
       console.log('MetaMask is installed!');
+      // window.web3 = new Web3(window.ethereum);
+      // web3 = window.web3;
       getAccount()
     }else{
       alert("It seems like MetaMask is not installed. Please refer to the MetaMask website to install MetaMask and begin to donate!")
@@ -140,3 +143,6 @@ export default function DonateButton(props) {
     </div>
   );
 }
+
+
+
