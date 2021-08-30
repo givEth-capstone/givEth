@@ -10,67 +10,23 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import useStyles from '/public/styles.js';
+import Paper from '@material-ui/core/Paper';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() => ({
-  action: {
-    display: 'flex',
-    justifyContent: 'space-around',
-  },
-  container: {
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    flexDirection: 'row',
-    maxWidth: '100vw',
-  },
-  content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  formControl: {
-    margin: 20,
-    minWidth: 200,
-    padding: 20,
-    minWidth: 200,
-  },
-  gridContainer: {
-    justifyContent: 'flex-start',
-    display: 'flex',
-    alignItems: 'center',
-    alignContent: 'space-between',
-    margin: 20,
-    padding: 20,
-    flexFlow: 'row wrap',
-    spacing: 0
-  },
-  message: {
-    alignSelf: 'center'
-  },
-  root: {
-    maxWidth: 500,
-    maxHeight: 600,
-    borderRadius: 12,
-  },
-  media: {
-    maxHeight: 200,
-  },
-  subroot: {
-    maxWidth: 340,
-    maxHeight: 400,
-    borderRadius: 12,
-    margin: 10,
-  },
-  submedia: {
-    maxHeight: 200,
+const colortheme = createTheme({
+  palette: {
+    primary: { main: "#00457C", contrastText: "#000" },
+    secondary: { main: "#0079C1", contrastText: "#000" },
+    black: {main: "#000000", contrastText:"FFF"},
+    white: {main: '#FFFFFF', contrastText:"000"},
   }
-}));
-
+});
 
 export const Home = props => {
   const [campaigns, setCampaigns] = useState([]);
-  const classes = useStyles();
   
   useEffect(() => {
     async function fetchData() {
@@ -89,65 +45,100 @@ function randomFunc() {
   let newRand = Math.floor(Math.random() * campaigns.length);
   random = newRand;
 }
-console.log(campaigns)
 randomFunc()
-
+const classes = useStyles();
 
   return (
+    <div >
+      <ThemeProvider theme={colortheme}>
+      <Paper className={classes.titleContainer} style={{ backgroundImage: `url('assets/paper-globe-hands.jpg')` }}>
+      <div className={classes.overlay}/>
 
-      <div>
-      <img src='assets/paper-globe-hands.jpg' width='900' height='500'></img>
-      <h1>Anonymous, Ethereum-based Crowdfunding</h1>
-
-      <h1>Starting A Campaign Is Easy</h1>
-      <Grid container direction="row" alignItems="center" justifyContent="center">
-	      <Card className={classes.subroot}>
-            <CardActionArea>
-              <CardContent>
-              <Typography gutterBottom variant='h6' component='h3'>
-                Step 1 
-              </Typography>
-              <Typography variant='body2' component='p'>
-                Tell us about the cause
-              </Typography>
-            </CardContent>
-            </CardActionArea>
-            </Card>
-
-            <Card className={classes.subroot}>
-            <CardActionArea>
-              <CardContent>
-              <Typography gutterBottom variant='h6' component='h3'>
-                Step 2
-              </Typography>
-              <Typography variant='body2' component='p'>
-                Link your MetaMask Wallet
-              </Typography>
-            </CardContent>
-            </CardActionArea>
-            </Card>
-
-            <Card className={classes.subroot}>
-            <CardActionArea>
-              <CardContent>
-              <Typography gutterBottom variant='h6' component='h3'>
-                Step 3 
-              </Typography>
-              <Typography variant='body2' component='p'>
-                Tell the World!
-              </Typography>
-            </CardContent>
-            </CardActionArea>
-            </Card>
-
+      <Grid container>
+        <Grid item >
+          <div className={classes.mainFeaturedPostContent}>
+            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+              GivEth
+            </Typography>
+            <Typography variant="h5" color="inherit" paragraph>
+            Anonymous, Ethereum-based Crowdfunding
+            </Typography>
+            <Link variant="subtitle1" href="/about">
+              continue reading...
+            </Link>
+          </div>
         </Grid>
-      <h1>Featured Campaigns</h1>
+      </Grid>
+      </Paper>
+
+      {/* STARTING A CAMPAIGN IS EASY */}
+      <div className={classes.root}>
+      <Grid container spacing={2} >
+      <Grid item xs={12}>
+        <Typography component="h1" variant="h3" align="center" color="secondary" gutterBottom>
+           Starting a Campaign is Easy
+        </Typography>
+      </Grid>
+
+      <Grid item xs ={4}>
+        <Card className={classes.card} variant="outlined">
+            <CardContent>
+            <CheckCircleOutlineIcon/>
+              <Typography component="h2" variant="h5">
+              Step 1
+              </Typography>
+              <Typography variant="subtitle1" paragraph>
+                Have a cause
+              </Typography>
+            </CardContent>
+        </Card>
+        </Grid>
+
+        <Grid item xs ={4}>
+        <Card className={classes.card} variant="outlined">
+            <CardContent>
+            <CheckCircleOutlineIcon/>
+              <Typography component="h2" variant="h5">
+                Step 2             
+              </Typography>
+              <Typography variant="subtitle1" paragraph>
+                Set up your account
+              </Typography>
+            </CardContent>
+        </Card>
+        </Grid>
+
+        <Grid item xs ={4}>
+        <Card className={classes.card} variant="outlined">
+            <CardContent>
+            <CheckCircleOutlineIcon/>
+              <Typography component="h2" variant="h5">
+              Step 3
+              </Typography>
+              <Typography variant="subtitle1" paragraph>
+              Publish your campaign
+              </Typography>
+            </CardContent>
+        </Card>
+        </Grid>
+    </Grid>
+    </div>
+   
+{/* END OF STEPS */}
+    <Grid container spacing={2} >
+    <Grid item xs={12}>
+    <Typography component="h1" variant="h3" align="center" color="secondary" gutterBottom>
+        Featured Campaign
+     </Typography>
+    </Grid>
+    </Grid>
       {!campaigns.length ? (
         <h1>No Campaigns Yet</h1>
       ) : (
         <div>
-          <Grid container direction="column" alignItems="center" justifyContent="center">
           <Card className={classes.root}>
+          <Grid container spacing={2} >
+          <Grid item xs={12}>
           <CardActionArea>
           <CardMedia
             component='img'
@@ -167,24 +158,37 @@ randomFunc()
           </CardContent>
           <CardActions>
             <Link to={`/campaigns/${campaigns[random].id}`}>
-              <Button size="small" color='primary' variant= 'contained'>
+              <Button size="small" color='primary' variant= 'contained' style={{ color: '#FFFFFF'}}>
                 See More
               </Button>
             </Link>
           </CardActions>
           </CardActionArea>
-          </Card>
           </Grid>
+          </Grid>
+          </Card>
         </div>
-      )
-      }
-      <h1>Recently Created Campaigns</h1>
+      )}
+
+{/* MOST RECENT CAMPAIGNS */}
+    <div className={classes.root}>
+    <Grid container spacing={2} >
+      <Grid item xs={12}>
+    <Typography component="h1" variant="h3" align="center" color="secondary" gutterBottom>
+        Most Recent Campaigns
+     </Typography>
+    </Grid>
+    </Grid>
+    </div>
       {!campaigns.length ? (
         <h1>No recent campaigns</h1>
       ) : (
-        <div>
-          <Grid container direction="row" alignItems="center" justifyContent="center">
-            <Card className={classes.subroot}>
+        <div >
+          {/* <Grid container direction="row" alignItems="center" justifyContent="center"> */}
+          <Grid container spacing={2} className={classes.root}>
+
+          <Grid item xs={4}>
+            <Card className={classes.card}>
             <CardActionArea>
             <CardMedia
               component='img'
@@ -204,15 +208,17 @@ randomFunc()
             </CardContent>
             <CardActions>
               <Link to={`/campaigns/${campaigns[campaigns.length-1].id}`}>
-                <Button size="small" color='primary' >
+                <Button size="small" color='primary' variant='contained' style={{ color: '#FFFFFF'}}>
                   See More
                 </Button>
               </Link>
             </CardActions>
             </CardActionArea>
             </Card>
+            </Grid>
 
-            <Card className={classes.subroot}>
+            <Grid item xs={4}>
+            <Card className={classes.card}>
             <CardActionArea>
             <CardMedia
               component='img'
@@ -232,15 +238,17 @@ randomFunc()
             </CardContent>
             <CardActions>
               <Link to={`/campaigns/${campaigns[campaigns.length-2].id}`}>
-                <Button size="small" color='primary' >
+                <Button size="small" color='primary' variant='contained' style={{ color: '#FFFFFF'}}>
                   See More
                 </Button>
               </Link>
             </CardActions>
             </CardActionArea>
             </Card>
+            </Grid>
 
-            <Card className={classes.subroot}>
+            <Grid item xs={4}>
+            <Card className={classes.card}>
             <CardActionArea>
             <CardMedia
               component='img'
@@ -260,21 +268,19 @@ randomFunc()
             </CardContent>
             <CardActions>
               <Link to={`/campaigns/${campaigns[campaigns.length-3].id}`}>
-                <Button size="small" color='primary' >
+                <Button size="small" variant='contained' color ='primary' style={{ color: '#FFFFFF'}}>
                   See More
                 </Button>
               </Link>
             </CardActions>
             </CardActionArea>
             </Card>
-          </Grid>
+            </Grid>
+            </Grid>
         </div>
-      )
-    }
-      
-      <h3>Get In Touch</h3>
-    </div>
-
+      )}
+  </ThemeProvider>
+  </div>
   );
 }
 
