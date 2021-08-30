@@ -28,7 +28,7 @@ export default function About() {
         <Grid item xs={6}>
           <Typography variant='body1' align='left' color='textSecondary'> Now more than ever, the world needs you!
             With givEth, we wanted to make it easy for anyone to give and receive Ethereum. 
-            GivEth is completely anonymous, making it the top choice for receiving safe and secure donations without risk of exposing anyone in a potentally risky situation.
+            GivEth is completely anonymous, making it the top choice for sending and receiving safe, secure donations without risk of exposing anyone in a potentally risky situation.
             GivEth caters to diverse situations. We make people our top priority. 
           </Typography>
         </Grid>
@@ -54,17 +54,23 @@ export default function About() {
           <Divider style={{ width: '1000%' }} />
         </Grid>
       </Container>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
       <Box m={2} pt={3}>
         <Typography variant='h3' align='left' color="primary"> How does givEth work? </Typography>
         <Typography> GivEth uses MetaMask to send and recieve ethereum. Simply click on the link below and install MetaMask on your browser. MetaMask does all of the work to create an anonymous wallet for you. Once you have that wallet id, it's easy to copy and paste your wallet to any campaign you create. As a donor, simply copy and paste a campaign's wallet id into your MetaMask wallet to send, and donate. It's as simple as that. </Typography>
       </Box>
+      </Grid>
+      <Grid item xs={6} >
       <img src='assets/MetaMask.png' align='right'></img>
-      <Box m={2} pt={3} align='right'>
+      <Box align='right'>
         <a href='https://metamask.io/download.html' target='_blank'>
           <Button variant="contained" color='primary'>Download MetaMask </Button>
         </a>
         <Divider style={{ width: '100%' }} />
       </Box>
+      </Grid>
+      </Grid>
     </div>
   )
 }
