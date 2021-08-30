@@ -38,7 +38,7 @@ export default function About() {
   return (
     <div>
       {/* top section -- info */}
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         <Grid item xs={6} className={classes.container}>
           <Typography component="h1" variant="h3" align="left" color="primary" gutterBottom>
             Why givEth?
