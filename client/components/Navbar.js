@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(() => ({
   container: {
-    backgroundColor: '#29abe2',
+    backgroundColor: '#00457C',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
