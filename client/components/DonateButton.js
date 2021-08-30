@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 
 import {injected} from './Connectors'
 import { useWeb3React } from '@web3-react/core'
-//import Web3 from "web3";
+import Web3 from "web3";
 
 
 import FormControl from '@material-ui/core/FormControl';
@@ -43,7 +43,7 @@ export default function DonateButton(props) {
   const [transactionNumber, setTransactionNumber] = useState('')
   let accounts = []
   const {active, account, library, connector, activate, deactivate} = useWeb3React()
-  let web3;
+  // let web3 = new Web3(Web3.givenProvider || "http://localhost:8080")
   
  
   

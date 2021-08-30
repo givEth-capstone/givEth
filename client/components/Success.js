@@ -1,9 +1,14 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
-//import Web3 from "web3";
+import Web3 from "web3";
 
 
 export default function Success(props) {
+  window.web3 = new Web3(window.ethereum);
+  const web3 = window.web3;
+
+  
+  // let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545")
 
   let {donation, txHash, accounts} = props.location.state
   // donation = Number(donation)
@@ -15,6 +20,9 @@ export default function Success(props) {
     const transactionReceipt = await window.ethereum.request({ method: 'eth_getTransactionReceipt', params:[ txHash] })//does not have value
     console.log("receipt", transactionReceipt)
     console.log("get transaction by hash", transaction)
+    const maybeNumber = web3.utils.hexToNumber(transactionReceipt.value)
+    console.log('idk dude', maybeNumber)
+
   }
   showDonationReceipt()
 }, [txHash])
