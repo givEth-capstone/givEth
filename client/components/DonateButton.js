@@ -13,6 +13,7 @@ import { Button } from '@material-ui/core';
 
 import history from '../history'
 
+import axios from 'axios'
 
 
 const useStyles = makeStyles(() => ({
@@ -20,17 +21,11 @@ const useStyles = makeStyles(() => ({
     margin: 20,
     minWidth: 200,
     padding: 20,
-    
-    // position: 'absolute',
-    // right: 20,
   },
-  input: {
+  donate: {
     display: 'flex',
-    flexGrow: 1,
-    alignContent: 'row',
-    margin: '10px',
     justifyContent: 'space-between',
-    alignItems: 'baseline'
+    // alignItems: 'baseline'
   },
   button: {
     background: '#55E9AE'
@@ -38,12 +33,14 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function DonateButton(props) {
+  window.web3 = new Web3(window.ethereum);
+  const web3 = window.web3;
+
+  const wei = 1000000000000000000
+
   const classes = useStyles();
   const [donation, setDonation] = useState(0)
-  const [transactionNumber, setTransactionNumber] = useState('')
   let accounts = []
-  const {active, account, library, connector, activate, deactivate} = useWeb3React()
-  // let web3 = new Web3(Web3.givenProvider || "http://localhost:8080")
   
  
   
@@ -64,29 +61,43 @@ export default function DonateButton(props) {
       connectToMetaMask()
     }
   }
+  async function updateReceived(receiveAmt) {
+    try {
+      await axios.put(`/api/campaigns/${props.id}/success`, {receiveAmt});
+    } catch (err) {
+      console.log(err);
+    }
+  }
   async function handleDonation() {
-    // const amountEthToWei = await web3.utils.toHex(
-    //   web3.utils.toWei(donation.toString(), "ether"),
-    //   console.log("amount eth to wei", amountEthToWei)
-  //);
+    const amountEthToWei = await web3.utils.toHex(
+    web3.utils.toWei(donation.toString(), "ether"),
+  );
     window.ethereum
       .request({
-        method: 'eth_sendTransaction',
+        method: "eth_sendTransaction",
         params: [
           {
             from: accounts[0],
             to: props.campaign.walletId,
-            //value: amountEthToWei
+            value: amountEthToWei, //this number needs to be hex encoded and then converted to wei
           },
         ],
       })
-      .then(
-        (txHash)=> {
-          console.log("this is donation", typeof donation)
-          console.log("this is transaction", txHash)
-          setTransactionNumber(txHash)
-          history.push({pathname: `/campaigns/${props.id}/success`, state:{donation, txHash, accounts}})
-        })
+      .then( async (txHash) => {
+        const transaction = await window.ethereum.request({
+          id: accounts[0],
+          method: "eth_getTransactionByHash",
+          params: [txHash],
+        });
+        let donationEth = web3.utils.toBN(transaction.value) / wei.toString();
+        // returns it in wei, so we gotta get it back to ether to send to the backend. Hence the dividiing by wei.
+        console.log("donation eth!!!", donationEth);
+        await updateReceived(donationEth);
+        history.push({
+          pathname: `/campaigns/${props.id}/success`,
+          state: { txHash, accounts, donationEth },
+        });
+      })
       .catch((error) => console.error(error));
   }
   
@@ -120,15 +131,18 @@ export default function DonateButton(props) {
     <div>
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="my-input">Donation amount</InputLabel>
-        <div className={classes.input}>
-          <Input
-            id="my-input"
-            aria-describedby="my-helper-text"
-            onChange={(event) => {
-              setDonation(event.target.value);
-            }}
-          />
-          <span>ETHER</span>
+        <div className={classes.donate}>
+          <div>
+            <Input
+              id="my-input"
+              aria-describedby="my-helper-text"
+              onChange={(event) => {
+                setDonation(event.target.value);
+              }}
+            />
+            <span>ETHER</span>
+          </div>
+
           <Button
             type="submit"
             variant="contained"

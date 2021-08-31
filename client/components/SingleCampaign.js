@@ -20,6 +20,7 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+    width: 700,
   },
   root: {
     flexGrow: 1,
@@ -30,11 +31,10 @@ const useStyles = makeStyles({
   media: {
     // height: '70vh', 
     height: 400,
-    width: 600,
+    width: 700,
     margin: '0 auto',
   },
   progress: {
-    // width: '37.5%',
     float: 'left',
     borderRadius: '6px',
     height: '20px',
@@ -45,7 +45,7 @@ const useStyles = makeStyles({
       'inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08)',
   },
   glass: {
-    width: '80%',
+    width: 700,
     height: '20px',
     borderRadius: '6px',
     background: '#ee0e0',
@@ -58,7 +58,7 @@ const useStyles = makeStyles({
 
 export default function SingleCampaign(props) {
   //const progress = props.campaign
-  const campaignID = props.match.params.id;
+  const campaignID = props.match ? props.match.params.id : props.id;//created this terniary bc I need to call this component in my Success function.
   const classes = useStyles();
   let [campaign, setCampaign] = React.useState([]);
   let [width, setWidth] = useState(0);
@@ -99,7 +99,7 @@ export default function SingleCampaign(props) {
         >
           <Card className={classes.root}>
             <CardContent className={classes.content}>
-              <Typography gutterBottom variant='h5' component='h2'>
+              <Typography gutterBottom variant='h3' component='h2' fontWeight="bold">
                 {campaign.name}
               </Typography>
             </CardContent>
