@@ -38,7 +38,7 @@ export function CreateCampaign(props) {
     async function createCampaign(body, token) {
         try {
             if (token) {
-                const { data } = await axios.post(`/api/campaigns/create`, body, { headers: { authorization: token } });
+                const { data } = await axios.post(`/api/campaigns/`, body, { headers: { authorization: token } });
                 props.history.push('/campaigns');
             } else {
                 props.history.push('/profile');
