@@ -30,9 +30,9 @@ router.get('/:id', async (req, res, next) => {
 
 //post route for individual campaign
 
-router.post('/', requireToken, async (req, res, next) => {
+router.post('/create', requireToken, async (req, res, next) => {
   try {
-    let {user} = req;
+    let user = req.user;
     const createCampaign = await Campaign.create(req.body)
     await user.addCampaign(createCampaign)
     res.status(201).send(createCampaign);

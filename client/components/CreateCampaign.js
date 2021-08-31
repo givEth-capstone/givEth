@@ -38,7 +38,7 @@ export function CreateCampaign(props) {
     async function createCampaign(body, token) {
         try {
             if (token) {
-                const { data } = await axios.post(`/api/campaigns/`, body, { headers: { authorization: token } });
+                const { data } = await axios.post(`/api/campaigns/create`, body, { headers: { authorization: token } });
                 props.history.push('/campaigns');
             } else {
                 props.history.push('/profile');
@@ -65,7 +65,7 @@ export function CreateCampaign(props) {
                     </Grid>
                     <div>
                         <Container maxWidth="sm">
-                            <FormControl onSubmit={(e) => onSubmit(e, token)}>
+                            <form onSubmit={(e) => onSubmit(e, token)}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={6}>
                                         <TextField
@@ -175,7 +175,7 @@ export function CreateCampaign(props) {
                                     <Button variant="contained" color='primary' type="submit" >Create Cause</Button>
                                     </Grid>
                                 </Grid>
-                            </FormControl>
+                            </form>
                         </Container>
                     </div>
 
