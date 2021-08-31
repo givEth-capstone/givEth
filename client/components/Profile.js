@@ -1,8 +1,3 @@
-//import isLoggedIn from user model
-//import Login and Signup
-//if there's no logged in user (either by checking state or local host token)
-//then display <Login /> and/or <Signup />
-
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -22,7 +17,6 @@ import { Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import useStyles from '/public/styles.js';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
@@ -35,60 +29,70 @@ const colortheme = createTheme({
   }
 });
 
-
 export function Profile(props) {
   const token = window.localStorage.token;
   const {isLoggedIn} = props
   let [user, setUser] = React.useState(); 
   const classes = useStyles();
   const [selectedTab,setSelectedTab] = React.useState(1);
-  const [state, setState] = React.useState({
-    active: true,
-  });
+  // const [state, setState] = React.useState({
+  //   active: true,
+  // });
+  const [campaigns, setCampaigns] = React.useState([])
+
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
   }
-  const handleToggle = (id, event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-    console.log(id)
-    async() => {
+
+  async function handleToggle(id, event){
+    console.log('HANDLETOGGLE', id)
+    console.log('EVENT', event.target.checked)
+    const status =  {status: event.target.checked}
+    console.log("STATUS", status)
       try{
-    const response = await axios.put(`/api/campaigns/${id}` , state);
-    console.log('response', response.data)
+        const {data} = await axios.put(`/api/campaigns/${id}`, status );
+        console.log('handle toggle data', data)
+        const campaignToUpdate = data
+        console.log('handle toggle campaign', campaigns)
+        console.log('campaigntoUpdate', campaignToUpdate)
+        setCampaigns(campaigns.map((campaign) => {
+          if(campaign.id === campaignToUpdate.id) {
+            return campaignToUpdate
+          }else{
+            return campaign
+          }
+        }))
       }catch(err){
         console.log(err)
       }
-    }
   };
+  console.log("after TOGGLE REUPDATE", campaigns)
 
   useEffect( () => {
-      async function fetchUser(token) {
-          try{
-            if(token){
-              const response = await axios.get(`/api/users`, {headers: { Authorization: token }});
-              const data = response.data
-              console.log("RESPONSE", response)
-              console.log("ASSOCIATED DATA", data);
-              setUser(data)
-            } 
-            else{
-              console.log("NOT LOGGED IN", window.localStorage);
-            }
-          }catch(err){
-              console.log(err);
-          }
+    async function fetchUser(token) {
+      try{
+        if(token){
+          const {data} = await axios.get(`/api/users`, {headers: { Authorization: token }});
+          console.log("ASSOCIATED DATA", data);
+          setUser(data)
+          setCampaigns(data.campaigns) 
+        } 
+        else{
+          console.log("NOT LOGGED IN", window.localStorage);
+        }
+      }catch(err){
+          console.log(err);
       }
+  }
   fetchUser(token);
       }, []);
       
-   console.log("state user", user)
-    console.log('toggle state', state)
+
     let currentCampaigns = []
     let pastCampaigns = []
-
-    function campaignRender (user) {
-      user.campaigns.map(campaign => {
+    if(campaigns.length) {
+      campaigns.map(campaign => {
         if(campaign.status) {
           currentCampaigns.push(campaign)
         } else {
@@ -96,7 +100,9 @@ export function Profile(props) {
         }
       })
     }
-
+    console.log("after FN campaigns", campaigns)
+    console.log("pastcampaigns", pastCampaigns)
+    console.log("currentcampaigns", currentCampaigns)
     return( 
         <div>
           <ThemeProvider theme={colortheme}>
@@ -108,12 +114,12 @@ export function Profile(props) {
             </div>  
             :
             <div>
-              { user ? 
+              { campaigns.length ? 
                 <div>
                 <Typography component="h2" variant="h5" align="center" color="primary" gutterBottom>
                   {user.username}
                   </Typography>
-                  <div>{campaignRender(user)}</div>
+                  {/* <div>{campaignRender(campaigns)}</div> */}
                     <Tabs value = {selectedTab} onChange={handleChange} indicatorColor="secondary" textColor="primary" centered>
                       <Tab label = "Past Campaigns" />
                       <Tab label = "Active Campaigns" />
@@ -121,61 +127,17 @@ export function Profile(props) {
                   {selectedTab === 1 ? 
                     currentCampaigns.length < 1 ? 
                       <div className={classes.message}>
-                      <Typography component="h3" variant="h8" align="center" color="secondary" gutterBottom>
+                      <Typography component="h3" variant="h5" align="center" color="secondary" gutterBottom>
                           No Active Campaigns
                       </Typography>
                       </div>
-                    :
-                    currentCampaigns.map ((campaigns) => {
-                      return(
-                        <Grid container spacing={2} className={classes.root}>
-                        <Grid item xs={4} className={classes.card}>
-                        <Card key={campaigns.id}>
-                        <CardActionArea>
-                        <CardMedia
-                          component='img'
-                          alt='Campaign Image'
-                          height='200'
-                          className={classes.media}
-                          image={campaigns.photoUrl}
-                          title={campaigns.name}
-                        />
-                        <CardContent>
-                          <Typography gutterBottom variant='h6' component='h3'>
-                            {campaigns.name}
-                          </Typography>
-                          <Typography variant='body2' component='p' textOverflow="ellipsis">
-                            {campaigns.info}
-                          </Typography>
-                        </CardContent>
-                        <CardActions>
-                          <Link to={`/campaigns/${campaigns.id}`}>
-                            <Button size="small" variant='contained' color ='primary' style={{ color: '#FFFFFF'}}>
-                              See More
-                            </Button>
-                          </Link>
-                          <FormControlLabel control={<Switch checked={state.active} onChange={ e => handleToggle(campaigns.id,e)} name="active" color="primary" /> }label="Active"/>
-                        </CardActions>
-                        </CardActionArea>
-                        </Card>
-                        </Grid>
-                      </Grid>
-                    ); 
-                  })
-                  :
-              pastCampaigns.length < 1 ? 
-                <div className={classes.message}>
-                  <Typography component="h3" variant="h8" align="center" color="secondary" gutterBottom>
-                    No Past Campaigns
-                  </Typography>
-                </div>
-                :
-                  pastCampaignsmap ((campaigns) => {
-                    return(
-                      <Grid container spacing={2} className={classes.root}>
-                        <Grid item xs={4} className={classes.card}>
-                        <Card key={campaigns.id}>
-                        <CardActionArea>
+                      :
+                      currentCampaigns.map ((campaigns) => {
+                        return(
+                          <Grid container spacing={2} className={classes.root}>
+                          <Grid item xs={4} className={classes.card}>
+                          <Card key={campaigns.id}>
+                          <CardActionArea>
                           <CardMedia
                             component='img'
                             alt='Campaign Image'
@@ -185,35 +147,80 @@ export function Profile(props) {
                             title={campaigns.name}
                           />
                           <CardContent>
-                            <Typography gutterBottom variant='h6' component='h3'>
-                              {campaigns.name}
-                            </Typography>
-                            <Typography variant='body2' component='p' textOverflow="ellipsis">
-                              {campaigns.info}
-                            </Typography>
-                          </CardContent>
-                          <CardActions>
-                          <Link to={`/campaigns/${campaigns.id}`}>
-                            <Button size="small" variant='contained' color ='primary' style={{ color: '#FFFFFF'}}>
-                              See More
-                            </Button>
-                          </Link>
-                          </CardActions>
-                        </CardActionArea>
-                        </Card>
-                        </Grid>
-                      </Grid>
-                      ); 
-                    })
-              }
-              </div>
-              :
-              <div>
-                <h4>User is Falsey</h4>
-              </div>
+                          <Typography gutterBottom variant='h6' component='h3'>
+                            {campaigns.name}
+                          </Typography>
+                          <Typography variant='body2' component='p' textOverflow="ellipsis">
+                            {campaigns.info}
+                          </Typography>
+                            </CardContent>
+                            <CardActions>
+                              <Link to={`/campaigns/${campaigns.id}`}>
+                                <Button size="small" variant='contained' color ='primary' style={{ color: '#FFFFFF'}}>
+                                  See More
+                                </Button>
+                              </Link>
+                              <FormControlLabel control={<Switch checked={campaigns.status} onChange={ e => handleToggle(campaigns.id,e)} name="active" color="primary" /> }label="Active"/>
+                            </CardActions>
+                            </CardActionArea>
+                            </Card>
+                            </Grid>
+                          </Grid>
+                            ); 
+                          })
+                      :
+                      pastCampaigns.length < 1 ? 
+                        <div className={classes.message}>
+                          <Typography component="h3" variant="h8" align="center" color="secondary" gutterBottom>
+                            No Past Campaigns
+                          </Typography>
+                        </div>
+                        :
+                        pastCampaigns.map ((campaigns) => {
+                          return(
+                            <Grid container spacing={2} className={classes.root}>
+                              <Grid item xs={4} className={classes.card}>
+                              <Card key={campaigns.id}>
+                              <CardActionArea>
+                                <CardMedia
+                                  component='img'
+                                  alt='Campaign Image'
+                                  height='200'
+                                  className={classes.media}
+                                  image={campaigns.photoUrl}
+                                  title={campaigns.name}
+                                />
+                                <CardContent>
+                                  <Typography gutterBottom variant='h6' component='h3'>
+                                    {campaigns.name}
+                                  </Typography>
+                                  <Typography variant='body2' component='p' textOverflow="ellipsis">
+                                    {campaigns.info}
+                                  </Typography>
+                                </CardContent>
+                                <CardActions>
+                                <Link to={`/campaigns/${campaigns.id}`}>
+                                  <Button size="small" variant='contained' color ='primary' style={{ color: '#FFFFFF'}}>
+                                    See More
+                                  </Button>
+                                </Link>
+                                <FormControlLabel control={<Switch checked={campaigns.status} onChange={ e => handleToggle(campaigns.id,e)} name="inactive" color="primary" /> }label="Inactive"/>
+                                </CardActions>
+                              </CardActionArea>
+                              </Card>
+                              </Grid>
+                            </Grid>
+                            ); 
+                          })
+                      }
+                </div>
+                :
+                <div>
+                  <h4>Loading Campaigns</h4>
+                </div>
               }
             </div> 
-            } 
+          } 
           </ThemeProvider>
         </div>
     )

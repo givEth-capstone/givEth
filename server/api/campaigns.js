@@ -66,9 +66,9 @@ router.put('/:id', async (req, res, next) => {
   try {
     console.log("this is type of req body", req.body)
     const campaign = await Campaign.findByPk(req.params.id)
-    await campaign.update(req.body)
+    const updatedCampaign = await campaign.update(req.body)
     console.log(campaign)
-    res.sendStatus(200)
+    res.status(200).send(updatedCampaign)
   } catch (error) {
     next(error)
   }
