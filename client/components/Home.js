@@ -10,7 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core'
-import { Link } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 import useStyles from '/public/styles.js';
 import Paper from '@material-ui/core/Paper';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -21,7 +21,7 @@ const colortheme = createTheme({
     primary: { main: "#00457C", contrastText: "#000" },
     secondary: { main: "#0079C1", contrastText: "#000" },
     black: {main: "#000000", contrastText:"FFF"},
-    white: {main: '#FFFFFF', contrastText:"000"},
+    white: "#FFFFFF",
   }
 });
 
@@ -54,7 +54,7 @@ const classes = useStyles();
       <Paper className={classes.titleContainer} style={{ backgroundImage: `url('assets/paper-globe-hands.jpg')` }}>
       <div className={classes.overlay}/>
 
-      <Grid container>
+      <Grid container spacing={3}>
         <Grid item >
           <div className={classes.mainFeaturedPostContent}>
             <Typography component="h1" variant="h3" color="inherit" gutterBottom>
@@ -63,7 +63,7 @@ const classes = useStyles();
             <Typography variant="h5" color="inherit" paragraph>
             Anonymous, Ethereum-based Crowdfunding
             </Typography>
-            <Link to="/about">
+            <Link href="/about" color="primary">
               continue reading...
             </Link>
           </div>
@@ -73,15 +73,15 @@ const classes = useStyles();
 
       {/* STARTING A CAMPAIGN IS EASY */}
       <div className={classes.root}>
-      <Grid container spacing={2} >
+      <Grid container spacing={3} >
       <Grid item xs={12}>
-        <Typography component="h1" variant="h3" align="center" color="secondary" gutterBottom>
+        <Typography component="h1" variant="h3" align="center" color="secondary" >
            Starting a Campaign is Easy
         </Typography>
       </Grid>
 
       <Grid item xs ={4}>
-        <Card className={classes.card} variant="outlined">
+        <Card className={classes.root} variant="outlined">
             <CardContent>
             <CheckCircleOutlineIcon/>
               <Typography component="h2" variant="h5">
@@ -95,7 +95,7 @@ const classes = useStyles();
         </Grid>
 
         <Grid item xs ={4}>
-        <Card className={classes.card} variant="outlined">
+        <Card className={classes.root} variant="outlined">
             <CardContent>
             <CheckCircleOutlineIcon/>
               <Typography component="h2" variant="h5">
@@ -109,7 +109,7 @@ const classes = useStyles();
         </Grid>
 
         <Grid item xs ={4}>
-        <Card className={classes.card} variant="outlined">
+        <Card className={classes.root} variant="outlined">
             <CardContent>
             <CheckCircleOutlineIcon/>
               <Typography component="h2" variant="h5">
@@ -124,10 +124,10 @@ const classes = useStyles();
     </Grid>
     </div>
    
-{/* END OF STEPS */}
-    <Grid container spacing={2} >
+{/* FEATURED CAMPAIGN */}
+    <Grid container spacing={3} >
     <Grid item xs={12}>
-    <Typography component="h1" variant="h3" align="center" color="secondary" gutterBottom>
+    <Typography component="h1" variant="h3" align="center" color="primary" >
         Featured Campaign
      </Typography>
     </Grid>
@@ -135,16 +135,16 @@ const classes = useStyles();
       {!campaigns.length ? (
         <h1>No Campaigns Yet</h1>
       ) : (
-        <div>
-          <Card className={classes.root}>
-          <Grid container spacing={2} >
-          <Grid item xs={12}>
+        <div className={classes.root}>
+          <Grid container spacing={2} justifyContent='center' >
+          <Grid item xs={4} >
+          <Card>
           <CardActionArea>
           <CardMedia
             component='img'
             alt='Campaign Image'
-            height='200'
-            className={classes.media}
+            height='250'
+            className={classes.featuredImg}
             image={campaigns[random].photoUrl}
             title={campaigns[random].name}
           />
@@ -164,17 +164,19 @@ const classes = useStyles();
             </Link>
           </CardActions>
           </CardActionArea>
-          </Grid>
-          </Grid>
           </Card>
+          </Grid>
+          </Grid>
         </div>
       )}
 
+
+
 {/* MOST RECENT CAMPAIGNS */}
     <div className={classes.root}>
-    <Grid container spacing={2} >
-      <Grid item xs={12}>
-    <Typography component="h1" variant="h3" align="center" color="secondary" gutterBottom>
+    <Grid container spacing={3} >
+    <Grid item xs={12}>
+    <Typography component="h1" variant="h3" align="center" color="secondary" >
         Most Recent Campaigns
      </Typography>
     </Grid>
@@ -186,6 +188,7 @@ const classes = useStyles();
         <div >
           {/* <Grid container direction="row" alignItems="center" justifyContent="center"> */}
           <Grid container spacing={2} className={classes.root}>
+
             <Grid item xs={4}>
             <Card className={classes.card}>
             <CardActionArea>
@@ -193,11 +196,11 @@ const classes = useStyles();
               component='img'
               alt='Campaign Image'
               height='200'
-              className={classes.submedia}
+              // className={classes.submedia}
               image={campaigns[campaigns.length-1].photoUrl}
               title={campaigns[campaigns.length-1].name}
             />
-              <CardContent>
+              <CardContent className={classes.cardContentHeight}>
               <Typography gutterBottom variant='h6' component='h3'>
                 {campaigns[campaigns.length-1].name}
               </Typography>
@@ -227,7 +230,7 @@ const classes = useStyles();
               image={campaigns[campaigns.length-2].photoUrl}
               title={campaigns[campaigns.length-2].name}
             />
-              <CardContent>
+              <CardContent className={classes.cardContentHeight}>
               <Typography gutterBottom variant='h6' component='h3'>
                 {campaigns[campaigns.length-2].name}
               </Typography>
@@ -257,7 +260,7 @@ const classes = useStyles();
               image={campaigns[campaigns.length-3].photoUrl}
               title={campaigns[campaigns.length-3].name}
             />
-              <CardContent>
+               <CardContent className={classes.cardContentHeight}>
               <Typography gutterBottom variant='h6' component='h3'>
                 {campaigns[campaigns.length-3].name}
               </Typography>

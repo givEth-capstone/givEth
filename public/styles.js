@@ -36,17 +36,33 @@ const useStyles = makeStyles((theme) => ({
       alignItems:'center',
       borderRadius: 12,
       padding: 'auto',
+      minHeight: 400
   },
+  steps: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems:'center',
+    borderRadius: 12,
+    padding: 'auto',
+    minHeight: 200
+},
     action: {
       display: 'flex',
       justifyContent: 'space-around',
     },
     media: {
-      maxHeight: 200,
+      maxHeight: 400,
     },
     message: {
       alignSelf: 'center',
       padding: 30
+    },
+    cardContentHeight:{
+      height: 120
+    },
+    featuredImg: {
+      maxHeight: 350,
     },
   }));
   
