@@ -12,22 +12,22 @@ const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(5),
   },
-  footer: {
-    borderTop: `1px solid ${theme.palette.divider}`,
-    marginTop: theme.spacing(8),
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6),
-    },
-    palette: {
-          primary: { main: "#00457C", contrastText: "#000" },
-          secondary: { main: "#0079C1", contrastText: "#000" },
-          black: { main: "#000000", contrastText: "FFF" },
-          white: { main: '#FFFFFF', contrastText: "000" },
-        }
-  },
+  // footer: {
+  //   borderTop: `1px solid ${theme.palette.divider}`,
+  //   marginTop: theme.spacing(8),
+  //   paddingTop: theme.spacing(3),
+  //   paddingBottom: theme.spacing(3),
+  //   [theme.breakpoints.up('sm')]: {
+  //     paddingTop: theme.spacing(6),
+  //     paddingBottom: theme.spacing(6),
+  //   },
+  //   palette: {
+  //         primary: { main: "#00457C", contrastText: "#000" },
+  //         secondary: { main: "#0079C1", contrastText: "#000" },
+  //         black: { main: "#000000", contrastText: "FFF" },
+  //         white: { main: '#FFFFFF', contrastText: "000" },
+  //       }
+  // },
 }))
 
 export default function About() {
@@ -37,7 +37,7 @@ export default function About() {
   return (
     <div>
       {/* top section -- info */}
-      <Grid container justfiy='center'>
+      <Grid container justify='center'>
         {/* <Box m={5}> */}
         <Grid item xs={6} className={classes.container} m={5}>
           <Typography component="h1" variant="h3" align="left" color="primary" gutterBottom mt={5}>
