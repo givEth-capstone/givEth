@@ -5,7 +5,6 @@ import { Typography, Grid } from '@material-ui/core';
 import { spacing } from '@material-ui/system';
 import Paper from '@material-ui/core/Paper';
 
-
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(5),
@@ -18,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
 //changing color from 'primary' to the blue in nav bar so it matches
 const TypographyColor = withStyles({
   root: {
-    color: "#00457C",
+    color: '#00457C',
     fontWeight: 1000,
-  }
+  },
 })(Typography);
 
 export default function About() {
@@ -28,8 +27,7 @@ export default function About() {
 
   return (
     <div className={classes.root}>
-      <Grid container justifyContent='center' alignItems='center' >
-
+      <Grid container justifyContent='center' alignItems='center'>
         <Grid item xs={6} className={classes.container} m={10}>
           {/* need to vertically align header and text better */}
           <TypographyColor
@@ -127,7 +125,7 @@ export default function About() {
 
       <Grid container className={classes.container} m={5} alignItems='center'>
         {/* center button horizontally */}
-      <Grid item xs={6} align='right'>
+        <Grid item xs={6} align='center'>
           <div>
             <div>
               <img
@@ -137,21 +135,19 @@ export default function About() {
                 width='100%'
               ></img>
             </div>
+
             <div>
-              <a href='https://metamask.io/download.html' target='_blank' >
+              <a href='https://metamask.io/download.html' target='_blank'>
                 {/* make button color match text and nav bar */}
-                <Button variant='contained'>
-                  {' '}
-                  Download MetaMask{' '}
-                </Button>
+                <Button variant='contained'> Download MetaMask </Button>
               </a>
             </div>
           </div>
         </Grid>
-        <Grid item xs={6} >
-           {/* need to vertically align header and text better */}
-          <TypographyColor component='h1' variant='h3' align='center'
-          >
+
+        <Grid item xs={6}>
+          {/* need to vertically align header and text better */}
+          <TypographyColor component='h1' variant='h3' align='center'>
             How does givEth work?
           </TypographyColor>
           <Typography variant='body1' align='center'>
@@ -162,10 +158,8 @@ export default function About() {
             send funds to others. It's as simple as that.
           </Typography>
         </Grid>
-
       </Grid>
 
-     
       <Divider style={{ width: '100%' }} />
     </div>
   );
