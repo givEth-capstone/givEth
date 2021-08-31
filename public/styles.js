@@ -4,8 +4,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     padding: theme.spacing(2),
-    marginBottom: theme.spacing(5),
-    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(3),
+    // marginTop: theme.spacing(3),
 },
   titleContainer: {
     position: 'relative',
@@ -38,35 +38,17 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: 12,
       margin: 'auto',
   },
-  // card: {
-  //   height:'70%',
-  //   display:'flex',
-  //   flexDirection: 'row',
-  //   borderRadius: 12,
-  //   margin: 10,
-  //},
     action: {
       display: 'flex',
       justifyContent: 'space-around',
     },
-    // root: {
-    //   maxWidth: 500,
-    //   maxHeight: 600,
-    //   borderRadius: 12,
-    // },
     media: {
       maxHeight: 200,
     },
-    // subroot: {
-    //   maxWidth: 340,
-    //   maxHeight: 400,
-    //   borderRadius: 12,
-    //   margin: 10,
-    // },
-    // submedia: {
-    //   maxHeight: 200,
-    // },
-
+    message: {
+      alignSelf: 'center',
+      margin: 30
+    },
   }));
   
   export default useStyles;

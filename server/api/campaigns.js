@@ -5,7 +5,11 @@ const {requireToken} = require('./gateKeepingMiddleware');
 
 router.get('/', async (req, res, next) => {
   try {
-    const campaigns = await Campaign.findAll()
+    const campaigns = await Campaign.findAll({
+      where : {
+        status:true
+      }
+    })
     res.send(campaigns)
   } catch (err) {
     next(err)
@@ -50,6 +54,19 @@ router.put('/:id/success', async (req, res, next) => {
     const updatedReceived = Number(campaign.received) + Number(req.body.receiveAmt)
     console.log(updatedReceived)
     await campaign.update({received: updatedReceived})
+    console.log(campaign)
+    res.sendStatus(200)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//put route for toggling active campaign to inactive
+router.put('/:id', async (req, res, next) => {
+  try {
+    console.log("this is type of req body", req.body)
+    const campaign = await Campaign.findByPk(req.params.id)
+    await campaign.update(req.body)
     console.log(campaign)
     res.sendStatus(200)
   } catch (error) {
