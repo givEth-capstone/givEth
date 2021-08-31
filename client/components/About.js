@@ -53,7 +53,7 @@ export default function About() {
         {/* </Box> */}
           {/* <Box ml={1}> */}
         <Grid item xs={6}>
-          <img src='assets/paper-mache-globe-hands.jpg' width='550' height='350' align="right" ></img>
+          <img src='assets/paper-mache-globe-hands.jpg' width='550' height='350' align="right" gutterBottom className={classes.container} m={5}></img>
         </Grid>
          {/* </Box> */}
       </Grid>
@@ -103,13 +103,13 @@ export default function About() {
 
       {/* bottom section -- how does it work? + button */}
 
-      <Grid container>
+      <Grid container className={classes.container} m={5}>
         <Grid item xs={6}>
           <Typography component="h1" variant="h3" align="left" color="primary" gutterBottom>
             How does givEth work?
           </Typography>
           <Typography variant="body1" align="left" gutterBottom>
-            givEth uses MetaMask to send and recieve Ether. Simply click on the link below and install MetaMask on your browser. MetaMask does all of the work to create an anonymous wallet for you. Once you have that wallet Id, simply copy and paste your wallet to any campaign you create. It's as simple as that.
+            givEth uses MetaMask to send and recieve Ether. Simply click on the link below and install MetaMask on your browser. MetaMask does all of the work to create an anonymous wallet for you. Once you have that wallet Id, you can connect it to a campaign you create. It's as simple as that.
           </Typography>
         </Grid>
         
@@ -125,7 +125,7 @@ export default function About() {
         </Grid>
         <Grid item xs={4} align='center' >
           <a href='https://metamask.io/download.html' target='_blank'>
-            <Button variant="contained" color='primary'>Download MetaMask </Button>
+            <Button variant="contained" color='primary'> Download MetaMask </Button>
           </a>
         </Grid>
       </Grid>
