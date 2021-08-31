@@ -11,7 +11,7 @@ import Profile from './components/Profile'
 import history from './history'
 import About from './components/About';
 import Success from './components/Success'
-
+import Loading from './components/Loading'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -30,7 +30,7 @@ class Routes extends Component {
         <Route exact path="/createcampaign" component={CreateCampaign}/>
         <Route exact path="/about" component={About}/>
         <Route exact path="/campaigns/:id/success" component={Success}/>
-
+        {/* <Route exact path="/loading" component={Loading}/> had this to test loading*/ } 
         {/* route for profile */}
         {/* route for single campaign */}
         {/* route for create campaign */}
