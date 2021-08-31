@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   //   [theme.breakpoints.up('sm')]: {
   //     paddingTop: theme.spacing(6),
   //     paddingBottom: theme.spacing(6),
-  //   },
+  //   },ç
   //   palette: {
   //         primary: { main: "#00457C", contrastText: "#000" },
   //         secondary: { main: "#0079C1", contrastText: "#000" },
@@ -109,7 +109,7 @@ export default function About() {
             How does givEth work?
           </Typography>
           <Typography variant="body1" align="left" gutterBottom>
-            givEth uses MetaMask to send and recieve Ether. Simply click on the link below and install MetaMask on your browser. MetaMask does all of the work to create an anonymous wallet for you. Once you have that wallet Id, you can connect it to a campaign you create. It's as simple as that.
+            givEth uses MetaMask to send and recieve Ether. Simply click on the link below and install MetaMask on your browser. MetaMask does all of the work to create an anonymous wallet for you. Once you have that wallet ID, you can connect it to a campaign you create. It's as simple as that.
           </Typography>
         </Grid>
         
