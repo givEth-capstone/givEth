@@ -1,7 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 
-import {injected} from './Connectors'
-import { useWeb3React } from '@web3-react/core'
 import Web3 from "web3";
 
 
@@ -10,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input'
 import { Button } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 import history from '../history'
 
@@ -24,11 +23,22 @@ const useStyles = makeStyles(() => ({
   },
   donate: {
     display: 'flex',
+    flexGrow: 1,
     justifyContent: 'space-between',
-    // alignItems: 'baseline'
+    alignItems: 'baseline',
+    width: 685,
+    marginTop: '20px'
   },
   button: {
-    background: '#55E9AE'
+    background: '#55E9AE',
+    width: '100%'
+  },
+  btn: {
+    width: '50%'
+  },
+  input: {
+    width: '45%',
+    
   }
 }));
 
@@ -47,12 +57,10 @@ export default function DonateButton(props) {
   async function getAccount() {
     try {
       accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      console.log(accounts)
     } catch (error) {
       console.log(error)
     }
     if (accounts[0]){
-      // console.log("account is connected")
       window.ethereum.on('accountsChanged', ()=>{console.log("account changed")})
       handleDonation()
       
@@ -91,7 +99,6 @@ export default function DonateButton(props) {
         });
         let donationEth = web3.utils.toBN(transaction.value) / wei.toString();
         // returns it in wei, so we gotta get it back to ether to send to the backend. Hence the dividiing by wei.
-        console.log("donation eth!!!", donationEth);
         await updateReceived(donationEth);
         history.push({
           pathname: `/campaigns/${props.id}/success`,
@@ -103,7 +110,6 @@ export default function DonateButton(props) {
   
 
   async function connectToMetaMask() {
-    console.log("we are in the connect to meta mask function")
     try {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
     } catch (error) {
@@ -113,9 +119,6 @@ export default function DonateButton(props) {
 
   function checkMetaMask(){
     if (typeof window.ethereum !== 'undefined') {
-      console.log('MetaMask is installed!');
-      // window.web3 = new Web3(window.ethereum);
-      // web3 = window.web3;
       getAccount()
     }else{
       alert("It seems like MetaMask is not installed. Please refer to the MetaMask website to install MetaMask and begin to donate!")
@@ -132,17 +135,19 @@ export default function DonateButton(props) {
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="my-input">Donation amount</InputLabel>
         <div className={classes.donate}>
-          <div>
+          <div className={classes.input}>
             <Input
               id="my-input"
               aria-describedby="my-helper-text"
+              fullWidth
               onChange={(event) => {
                 setDonation(event.target.value);
-              }}
+              }
+            }
+            endAdornment={<InputAdornment position="end">ETH</InputAdornment>}
             />
-            <span>ETHER</span>
           </div>
-
+          <div className={classes.btn}>
           <Button
             type="submit"
             variant="contained"
@@ -152,6 +157,8 @@ export default function DonateButton(props) {
           >
             Donate
           </Button>
+          </div>
+          
         </div>
       </FormControl>
     </div>

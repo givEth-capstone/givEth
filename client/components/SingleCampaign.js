@@ -20,7 +20,6 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    width: 700,
   },
   root: {
     flexGrow: 1,
@@ -38,8 +37,8 @@ const useStyles = makeStyles({
     float: 'left',
     borderRadius: '6px',
     height: '20px',
-    background: '#36B8E9' /* For browsers that do not support gradients */,
-    // background: '-webkit-linear-gradient(-90deg, #71F7F2, #36B8E9)', /* For Safari 5.1 to 6.0 */
+    //background: '#36B8E9' /* For browsers that do not support gradients */,
+    background: '-webkit-linear-gradient(-90deg, #71F7F2, #36B8E9)', /* For Safari 5.1 to 6.0 */
     zIndex: 333,
     boxShadow:
       'inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08)',
@@ -54,6 +53,17 @@ const useStyles = makeStyles({
     backgroundColor: '#dee0e0',
     boxShadow: '0 2px 3px rgba(0,0,0,.5) inset',
   },
+  goal: {
+    display: 'flex',
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+    width: 700,
+    marginTop: '20px'
+  },
+  test:{
+    alignContent: 'center'
+  }
 });
 
 export default function SingleCampaign(props) {
@@ -87,39 +97,61 @@ export default function SingleCampaign(props) {
   }, [campaign]);
 
   return (
-    <div>
+    <div className={classes.test}>
       {campaign.length < 1 ? (
         <h1>Nothing to see.</h1>
       ) : (
         <Grid
           container
-          direction='column'
-          alignItems='center'
-          justifyContent='center'
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          justify="center"
+          spacing={0}
         >
-          <Card className={classes.root}>
-            <CardContent className={classes.content}>
-              <Typography gutterBottom variant='h3' component='h2' fontWeight="bold">
+          <Grid item >
+          <Card className={classes.content}>
+            <CardContent >
+              <Typography
+                gutterBottom
+                variant="h3"
+                component="h2"
+                fontWeight="bold"
+              >
                 {campaign.name}
               </Typography>
             </CardContent>
-            <CardActionArea>
               <CardMedia
                 className={classes.media}
                 image={campaign.photoUrl}
                 title={campaign.title}
               />
 
-              <CardContent className={classes.content}>
-                <Typography gutterBottom variant='h5' component='h2'>
+              <CardContent >
+                <Typography gutterBottom variant="h5" component="h2">
                   {campaign.title}
                 </Typography>
-                <Typography gutterBottom variant='h5' component='h2'>
+                <Typography gutterBottom variant="h5" component="h2">
                   {campaign.info}
                 </Typography>
-                <Typography gutterBottom variant='h5' component='h2'>
-                  Goal: {campaign.needed} ETHER
-                </Typography>
+
+                <div className={classes.goal}>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                  >
+                    RAISED: {campaign.received} ETH 
+                  </Typography>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                  >
+                    NEEDED: {campaign.needed} ETH
+                  </Typography>
+                </div>
+           
 
                 <div className={classes.glass}>
                   <div
@@ -128,15 +160,14 @@ export default function SingleCampaign(props) {
                   ></div>
                 </div>
 
-                <Typography gutterBottom variant='h5' component='h2'>
-                  {/* Amount raised: {campaign.amountRaised/campaign.needed} */}
-                </Typography>
               </CardContent>
-            </CardActionArea>
+
             <CardActions>
               <DonateButton campaign={campaign} id={campaignID} />
             </CardActions>
           </Card>
+          </Grid>
+          
         </Grid>
       )}
     </div>
