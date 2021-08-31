@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     padding: theme.spacing(2),
-    marginBottom: theme.spacing(3),
+    padding: theme.spacing(3),
     // marginTop: theme.spacing(3),
 },
   titleContainer: {
@@ -12,8 +12,7 @@ const useStyles = makeStyles((theme) => ({
     height:400,
     backgroundColor:theme.palette.grey[800],
     color: theme.palette.common.white,
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(5),
+    padding: theme.spacing(5),
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'center',
       alignItems:'center',
       borderRadius: 12,
-      margin: 'auto',
+      padding: 'auto',
   },
     action: {
       display: 'flex',
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     },
     message: {
       alignSelf: 'center',
-      margin: 30
+      padding: 30
     },
   }));
   

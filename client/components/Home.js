@@ -63,7 +63,7 @@ const classes = useStyles();
             <Typography variant="h5" color="inherit" paragraph>
             Anonymous, Ethereum-based Crowdfunding
             </Typography>
-            <Link variant="subtitle1" href="/about">
+            <Link to="/about">
               continue reading...
             </Link>
           </div>

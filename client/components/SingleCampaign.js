@@ -88,8 +88,8 @@ export default function SingleCampaign(props) {
 
   return (
     <div>
-      {campaign.length < 1 ? (
-        <h1>Nothing to see.</h1>
+      {campaign.length ? (
+        <h1>Loading</h1>
       ) : (
         <Grid
           container
@@ -97,20 +97,17 @@ export default function SingleCampaign(props) {
           alignItems='center'
           justifyContent='center'
         >
-          <Card className={classes.root}>
-            <CardContent className={classes.content}>
-              <Typography gutterBottom variant='h5' component='h2'>
-                {campaign.name}
-              </Typography>
-            </CardContent>
-            <CardActionArea>
+          <Card style={{ border: "none", boxShadow: "none" }} className={classes.root}>
               <CardMedia
                 className={classes.media}
                 image={campaign.photoUrl}
                 title={campaign.title}
               />
 
-              <CardContent className={classes.content}>
+              <CardContent className={classes.content} wrap='nowrap'>
+              <Typography gutterBottom variant='h5' component='h2'>
+                {campaign.name}
+              </Typography>
                 <Typography gutterBottom variant='h5' component='h2'>
                   {campaign.title}
                 </Typography>
@@ -118,7 +115,7 @@ export default function SingleCampaign(props) {
                   {campaign.info}
                 </Typography>
                 <Typography gutterBottom variant='h5' component='h2'>
-                  Goal: {campaign.needed} ETHER
+                  Amount Needed: {campaign.needed} Ether
                 </Typography>
 
                 <div className={classes.glass}>
@@ -131,11 +128,10 @@ export default function SingleCampaign(props) {
                 <Typography gutterBottom variant='h5' component='h2'>
                   {/* Amount raised: {campaign.amountRaised/campaign.needed} */}
                 </Typography>
+                <CardActions>
+                  <DonateButton campaign={campaign} id={campaignID} />
+               </CardActions>
               </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <DonateButton campaign={campaign} id={campaignID} />
-            </CardActions>
           </Card>
         </Grid>
       )}
