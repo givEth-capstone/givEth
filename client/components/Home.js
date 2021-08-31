@@ -186,8 +186,7 @@ const classes = useStyles();
         <div >
           {/* <Grid container direction="row" alignItems="center" justifyContent="center"> */}
           <Grid container spacing={2} className={classes.root}>
-
-          <Grid item xs={4}>
+            <Grid item xs={4}>
             <Card className={classes.card}>
             <CardActionArea>
             <CardMedia
