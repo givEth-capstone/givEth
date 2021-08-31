@@ -31,8 +31,12 @@ const useStyles = makeStyles(() => ({
   },
   button: {
     background: '#55E9AE',
-    width: '100%'
+    width: '100%',
+    '&:hover': {
+      backgroundColor: '#00C1AA',
+    }
   },
+
   btn: {
     width: '50%'
   },

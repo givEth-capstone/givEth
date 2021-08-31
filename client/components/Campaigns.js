@@ -66,7 +66,10 @@ const useStyles = makeStyles(() => ({
   },
   button: {
     background: '#00C3E3',
-    marginBottom: 20
+    marginBottom: 20,
+    '&:hover': {
+      backgroundColor: '#00B8D8',
+    }
   }
 }));
 
