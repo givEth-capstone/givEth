@@ -78,7 +78,7 @@ export function CreateCampaign(props) {
                                             fullWidth
                                             label="Cause Name"
                                             onChange={(evt) => { setname(evt.target.value) }}
-                                        />
+                                        /> 
                                     </Grid>
                                     <Grid item xs={6}>
                                     <TextField
