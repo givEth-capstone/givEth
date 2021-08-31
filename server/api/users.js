@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { models: { User , Campaign}} = require('../db')
 module.exports = router
-const {requireToken} = require('./gatekeepingMiddleware')
+const {requireToken} = require('./gateKeepingMiddleware')
 
 //get logged in user
 // router.get('/',requireToken, async (req, res, next) => {

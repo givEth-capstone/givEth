@@ -9,8 +9,9 @@ import CreateCampaign from './components/CreateCampaign';
 import SingleCampaign from './components/SingleCampaign'
 import Profile from './components/Profile'
 import history from './history'
+import About from './components/About';
 import Success from './components/Success'
-
+import Loading from './components/Loading'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -27,8 +28,9 @@ class Routes extends Component {
         <Route exact path="/campaigns/:id" component={SingleCampaign}/>
         <Route exact path="/profile" component={Profile}/>
         <Route exact path="/createcampaign" component={CreateCampaign}/>
+        <Route exact path="/about" component={About}/>
         <Route exact path="/campaigns/:id/success" component={Success}/>
-
+        <Route exact path="/loading" component={Loading}/> 
         {/* route for profile */}
         {/* route for single campaign */}
         {/* route for create campaign */}
