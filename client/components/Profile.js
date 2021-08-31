@@ -116,7 +116,7 @@ export function Profile(props) {
             <div>
               { campaigns.length ? 
                 <div>
-                <Typography component="h2" variant="h5" align="center" color="primary" gutterBottom>
+                <Typography component="h2" variant="h5" align="center" color="primary" className={classes.message}>
                   {user.username}
                   </Typography>
                   {/* <div>{campaignRender(campaigns)}</div> */}
