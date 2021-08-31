@@ -3,6 +3,7 @@ const { models: { User , Campaign}} = require('../db')
 module.exports = router
 const {requireToken} = require('./gateKeepingMiddleware')
 
+// o: remove these before the end of the project
 //get logged in user
 // router.get('/',requireToken, async (req, res, next) => {
 //   try {

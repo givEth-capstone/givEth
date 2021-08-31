@@ -39,6 +39,8 @@ export default function DonateButton(props) {
   const [donation, setDonation] = useState(0)
   const [transactionNumber, setTransactionNumber] = useState('')
   let accounts = []
+
+  // o: it looks like these are not being used
   const {active, account, library, connector, activate, deactivate} = useWeb3React()
   
   useEffect(()=> {
@@ -71,7 +73,7 @@ export default function DonateButton(props) {
           {
             from: accounts[0],
             to: props.campaign.walletId,
-
+            // o: why is this being multiplied by 1000000000000000000 ?
             value: `${donation *1000000000000000000}`,
             // gasPrice: '0x09184e72a000',
             // gas: '0x2710',

@@ -12,6 +12,10 @@ export function CreateCampaign(props) {
     const [tag, setCategory] = React.useState('')
     const [info, setDescription] = React.useState('')
     const [walletId, setWalletID] = React.useState('')
+
+    // o: for this project, this is fine but if you want use something from the
+    //  internet, I recommend downloading and loading it from the app in case
+    //  of the site being down
     const [photoUrl, setPhotoUrl] = React.useState('https://www.pngitem.com/pimgs/m/145-1450643_providing-encouragement-and-support-to-help-people-icon.png')
     const [userId, setUserId] = React.useState(null)
     const [needed, setNeeded] = React.useState('')
@@ -57,6 +61,7 @@ export function CreateCampaign(props) {
 
     return (
         <div>
+        {/* o: non-negative conditionals are easier to read */}
         { !isLoggedIn ? 
         <div>
         <Redirect to ='/profile'> </Redirect>
@@ -90,6 +95,7 @@ export function CreateCampaign(props) {
                         <label>Category</label>
                         <select onChange={(evt) => { setCategory(evt.target.value) }}
                             name="category" id="category">
+                            {/* o: you can create these options via mapping over an array */}
                             <option value="select">Select</option>
                             <option value="Arts">Arts</option>
                             <option value="Community">Community</option>

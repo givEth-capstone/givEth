@@ -180,6 +180,7 @@ const classes = useStyles();
     </Grid>
     </Grid>
     </div>
+      {/* o: non-negative conditionals are easier to read */}
       {!campaigns.length ? (
         <h1>No recent campaigns</h1>
       ) : (
@@ -194,6 +195,8 @@ const classes = useStyles();
               alt='Campaign Image'
               height='200'
               className={classes.submedia}
+              // o: since you are calculating this several times below
+              //  might as well make it into a variable
               image={campaigns[campaigns.length-1].photoUrl}
               title={campaigns[campaigns.length-1].name}
             />

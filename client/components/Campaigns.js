@@ -92,8 +92,7 @@ export default function Campaigns() {
   useEffect(() => {
     async function fetchData() {
       try {
-
-
+        // o: might want to destructure and just keep data here
         const response = await axios.get('/api/campaigns');
         setCampaigns(response.data);
         setSelectedCampaigns(response.data);
@@ -139,6 +138,7 @@ export default function Campaigns() {
       </div>
 
       <div className={classes.gridContainer}>
+        {/* o: small detail but usually non-negative conditionals are easier to read */}
         {!selectedCampaigns.length ? (
           <h1 className={classes.message}>No Campaigns Yet!</h1>
         ) : (

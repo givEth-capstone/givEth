@@ -66,6 +66,7 @@ export default function SingleCampaign(props) {
   useEffect(() => {
     async function getCampaign(id) {
       try {
+        // o: might want to destructure and just keep data here
         const response = await axios.get(`/api/campaigns/${id}`);
         const data = response.data;
         setCampaign(data);
@@ -88,6 +89,7 @@ export default function SingleCampaign(props) {
 
   return (
     <div>
+      {/* o: can just check if length exists */}
       {campaign.length < 1 ? (
         <h1>Nothing to see.</h1>
       ) : (

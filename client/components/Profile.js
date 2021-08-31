@@ -66,6 +66,7 @@ export function Profile(props) {
       async function fetchUser(token) {
           try{
             if(token){
+              // o: might want to destructure and keep just data here
               const response = await axios.get(`/api/users`, {headers: { Authorization: token }});
               const data = response.data
               console.log("RESPONSE", response)
