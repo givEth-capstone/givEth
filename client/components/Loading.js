@@ -13,7 +13,6 @@ export default function Loading(){
     // const [bufferProgress, setBufferProgress] = React.useState(null)
 
     return (
-        // <div style={{display: 'flex', justifyContent: 'center'}}>
         <div style={{'paddingTop': '260px'}} align='center'>
              <CircularProgress size={50}/>
             {/* <LinearProgress 
@@ -83,3 +82,5 @@ export default function CircularStatic() {
 }
 
 */
+
+
