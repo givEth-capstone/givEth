@@ -1,5 +1,6 @@
 import React, {useEffect,useState} from 'react'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
+import Link from '@material-ui/core/Link';
 import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -52,25 +53,25 @@ const classes = useStyles();
   return (
     <div >
       <ThemeProvider theme={colortheme}>
-      <Paper className={classes.titleContainer} style={{ backgroundImage: `url('assets/paper-globe-hands.jpg')` }}>
+      <div className={classes.titleContainer} style={{ backgroundImage: `url('assets/paper-globe-plants.jpg')` }}>
       <div className={classes.overlay}/>
 
-      <Grid container spacing={3}>
-        <Grid item >
-          <div className={classes.mainFeaturedPostContent}>
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-              GivEth
+      <Grid container spacing={3} alignItems="center" justifyContent="center" alignContent="center">
+        <Grid item className={classes.mainFeaturedPostContent} >
+            <Typography component="h1" variant="h3" color= 'inherit' align="center" gutterBottom >
+              givEth
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
+            <Typography variant="h5" color='inherit' align="center" gutterBottom>
             Anonymous, Ethereum-based Crowdfunding
             </Typography>
-            <Link to="/about" color="primary">
-              continue reading...
-            </Link>
-          </div>
+            <Typography  align="center" >
+             <Link href="/about" color="inherit" underline="always" >
+              Learn More
+              </Link>
+              </Typography>
         </Grid>
       </Grid>
-      </Paper>
+      </div>
 
       {/* STARTING A CAMPAIGN IS EASY */}
       <div className={classes.root}>
@@ -82,8 +83,8 @@ const classes = useStyles();
       </Grid>
 
       <Grid item xs ={4}>
-        <Card className={classes.root} variant="outlined">
-            <CardContent>
+        <Card className={classes.root} variant="outlined" >
+            <CardContent align="center">
             <CheckCircleOutlineIcon/>
               <Typography component="h2" variant="h5">
               Step 1
@@ -97,7 +98,7 @@ const classes = useStyles();
 
         <Grid item xs ={4}>
         <Card className={classes.root} variant="outlined">
-            <CardContent>
+            <CardContent align="center">
             <CheckCircleOutlineIcon/>
               <Typography component="h2" variant="h5">
                 Step 2             
@@ -111,7 +112,7 @@ const classes = useStyles();
 
         <Grid item xs ={4}>
         <Card className={classes.root} variant="outlined">
-            <CardContent>
+            <CardContent align="center">
             <CheckCircleOutlineIcon/>
               <Typography component="h2" variant="h5">
               Step 3
@@ -156,7 +157,7 @@ const classes = useStyles();
             </Typography>
           </CardContent>
           <CardActions >
-            <Link to={`/campaigns/${campaigns[random].id}`}>
+            <Link href={`/campaigns/${campaigns[random].id}`}>
               <Button size="small" color='primary' variant= 'contained' style={{ color: '#FFFFFF'}}>
                 See More
               </Button>
@@ -206,7 +207,7 @@ const classes = useStyles();
               </Typography>
             </CardContent>
             <CardActions>
-              <Link to={`/campaigns/${campaigns[campaigns.length-1].id}`}>
+              <Link href={`/campaigns/${campaigns[campaigns.length-1].id}`}>
                 <Button size="small" color='primary' variant='contained' style={{ color: '#FFFFFF'}}>
                   See More
                 </Button>
@@ -236,7 +237,7 @@ const classes = useStyles();
               </Typography>
             </CardContent>
             <CardActions>
-              <Link to={`/campaigns/${campaigns[campaigns.length-2].id}`}>
+              <Link href={`/campaigns/${campaigns[campaigns.length-2].id}`}>
                 <Button size="small" color='primary' variant='contained' style={{ color: '#FFFFFF'}}>
                   See More
                 </Button>
@@ -266,8 +267,8 @@ const classes = useStyles();
               </Typography>
             </CardContent>
             <CardActions>
-              <Link to={`/campaigns/${campaigns[campaigns.length-3].id}`}>
-                <Button size="small" variant='contained' color ='primary' style={{ color: '#FFFFFF'}}>
+              <Link href={`/campaigns/${campaigns[campaigns.length-3].id}`}>
+                <Button size="small" variant='contained' color ='primary' style={{ color:'#FFFFFF'}}>
                   See More
                 </Button>
               </Link>
