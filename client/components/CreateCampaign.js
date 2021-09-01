@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+
+
 export function CreateCampaign(props) {
     const { isLoggedIn } = props
     const [name, setname] = React.useState('')
@@ -19,6 +21,11 @@ export function CreateCampaign(props) {
     const [needed, setNeeded] = React.useState('')
 
     const token = window.localStorage.token;
+
+    function onChange (evt){
+        setPhotoUrl(URL.createObjectURL(evt.target.files[0]))
+        console.log('here is the crazy url thing',URL.createObjectURL(evt.target.files[0]))
+    }
 
     function onSubmit(e, token) {
         e.preventDefault();
@@ -49,6 +56,7 @@ export function CreateCampaign(props) {
     }
 
     return (
+
         <div>
             {!isLoggedIn ?
                 <div>
@@ -113,7 +121,7 @@ export function CreateCampaign(props) {
                                         Category
                                     </FormLabel>
                                     <Select
-                                        onChange={(evt) => { setCategory(evt.target.value) }}
+                                        onChange={(evt) => { setCategory(evt.target.value)}}
                                         name="category"
                                         id="category"
                                         required
@@ -149,7 +157,7 @@ export function CreateCampaign(props) {
                                     <Grid container spacing={2}>
                                     <Grid item xs={6}>
                                     <img src={photoUrl} width="150" height="150" />
-                                    <input onChange={(evt) => { setPhotoUrl(evt.target.value) }}
+                                    <input onChange={(evt) => onChange(evt)}
                                         type="file"
                                         id="img"
                                         accept="image/*"
