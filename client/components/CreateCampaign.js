@@ -115,14 +115,12 @@ export function CreateCampaign(props) {
                                     />
                                     </Grid>
                                     <Grid item xs={6}>
-                                    <FormLabel>
-                                        Category
-                                    </FormLabel>
-                                    <Select
+                                    <TextField
                                         onChange={(evt) => { setCategory(evt.target.value)}}
-                                        name="category"
                                         id="category"
+                                        select
                                         required
+                                        variant="outlined"
                                         fullWidth
                                         label="Category"
                                     >
@@ -136,7 +134,7 @@ export function CreateCampaign(props) {
                                         <MenuItem value="Medical">Medical</MenuItem>
                                         <MenuItem value="Housing">Housing</MenuItem>
                                         <MenuItem value="Hunger">Hunger</MenuItem>
-                                    </Select>
+                                    </TextField>
                                     </Grid>
                                     </Grid>
                                     <Grid item xs={6}>
