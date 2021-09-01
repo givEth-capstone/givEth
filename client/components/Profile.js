@@ -6,7 +6,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-// import FormHelperText from '@material-ui/core/FormHelperText';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -38,9 +37,6 @@ export function Profile(props) {
   let [user, setUser] = React.useState(); 
   const classes = useStyles();
   const [selectedTab,setSelectedTab] = React.useState(1);
-  // const [state, setState] = React.useState({
-  //   active: true,
-  // });
   const [campaigns, setCampaigns] = React.useState([])
 
 
@@ -49,16 +45,10 @@ export function Profile(props) {
   }
 
   async function handleToggle(id, event){
-    console.log('HANDLETOGGLE', id)
-    console.log('EVENT', event.target.checked)
     const status =  {status: event.target.checked}
-    console.log("STATUS", status)
       try{
         const {data} = await axios.put(`/api/campaigns/${id}`, status );
-        console.log('handle toggle data', data)
         const campaignToUpdate = data
-        console.log('handle toggle campaign', campaigns)
-        console.log('campaigntoUpdate', campaignToUpdate)
         setCampaigns(campaigns.map((campaign) => {
           if(campaign.id === campaignToUpdate.id) {
             return campaignToUpdate
@@ -77,7 +67,6 @@ export function Profile(props) {
       try{
         if(token){
           const {data} = await axios.get(`/api/users`, {headers: { Authorization: token }});
-          console.log("ASSOCIATED DATA", data);
           setUser(data)
           setCampaigns(data.campaigns) 
         } 
@@ -103,21 +92,12 @@ export function Profile(props) {
         }
       })
     }
-    console.log("after FN campaigns", campaigns)
-    console.log("pastcampaigns", pastCampaigns)
-    console.log("currentcampaigns", currentCampaigns)
     return( 
         <div>
           <ThemeProvider theme={colortheme}>
             { !isLoggedIn ? 
-            // <div >
-            //     {"Please Log In or Sign Up"}
-            //     <Login/>
-            //     <Signup/>
-            // </div>  
             history.push({
-              pathname: `/login`,
-              //state: { txHash, accounts, donationEth },
+              pathname: `/login`
             })
             :
             <div>
@@ -126,7 +106,6 @@ export function Profile(props) {
                 <Typography component="h2" variant="h5" align="center" color="primary" className={classes.message}>
                   {user.username}
                   </Typography>
-                  {/* <div>{campaignRender(campaigns)}</div> */}
                     <Tabs value = {selectedTab} onChange={handleChange} indicatorColor="secondary" textColor="primary" centered>
                       <Tab label = "Past Campaigns" />
                       <Tab label = "Active Campaigns" />
@@ -233,8 +212,6 @@ export function Profile(props) {
 
 const mapState = state => {
     return {
-      // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-      // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
       isLoggedIn: !!state.auth.id
     }
   }

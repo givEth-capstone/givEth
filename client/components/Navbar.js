@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-// import {Link} from '@material-ui/core/Link'
 import { logout } from '../store';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -21,7 +20,6 @@ const useStyles = makeStyles(() => ({
   },
   img: {
     height: 60,
-    // alignItems: 'flex-start'
   },
   link: {
     color: '#FFFFFF',
@@ -29,10 +27,7 @@ const useStyles = makeStyles(() => ({
   },
   navLinks: {
     display: 'flex',
-    // textDecoration: 'none',
     alignItems: 'center',
-    // padding: '0px 10px',
-    // color: "#FFFFFF"
   },
 }));
 
@@ -78,7 +73,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   Start A Campaign
                 </Typography>
               </Link>
-              {/*Link to Donate// Can link to All campaigns with header that says Choose a campaign to donate to */}
+
               <Link to='/campaigns'>
                 <Typography className={classes.link}>Donate</Typography>
               </Link>

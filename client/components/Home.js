@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-// import background from 'assets/paper-globe-hands.jpg'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -186,7 +185,6 @@ const classes = useStyles();
         <h1>No recent campaigns</h1>
       ) : (
         <div >
-          {/* <Grid container direction="row" alignItems="center" justifyContent="center"> */}
           <Grid container spacing={2} className={classes.root}>
 
             <Grid item xs={4}>
@@ -196,7 +194,6 @@ const classes = useStyles();
               component='img'
               alt='Campaign Image'
               height='200'
-              // className={classes.submedia}
               image={campaigns[campaigns.length-1].photoUrl}
               title={campaigns[campaigns.length-1].name}
             />

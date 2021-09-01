@@ -61,10 +61,8 @@ router.put('/:id/success', async (req, res, next) => {
 //put route for toggling active campaign to inactive
 router.put('/:id', async (req, res, next) => {
   try {
-    console.log("this is type of req body", req.body)
     const campaign = await Campaign.findByPk(req.params.id)
     const updatedCampaign = await campaign.update(req.body)
-    console.log(campaign)
     res.status(200).send(updatedCampaign)
   } catch (error) {
     next(error)

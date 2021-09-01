@@ -12,12 +12,9 @@ const Campaign = db.define('campaign', {
   },
   location: {
     type: Sequelize.STRING
-    //is there a way we can check this with an existing map API to make it a valid location
-    //if not, consider removing this
   },
   needed: {
     type: Sequelize.INTEGER 
-    //assuming users can request only whole dollar amounts
   },
   info: {
     type: Sequelize.TEXT
