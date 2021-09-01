@@ -3,6 +3,7 @@
 const {db, models: {User, Campaign} } = require('../server/db')
 
 const photo = 'https://www.pngitem.com/pimgs/m/145-1450643_providing-encouragement-and-support-to-help-people-icon.png'
+
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -40,7 +41,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
       location: 'Haiti',
       needed: 7,
       info: 'The earthquake has displaced many victims. Donate to support.',
-      photoUrl: photo,
+      photoUrl: '/assets/earthquake.jpg',
       tag: 'Emergency',
       status: true,
       received: 2
@@ -49,10 +50,10 @@ const [Nicky, Farha, Amber, Rachel] = users;
     Campaign.create({ 
       name: 'Rebuild the school',
       walletId: '0x1D1c5410C8A96d62Af3fF02A158FcA44A0336517', 
-      location: 'Brooklyn',
+      location: 'Brazil',
       needed: 6,
-      info: 'The school caught on fire. Please help us get new furniture.',
-      photoUrl: photo,
+      info: 'It has been a long time since our school has received new furniture. Please help us in trying to make the school more comfortable for our children.',
+      photoUrl: '/assets/school.jpg',
       tag: 'Education',
       status: true
     }),
@@ -62,7 +63,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
       location: 'Queens',
       needed: 5,
       info: 'Due to the coronavirus, I have been in and out of the hospital. I lost my job also and have no health insurance. Please help me pay off my hospital debt.',
-      photoUrl: photo,
+      photoUrl: '/assets/hospital.jpg',
       tag: 'Medical',
       status: true
     }),
@@ -72,17 +73,17 @@ const [Nicky, Farha, Amber, Rachel] = users;
       location: 'Global',
       needed: 3,
       info: 'We are trying to help refugees of global crises reunite with their families. Please donate so we can get them plane tickets!',
-      photoUrl: photo,
+      photoUrl: '/assets/plane.jpg',
       tag: 'Emergency',
       status: true
     }),
     Campaign.create({
       name: 'Temporary housing for flood victims',
       walletId: '0x200E547fc82208014850E4b75959C96B6a6273BE', 
-      location: 'Tennessee',
+      location: 'United Kingdom',
       needed: 2,
-      info: 'Many people lost their homes in the devastating floods recently. Please help them to pay for temporary housing while they get back on their feet.',
-      photoUrl: photo,
+      info: 'Many people in our city recently lost their homes due to a devastating flood. Please help us pay for temporary housing while we get back on their feet.',
+      photoUrl: '/assets/flood.jpg',
       tag: 'Emergency',
       status: false
     }),
@@ -92,7 +93,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
       location: 'Kabul',
       needed: 4,
       info: 'We are trying to raise money to continue running our safe shelter for homeless and struggling LGBTQ youth in our city. Please donate to keep us safe!',
-      photoUrl: photo,
+      photoUrl: '/assets/lgbtq.jpg',
       tag: 'Emergency',
       status: false
     }),
@@ -102,7 +103,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
       location: 'Botswana',
       needed: 2,
       info: 'We are in need of funds to help rehabilitate and protect the wild elephants in our area that have been targeted by poachers.',
-      photoUrl: photo,
+      photoUrl: '/assets/elephants.jpg',
       tag: 'Community',
       status: true
     }),
@@ -112,7 +113,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
       location: 'USA',
       needed: 3,
       info: '1 in 3 children go to bed without dinner. Please donate to help us continue providing free school lunches to children who need it.',
-      photoUrl: photo,
+      photoUrl: '/assets/children.jpg',
       tag: 'Hunger',
       status: false
     }),

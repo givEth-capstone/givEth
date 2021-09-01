@@ -6,7 +6,6 @@ import Web3 from "web3";
 import SingleCampaign from './SingleCampaign'
 
 import { Grid } from '@material-ui/core';
-//need help importing heart img.
 
 
 export default function Success(props) {
