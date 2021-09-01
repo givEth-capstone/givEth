@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import axios from 'axios';
 
 import DonateButton from './DonateButton';
@@ -20,6 +22,7 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+    padding: '10px'
   },
   root: {
     flexGrow: 1,
@@ -101,6 +104,7 @@ export default function SingleCampaign(props) {
       {campaign.length < 1 ? (
         <h1>Nothing to see.</h1>
       ) : (
+        
         <Grid
           container
           direction="column"
@@ -109,25 +113,29 @@ export default function SingleCampaign(props) {
           justify="center"
           spacing={0}
         >
-          <Grid item >
-          <Card className={classes.content}>
-            <CardContent >
-              <Typography
-                gutterBottom
-                variant="h3"
-                component="h2"
-                fontWeight="bold"
-              >
-                {campaign.name}
-              </Typography>
-            </CardContent>
+          <Link to={`/campaigns`}>
+          Back to All Campaigns
+        </Link>
+          <Grid item>
+          
+            <Card className={classes.content}>
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h3"
+                  component="h2"
+                  fontWeight="bold"
+                >
+                  {campaign.name}
+                </Typography>
+              </CardContent>
               <CardMedia
                 className={classes.media}
                 image={campaign.photoUrl}
                 title={campaign.title}
               />
 
-              <CardContent >
+              <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   {campaign.title}
                 </Typography>
@@ -136,22 +144,13 @@ export default function SingleCampaign(props) {
                 </Typography>
 
                 <div className={classes.goal}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="h2"
-                  >
-                    RAISED: {campaign.received} ETH 
+                  <Typography gutterBottom variant="h5" component="h2">
+                    RAISED: {campaign.received} ETH
                   </Typography>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="h2"
-                  >
+                  <Typography gutterBottom variant="h5" component="h2">
                     NEEDED: {campaign.needed} ETH
                   </Typography>
                 </div>
-           
 
                 <div className={classes.glass}>
                   <div
@@ -159,15 +158,23 @@ export default function SingleCampaign(props) {
                     style={{ width: `${width}%` }}
                   ></div>
                 </div>
-
               </CardContent>
 
-            <CardActions>
-              <DonateButton campaign={campaign} id={campaignID} />
-            </CardActions>
-          </Card>
+              {props.donationEth ? (
+                <div className={classes.content} >
+                  <img src="/assets/heart.png" alt="heart image" height="50px" width="50px" />
+                  <span>Thank you for your kind donation.</span>
+                  <span>
+                    Donation summary: {props.donationEth} ETH{" "}
+                  </span>
+                </div>
+              ) : (
+                <CardActions>
+                  <DonateButton campaign={campaign} id={campaignID} />
+                </CardActions>
+              )}
+            </Card>
           </Grid>
-          
         </Grid>
       )}
     </div>

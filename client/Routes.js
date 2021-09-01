@@ -24,6 +24,8 @@ class Routes extends Component {
       <div>
         <Router history={history}>
         <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/campaigns" component={Campaigns} />
         <Route exact path="/campaigns/:id" component={SingleCampaign}/>
         <Route exact path="/profile" component={Profile}/>
