@@ -18,6 +18,8 @@ const colortheme = createTheme({
     }
   });
 
+
+
 export function CreateCampaign(props) {
     const { isLoggedIn } = props
     const [name, setname] = React.useState('')
@@ -30,6 +32,14 @@ export function CreateCampaign(props) {
     const [needed, setNeeded] = React.useState('')
 
     const token = window.localStorage.token;
+
+    function onChange (evt){
+        setPhotoUrl(evt.target.value)
+        // console.log('here is the crazy url thing',URL.createObjectURL(evt.target.files[0]))
+        // might have to start a new database for this because postgres does allow images saved
+        // can't use local url 
+        // might need to use firebase or other database to do this. 
+    }
 
     function onSubmit(e, token) {
         e.preventDefault();
@@ -60,6 +70,7 @@ export function CreateCampaign(props) {
     }
 
     return (
+
         <div>
             <ThemeProvider theme={colortheme}>
             {!isLoggedIn ?
@@ -77,6 +88,7 @@ export function CreateCampaign(props) {
                     </Grid>
                     <div>
                         <Container maxWidth="sm">
+                            <FormControl variant='outlined'>
                             <form onSubmit={(e) => onSubmit(e, token)}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={6}>
@@ -91,8 +103,6 @@ export function CreateCampaign(props) {
                                             label="Cause Name"
                                             onChange={(evt) => { setname(evt.target.value) }}
                                         /> 
-                                    </Grid>
-                                    <Grid item xs={6}>
                                     <TextField
                                         id="outlined-basic"
                                         variant="outlined"
@@ -104,10 +114,7 @@ export function CreateCampaign(props) {
                                         label="Location"
                                         onChange={(evt) => { setlocation(evt.target.value) }}
                                     />
-                                    </Grid>
-                                    </Grid>
-                                    <Grid container spacing={2}>
-                                    <Grid item xs={6} >
+                                     <Grid item xs={6} >
                                     <TextField 
                                         id="outlined-basic"
                                         variant="outlined"
@@ -121,16 +128,15 @@ export function CreateCampaign(props) {
                                     />
                                     </Grid>
                                     <Grid item xs={6}>
-                                    <FormLabel>
-                                        Category
-                                    </FormLabel>
-                                    <Select
-                                        onChange={(evt) => { setCategory(evt.target.value) }}
-                                        name="category"
-                                        id="category"
+                                    <TextField
                                         required
-                                        fullWidth
+                                        id="category"
+                                        select
                                         label="Category"
+                                        fullWidth
+                                        margin="normal"
+                                        variant="outlined"
+                                        onChange={(evt) => { setCategory(evt.target.value)}}
                                     >
                                         <MenuItem value="select">Select</MenuItem>
                                         <MenuItem value="Arts">Arts</MenuItem>
@@ -142,10 +148,30 @@ export function CreateCampaign(props) {
                                         <MenuItem value="Medical">Medical</MenuItem>
                                         <MenuItem value="Housing">Housing</MenuItem>
                                         <MenuItem value="Hunger">Hunger</MenuItem>
-                                    </Select>
+                                    </TextField>
                                     </Grid>
-                                    <Grid container spacing={2}>
+                                    </Grid>
                                     <Grid item xs={6}>
+                                    <img src={photoUrl} width="150" height="150" />
+                                    <input onChange={(evt) => onChange(evt)}
+                                        type="text"
+                                        id="img"
+                                        placeholder="upload your image URL"
+                                    />
+                                    <TextField
+                                        id="outlined-basic"
+                                        variant="outlined"
+                                        size="small"
+                                        type="text"
+                                        name="name"
+                                        required
+                                        label="Input Wallet Id"
+                                        onChange={(evt) => { setWalletID(evt.target.value) }}
+                                    />
+                                      </Grid>
+                                   
+                                    <Grid container spacing={2}>
+                                    <Grid item xs={12}>
                                     <TextField
                                         id="outlined-basic"
                                         variant="outlined"
@@ -154,33 +180,14 @@ export function CreateCampaign(props) {
                                         name="name"
                                         required
                                         fullWidth
+                                        multiline
+                                        rows={8}
                                         label="Description"
                                         onChange={(evt) => { setDescription(evt.target.value) }}
                                     />
                                     </Grid>
                                     <Grid container spacing={2}>
-                                    <Grid item xs={6}>
-                                    <img src={photoUrl} width="150" height="150" />
-                                    <input onChange={(evt) => { setPhotoUrl(evt.target.value) }}
-                                        type="file"
-                                        id="img"
-                                        accept="image/*"
-                                        placeholder="upload campaign image"
-                                    />
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-basic"
-                                        variant="outlined"
-                                        size="small"
-                                        type="text"
-                                        name="name"
-                                        required
-                                        fullWidth
-                                        label="Input Wallet Id"
-                                        onChange={(evt) => { setWalletID(evt.target.value) }}
-                                    />
-                                      </Grid>
+                                
                                      </Grid>
                                     </Grid>
                                      <Grid item xs={12} align='right'>
@@ -190,6 +197,7 @@ export function CreateCampaign(props) {
                                     </Grid>
                                 </Grid>
                             </form>
+                            </FormControl>
                         </Container>
                     </div>
 
