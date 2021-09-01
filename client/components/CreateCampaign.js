@@ -76,6 +76,7 @@ export function CreateCampaign(props) {
                     </Grid>
                     <div>
                         <Container maxWidth="sm">
+                            <FormControl variant='outlined'>
                             <form onSubmit={(e) => onSubmit(e, token)}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={6}>
@@ -116,13 +117,14 @@ export function CreateCampaign(props) {
                                     </Grid>
                                     <Grid item xs={6}>
                                     <TextField
-                                        onChange={(evt) => { setCategory(evt.target.value)}}
+                                        required
                                         id="category"
                                         select
-                                        required
-                                        variant="outlined"
-                                        fullWidth
                                         label="Category"
+                                        fullWidth
+                                        margin="normal"
+                                        variant="outlined"
+                                        onChange={(evt) => { setCategory(evt.target.value)}}
                                     >
                                         <MenuItem value="select">Select</MenuItem>
                                         <MenuItem value="Arts">Arts</MenuItem>
@@ -182,6 +184,7 @@ export function CreateCampaign(props) {
                                     </Grid>
                                 </Grid>
                             </form>
+                            </FormControl>
                         </Container>
                     </div>
 
