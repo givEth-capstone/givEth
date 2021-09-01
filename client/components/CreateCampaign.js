@@ -23,8 +23,11 @@ export function CreateCampaign(props) {
     const token = window.localStorage.token;
 
     function onChange (evt){
-        setPhotoUrl(URL.createObjectURL(evt.target.files[0]))
-        console.log('here is the crazy url thing',URL.createObjectURL(evt.target.files[0]))
+        setPhotoUrl(evt.target.value)
+        // console.log('here is the crazy url thing',URL.createObjectURL(evt.target.files[0]))
+        // might have to start a new database for this because postgres does allow images saved
+        // can't use local url 
+        // might need to use firebase or other database to do this. 
     }
 
     function onSubmit(e, token) {
@@ -87,8 +90,6 @@ export function CreateCampaign(props) {
                                             label="Cause Name"
                                             onChange={(evt) => { setname(evt.target.value) }}
                                         /> 
-                                    </Grid>
-                                    <Grid item xs={6}>
                                     <TextField
                                         id="outlined-basic"
                                         variant="outlined"
@@ -100,10 +101,7 @@ export function CreateCampaign(props) {
                                         label="Location"
                                         onChange={(evt) => { setlocation(evt.target.value) }}
                                     />
-                                    </Grid>
-                                    </Grid>
-                                    <Grid container spacing={2}>
-                                    <Grid item xs={6} >
+                                     <Grid item xs={6} >
                                     <TextField 
                                         id="outlined-basic"
                                         variant="outlined"
@@ -140,8 +138,29 @@ export function CreateCampaign(props) {
                                         <MenuItem value="Hunger">Hunger</MenuItem>
                                     </Select>
                                     </Grid>
-                                    <Grid container spacing={2}>
+                                    </Grid>
                                     <Grid item xs={6}>
+                                    <img src={photoUrl} width="150" height="150" />
+                                    <input onChange={(evt) => onChange(evt)}
+                                        type="text"
+                                        id="img"
+                                        // accept="image/*"
+                                        placeholder="upload your image URL"
+                                    />
+                                    <TextField
+                                        id="outlined-basic"
+                                        variant="outlined"
+                                        size="small"
+                                        type="text"
+                                        name="name"
+                                        required
+                                        label="Input Wallet Id"
+                                        onChange={(evt) => { setWalletID(evt.target.value) }}
+                                    />
+                                      </Grid>
+                                   
+                                    <Grid container spacing={2}>
+                                    <Grid item xs={12}>
                                     <TextField
                                         id="outlined-basic"
                                         variant="outlined"
@@ -150,33 +169,14 @@ export function CreateCampaign(props) {
                                         name="name"
                                         required
                                         fullWidth
+                                        multiline
+                                        rows={8}
                                         label="Description"
                                         onChange={(evt) => { setDescription(evt.target.value) }}
                                     />
                                     </Grid>
                                     <Grid container spacing={2}>
-                                    <Grid item xs={6}>
-                                    <img src={photoUrl} width="150" height="150" />
-                                    <input onChange={(evt) => onChange(evt)}
-                                        type="file"
-                                        id="img"
-                                        accept="image/*"
-                                        placeholder="upload campaign image"
-                                    />
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-basic"
-                                        variant="outlined"
-                                        size="small"
-                                        type="text"
-                                        name="name"
-                                        required
-                                        fullWidth
-                                        label="Input Wallet Id"
-                                        onChange={(evt) => { setWalletID(evt.target.value) }}
-                                    />
-                                      </Grid>
+                                
                                      </Grid>
                                     </Grid>
                                      <Grid item xs={12} align='right'>
