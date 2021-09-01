@@ -1,13 +1,12 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Typography, Grid, FormLabel, InputLabel, FormControl, TextField } from '@material-ui/core';
-import { Redirect } from 'react-router-dom'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
+
 
 const colortheme = createTheme({
     palette: {
@@ -53,6 +52,7 @@ export function CreateCampaign(props) {
     }
 
     async function createCampaign(body, token) {
+
         try {
             if (token) {
                 const { data } = await axios.post(`/api/campaigns/create`, body, { headers: { authorization: token } });
@@ -75,17 +75,16 @@ export function CreateCampaign(props) {
                 </div>
                 :
                 <div>
-                    <Grid container >
-                    <Grid item xs={12} align='center' >
+                    <Grid container>
+                    <Grid item xs={12} m={6} >
                     <Typography component="h2" variant="h4" align="center" color="primary" style={{ padding: 25 }} >
                         Create Your Cause
                     </Typography>
                     </Grid>
                     </Grid>
                     <div>
-                        <Container maxWidth="sm">
-                            <FormControl variant='outlined'>
-                            <form onSubmit={(e) => onSubmit(e, token)}>
+                        <Container maxWidth="md">
+                            <FormControl >
                                 <Grid container spacing={2}>
                                     <Grid item xs={6}>
                                         <TextField
@@ -165,7 +164,7 @@ export function CreateCampaign(props) {
                                         onChange={(evt) => { setWalletID(evt.target.value) }}
                                     />
                                       </Grid>
-                                   
+
                                     <Grid container spacing={2}>
                                     <Grid item xs={12}>
                                     <TextField
@@ -182,17 +181,21 @@ export function CreateCampaign(props) {
                                         onChange={(evt) => { setDescription(evt.target.value) }}
                                     />
                                     </Grid>
+
                                     <Grid container spacing={2}>
-                                
                                      </Grid>
                                     </Grid>
                                      <Grid item xs={12} align='right'>
-                                    <Button variant="contained" color='primary' type="submit" style={{ color: '#FFFFFF'}}
+                                    <Button 
+                                    variant="contained" 
+                                    color='primary' 
+                                    type="submit" 
+                                    style={{ color: '#FFFFFF'}}
+                                    onClick={(e) => onSubmit(e, token)}
                                      >Create Cause
                                      </Button>
                                     </Grid>
                                 </Grid>
-                            </form>
                             </FormControl>
                         </Container>
                     </div>
@@ -200,12 +203,10 @@ export function CreateCampaign(props) {
                     <div>
                         <h4>
                             Not sure where to start? Take a look at some <Link href="/campaigns" color="primary">examples</Link> here!
-                            
                         </h4>
                     </div>
                 </div>
-            }
-            </ThemeProvider>
+ } </ThemeProvider>
         </div >
     )
 }
