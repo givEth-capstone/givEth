@@ -156,7 +156,6 @@ export function CreateCampaign(props) {
                                     <input onChange={(evt) => onChange(evt)}
                                         type="text"
                                         id="img"
-                                        // accept="image/*"
                                         placeholder="upload your image URL"
                                     />
                                     <TextField
