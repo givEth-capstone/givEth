@@ -17,7 +17,17 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import Loading from './Loading.js';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
+const colortheme = createTheme({
+  palette: {
+    primary: { main: "#00457C", contrastText: "#000" },
+    secondary: { main: "#0079C1", contrastText: "#000" },
+    black: {main: "#000000", contrastText:"FFF"},
+    white: "#FFFFFF",
+  }
+});
 const useStyles = makeStyles(() => ({
   action: {
     display: 'flex',
@@ -119,6 +129,7 @@ export default function Campaigns() {
 
   return (
     <div className={classes.container}>
+      <ThemeProvider theme={colortheme}>
       <div>
         <FormControl className={classes.formControl}>
           <InputLabel id='select-label'>
@@ -143,7 +154,7 @@ export default function Campaigns() {
 
       <div className={classes.gridContainer}>
         {!selectedCampaigns.length ? (
-          <h1 className={classes.message}>No Campaigns Yet!</h1>
+          <Loading/>
         ) : (
           <Grid container>
             {selectedCampaigns.map((campaign) => {
@@ -167,9 +178,9 @@ export default function Campaigns() {
                       </Typography>
                     </CardContent>
                     <CardActions className={classes.action}>
-                      <Link to={`/campaigns/${campaign.id}`}>
-                        <Button className={classes.button} variant='contained'>
-                          See More
+                    <Link to={`/campaigns/${campaigns[campaigns.length-3].id}`}>
+                       <Button variant='contained' color ='primary' style={{ color: '#FFFFFF'}}>
+                        See More
                         </Button>
                       </Link>
                     </CardActions>
@@ -180,6 +191,7 @@ export default function Campaigns() {
           </Grid>
         )}
       </div>
+      </ThemeProvider>
     </div>
   );
 };

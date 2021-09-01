@@ -19,6 +19,9 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import useStyles from '/public/styles.js';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Loading from './Loading.js';
+
+import history from '../history'
 
 const colortheme = createTheme({
   palette: {
@@ -107,11 +110,15 @@ export function Profile(props) {
         <div>
           <ThemeProvider theme={colortheme}>
             { !isLoggedIn ? 
-            <div>
-                {"Please Log In or Sign Up"}
-                <Login/>
-                <Signup/>
-            </div>  
+            // <div >
+            //     {"Please Log In or Sign Up"}
+            //     <Login/>
+            //     <Signup/>
+            // </div>  
+            history.push({
+              pathname: `/login`,
+              //state: { txHash, accounts, donationEth },
+            })
             :
             <div>
               { campaigns.length ? 
@@ -215,9 +222,7 @@ export function Profile(props) {
                       }
                 </div>
                 :
-                <div>
-                  <h4>Loading Campaigns</h4>
-                </div>
+                <Loading/>
               }
             </div> 
           } 
