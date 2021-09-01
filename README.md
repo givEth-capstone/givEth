@@ -9,19 +9,21 @@ If you're running the application locally in a testing environment, please downl
 ## Technologies
 
 ** Front-End **
-*JavaScript
-*React
-*Material-UI
-*Web3
-*MetaMask
-*Truffle
-*Ganache
-*Redux
+
+*JavaScript  
+*React  
+*Material-UI  
+*Web3  
+*MetaMask  
+*Truffle  
+*Ganache  
+*Redux  
 
 ** Back-End **
-*Express
-*Sequelize
-*Postgres
-*JSON Web Token
-*Bcrypt
+
+*Express  
+*Sequelize  
+*Postgres  
+*JSON Web Token  
+*Bcrypt  
 
