@@ -6,6 +6,7 @@ import { logout } from '../store';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
+
 const useStyles = makeStyles(() => ({
   container: {
     backgroundColor: '#00457C',
@@ -16,6 +17,7 @@ const useStyles = makeStyles(() => ({
     maxWidth: '100vw',
     alignContent: 'space-between',
     height: 80,
+
   },
   img: {
     height: 60,
@@ -90,7 +92,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
           )}
         </div>
       </nav>
-      <hr />
     </div>
   );
 };
