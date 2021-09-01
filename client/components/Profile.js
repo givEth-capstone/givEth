@@ -19,6 +19,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import useStyles from '/public/styles.js';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Loading from './Loading.js';
 
 import history from '../history'
 
@@ -221,9 +222,7 @@ export function Profile(props) {
                       }
                 </div>
                 :
-                <div>
-                  <h4>Loading Campaigns</h4>
-                </div>
+                <Loading/>
               }
             </div> 
           } 

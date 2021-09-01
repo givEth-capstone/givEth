@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { LinearProgress } from '@material-ui/core/LinearProgress';
+import Loading from './Loading.js';
 
 const useStyles = makeStyles({
   content: {
@@ -102,7 +103,7 @@ export default function SingleCampaign(props) {
   return (
     <div className={classes.test}>
       {campaign.length < 1 ? (
-        <h1>Nothing to see.</h1>
+        <Loading/>
       ) : (
         
         <Grid
