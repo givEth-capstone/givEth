@@ -99,7 +99,7 @@ export default function SingleCampaign(props) {
 
   return (
     <div className={classes.test}>
-      {campaign.length < 1 ? (
+      {campaign.length ? (
         <Loading/>
       ) : (
         

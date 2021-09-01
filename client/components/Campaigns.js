@@ -149,9 +149,7 @@ export default function Campaigns() {
       </div>
 
       <div className={classes.gridContainer}>
-        {!selectedCampaigns.length ? (
-          <Loading/>
-        ) : (
+        {selectedCampaigns.length ?  (
           <Grid container>
             {selectedCampaigns.map((campaign) => {
               return (
@@ -184,9 +182,11 @@ export default function Campaigns() {
               );
             })}
           </Grid>
-        )}
+        ): (
+          <Loading/>
+        ) }
       </div>
       </ThemeProvider>
     </div>
   );
-};
+}
