@@ -75,7 +75,7 @@ const classes = useStyles();
       <div className={classes.root}>
       <Grid container spacing={3} >
       <Grid item xs={12}>
-        <Typography component="h1" variant="h3" align="center" color="secondary" >
+        <Typography component="h1" variant="h3" align="center" color="primary" >
            Starting a Campaign is Easy
         </Typography>
       </Grid>
@@ -133,7 +133,7 @@ const classes = useStyles();
     </Grid>
     </Grid>
       {!campaigns.length ? (
-        <h1>No Campaigns Yet</h1>
+        <h1>No Campaign Yet</h1>
       ) : (
         <div className={classes.root}>
           <Grid container spacing={2} justifyContent='center' >
@@ -156,7 +156,7 @@ const classes = useStyles();
               {campaigns[random].info}
             </Typography>
           </CardContent>
-          <CardActions>
+          <CardActions >
             <Link to={`/campaigns/${campaigns[random].id}`}>
               <Button size="small" color='primary' variant= 'contained' style={{ color: '#FFFFFF'}}>
                 See More
@@ -176,7 +176,7 @@ const classes = useStyles();
     <div className={classes.root}>
     <Grid container spacing={3} >
     <Grid item xs={12}>
-    <Typography component="h1" variant="h3" align="center" color="secondary" >
+    <Typography component="h1" variant="h3" align="center" color="primary" >
         Most Recent Campaigns
      </Typography>
     </Grid>

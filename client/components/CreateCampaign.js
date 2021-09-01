@@ -6,6 +6,17 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
+
+const colortheme = createTheme({
+    palette: {
+      primary: { main: "#00457C", contrastText: "#000" },
+      secondary: { main: "#0079C1", contrastText: "#000" },
+      black: {main: "#000000", contrastText:"FFF"},
+      white: "#FFFFFF",
+    }
+  });
 
 export function CreateCampaign(props) {
     const { isLoggedIn } = props
@@ -50,15 +61,16 @@ export function CreateCampaign(props) {
 
     return (
         <div>
+            <ThemeProvider theme={colortheme}>
             {!isLoggedIn ?
                 <div>
                     <Redirect to='/profile'> </Redirect>
                 </div>
                 :
                 <div>
-                    <Grid container spacing={2}>
-                    <Grid item xs={12} align='center'>
-                    <Typography component="h2" variant="h4" align="center" color="primary" gutterBottom>
+                    <Grid container >
+                    <Grid item xs={12} align='center' >
+                    <Typography component="h2" variant="h4" align="center" color="primary" style={{ padding: 25 }} >
                         Create Your Cause
                     </Typography>
                     </Grid>
@@ -172,7 +184,9 @@ export function CreateCampaign(props) {
                                      </Grid>
                                     </Grid>
                                      <Grid item xs={12} align='right'>
-                                    <Button variant="contained" color='primary' type="submit" >Create Cause</Button>
+                                    <Button variant="contained" color='primary' type="submit" style={{ color: '#FFFFFF'}}
+                                     >Create Cause
+                                     </Button>
                                     </Grid>
                                 </Grid>
                             </form>
@@ -181,11 +195,13 @@ export function CreateCampaign(props) {
 
                     <div>
                         <h4>
-                            Not sure where to start? Take a look at some <a href="http://localhost:8080/campaigns">examples</a> here!
+                            Not sure where to start? Take a look at some <Link href="http://localhost:8080/campaigns" color="primary">examples</Link> here!
+                            
                         </h4>
                     </div>
                 </div>
             }
+            </ThemeProvider>
         </div >
     )
 }
