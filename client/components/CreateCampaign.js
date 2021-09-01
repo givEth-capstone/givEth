@@ -195,7 +195,7 @@ export function CreateCampaign(props) {
 
                     <div>
                         <h4>
-                            Not sure where to start? Take a look at some <Link href="http://localhost:8080/campaigns" color="primary">examples</Link> here!
+                            Not sure where to start? Take a look at some <Link href="/campaigns" color="primary">examples</Link> here!
                             
                         </h4>
                     </div>
