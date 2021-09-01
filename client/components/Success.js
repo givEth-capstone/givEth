@@ -22,9 +22,7 @@ export default function Success(props) {
         margin="30px"
         justifyContent="center"
       >
-        <Link to={`/campaigns`}>
-          Back to All Campaigns
-        </Link>
+       
         <SingleCampaign id={props.match.params.id} donationEth={props.location.state.donationEth}/>
       </Grid>
     </div>

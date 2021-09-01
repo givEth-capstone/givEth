@@ -178,7 +178,7 @@ export default function Campaigns() {
                       </Typography>
                     </CardContent>
                     <CardActions className={classes.action}>
-                    <Link to={`/campaigns/${campaigns[campaigns.length-3].id}`}>
+                    <Link to={`/campaigns/${campaign.id}`}>
                        <Button variant='contained' color ='primary' style={{ color: '#FFFFFF'}}>
                         See More
                         </Button>

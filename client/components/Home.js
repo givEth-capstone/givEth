@@ -1,4 +1,5 @@
 import React, {useEffect,useState} from 'react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -10,7 +11,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core'
-import Link from '@material-ui/core/Link';
 import useStyles from '/public/styles.js';
 import Paper from '@material-ui/core/Paper';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -63,7 +63,7 @@ const classes = useStyles();
             <Typography variant="h5" color="inherit" paragraph>
             Anonymous, Ethereum-based Crowdfunding
             </Typography>
-            <Link href="/about" color="primary">
+            <Link to="/about" color="primary">
               continue reading...
             </Link>
           </div>
