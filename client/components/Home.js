@@ -1,8 +1,8 @@
 import React, {useEffect,useState} from 'react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-// import background from 'assets/paper-globe-hands.jpg'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,7 +10,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core'
-import Link from '@material-ui/core/Link';
 import useStyles from '/public/styles.js';
 import Paper from '@material-ui/core/Paper';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -63,7 +62,7 @@ const classes = useStyles();
             <Typography variant="h5" color="inherit" paragraph>
             Anonymous, Ethereum-based Crowdfunding
             </Typography>
-            <Link href="/about" color="primary">
+            <Link to="/about" color="primary">
               continue reading...
             </Link>
           </div>
@@ -186,7 +185,6 @@ const classes = useStyles();
         <h1>No recent campaigns</h1>
       ) : (
         <div >
-          {/* <Grid container direction="row" alignItems="center" justifyContent="center"> */}
           <Grid container spacing={2} className={classes.root}>
 
             <Grid item xs={4}>
@@ -196,7 +194,6 @@ const classes = useStyles();
               component='img'
               alt='Campaign Image'
               height='200'
-              // className={classes.submedia}
               image={campaigns[campaigns.length-1].photoUrl}
               title={campaigns[campaigns.length-1].name}
             />

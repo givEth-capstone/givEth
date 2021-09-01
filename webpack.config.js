@@ -28,7 +28,6 @@ module.exports = {
       stream: require.resolve('stream-browserify'),
       assert: false,
       util: false,
-      // http: false,
       https: false,
       os: false,
       url: false,

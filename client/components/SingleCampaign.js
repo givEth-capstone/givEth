@@ -29,10 +29,8 @@ const useStyles = makeStyles({
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
-    // height: '80vh',
   },
   media: {
-    // height: '70vh', 
     height: 400,
     width: 700,
     margin: '0 auto',
@@ -42,7 +40,7 @@ const useStyles = makeStyles({
     borderRadius: '6px',
     height: '20px',
     //background: '#36B8E9' /* For browsers that do not support gradients */,
-    background: '-webkit-linear-gradient(-90deg, #71F7F2, #36B8E9)', /* For Safari 5.1 to 6.0 */
+    background: '-webkit-linear-gradient(-90deg, #71F7F2, #36B8E9)', 
     zIndex: 333,
     boxShadow:
       'inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08)',
@@ -71,8 +69,7 @@ const useStyles = makeStyles({
 });
 
 export default function SingleCampaign(props) {
-  //const progress = props.campaign
-  const campaignID = props.match ? props.match.params.id : props.id;//created this terniary bc I need to call this component in my Success function.
+  const campaignID = props.match ? props.match.params.id : props.id; //created this ternary bc I need to call this component in my Success function.
   const classes = useStyles();
   let [campaign, setCampaign] = React.useState([]);
   let [width, setWidth] = useState(0);

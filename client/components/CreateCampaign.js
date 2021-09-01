@@ -35,10 +35,6 @@ export function CreateCampaign(props) {
 
     function onChange (evt){
         setPhotoUrl(evt.target.value)
-        // console.log('here is the crazy url thing',URL.createObjectURL(evt.target.files[0]))
-        // might have to start a new database for this because postgres does allow images saved
-        // can't use local url 
-        // might need to use firebase or other database to do this. 
     }
 
     function onSubmit(e, token) {
@@ -217,8 +213,6 @@ export function CreateCampaign(props) {
 
 const mapState = state => {
     return {
-        // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-        // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
         isLoggedIn: !!state.auth.id
     }
 }

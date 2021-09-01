@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//changing color from 'primary' to the blue in nav bar so it matches
 const TypographyColor = withStyles({
   root: {
     color: '#00457C',
@@ -29,14 +28,12 @@ export default function About() {
     <div className={classes.root}>
       <Grid container justifyContent='center' alignItems='center'>
         <Grid item xs={6} className={classes.container} m={10}>
-          {/* need to vertically align header and text better */}
           <TypographyColor
             component='h1'
             variant='h3'
             align='center'
             m={10}
             spacing={2}
-            // padding='6'
           >
             Why givEth?
           </TypographyColor>
@@ -63,7 +60,7 @@ export default function About() {
         </Grid>
       </Grid>
 
-      {/* middle section -- step by step */}
+      {/* middle section*/}
 
       <Grid container spacing={2} justifyContent='center' alignItems='center'>
         <Divider style={{ width: '100%', marginTop: 50, marginBottom: 50 }} />
@@ -121,7 +118,7 @@ export default function About() {
         <Divider style={{ width: '100%', marginTop: 50, marginBottom: 50 }} />
       </Grid>
 
-      {/* bottom section -- how does it work? + button */}
+      {/* bottom section */}
 
       <Grid container className={classes.container} m={5} alignItems='center'>
         {/* center button horizontally */}
@@ -138,7 +135,7 @@ export default function About() {
 
             <div>
               <a href='https://metamask.io/download.html' target='_blank'>
-                {/* make button color match text and nav bar */}
+
                 <Button variant='contained'> Download MetaMask </Button>
               </a>
             </div>
@@ -146,7 +143,7 @@ export default function About() {
         </Grid>
 
         <Grid item xs={6}>
-          {/* need to vertically align header and text better */}
+    
           <TypographyColor component='h1' variant='h3' align='center'>
             How does givEth work?
           </TypographyColor>

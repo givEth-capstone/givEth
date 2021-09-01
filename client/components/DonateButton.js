@@ -102,7 +102,6 @@ export default function DonateButton(props) {
           params: [txHash],
         });
         let donationEth = web3.utils.toBN(transaction.value) / wei.toString();
-        // returns it in wei, so we gotta get it back to ether to send to the backend. Hence the dividiing by wei.
         await updateReceived(donationEth);
         history.push({
           pathname: `/campaigns/${props.id}/success`,

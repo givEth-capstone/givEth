@@ -11,9 +11,8 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(() => ({
   background: {
-    //backgroundColor:"#00457C",
     backgroundImage: 'url("/assets/people.png")' ,
-    height: '90vh',// trying to find a way for the height to take up the entire screen, but not sure.
+    height: '100vh',
     display: 'flex',
 
   },
@@ -43,9 +42,6 @@ const useStyles = makeStyles(() => ({
   
 }));
 
-/**
- * COMPONENT
- */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
   const classes = useStyles();
