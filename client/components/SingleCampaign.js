@@ -30,6 +30,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     margin: '0 auto',
+    // maxWidth: 800,
   },
   media: {
     height: 400,
@@ -47,8 +48,11 @@ const useStyles = makeStyles({
     boxShadow:
       'inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08)',
   },
-  barDiv: {
-    margin: '0 auto',
+  info: {
+    // should this be the typography itself or a container div
+    maxWidth: 700,
+    textAlign: 'center'
+
   },
   glass: {
     width: 700,
@@ -138,11 +142,11 @@ export default function SingleCampaign(props) {
                 <Typography gutterBottom variant='h5' component='h2'>
                   {campaign.title}
                 </Typography>
-                <Typography gutterBottom variant='h5' component='h2'>
+                <Typography gutterBottom variant='h5' component='h2' className={classes.info}>
                   {campaign.info}
                 </Typography>
                 {/* beginning of progress bar */}
-                <div className={classes.barDiv}>
+                
                   <div className={classes.goal}>
                     <Typography gutterBottom variant='h5' component='h2'>
                       RAISED: {campaign.received} ETH
@@ -158,7 +162,7 @@ export default function SingleCampaign(props) {
                       style={{ width: `${width}%` }}
                     ></div>
                   </div>
-                </div>
+                
               </CardContent>
 
               {props.donationEth ? (
