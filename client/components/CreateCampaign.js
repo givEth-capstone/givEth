@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import {Redirect} from 'react-router-dom';
 
+
 const colortheme = createTheme({
     palette: {
       primary: { main: "#00457C", contrastText: "#000" },
@@ -58,7 +59,7 @@ export function CreateCampaign(props) {
                 const { data } = await axios.post(`/api/campaigns/create`, body, { headers: { authorization: token } });
                 props.history.push('/campaigns');
             } else {
-                props.history.push('/profile');
+                props.history.push('/login');
             }
         } catch (err) {
             console.log(err);
@@ -69,9 +70,9 @@ export function CreateCampaign(props) {
 
         <div>
             <ThemeProvider theme={colortheme}>
-            {!isLoggedIn ?
+            {!window.localStorage.token ?
                 <div>
-                    <Redirect to='/profile'> </Redirect>
+                    <Redirect to='/login'> </Redirect>
                 </div>
                 :
                 <div>
