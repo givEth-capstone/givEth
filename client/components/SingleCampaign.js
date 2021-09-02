@@ -23,12 +23,13 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    padding: '10px'
+    padding: '10px',
   },
   root: {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
+    margin: '0 auto',
   },
   media: {
     height: 400,
@@ -37,20 +38,24 @@ const useStyles = makeStyles({
   },
   progress: {
     float: 'left',
+    margin: '0 auto',
     borderRadius: '6px',
     height: '20px',
     //background: '#36B8E9' /* For browsers that do not support gradients */,
-    background: '-webkit-linear-gradient(-90deg, #71F7F2, #36B8E9)', 
+    background: '-webkit-linear-gradient(-90deg, #71F7F2, #36B8E9)',
     zIndex: 333,
     boxShadow:
       'inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08)',
+  },
+  info: {
+    maxWidth: 700,
+    textAlign: 'center'
   },
   glass: {
     width: 700,
     height: '20px',
     borderRadius: '6px',
     background: '#ee0e0',
-    float: 'left',
     overflow: 'hidden',
     backgroundColor: '#dee0e0',
     boxShadow: '0 2px 3px rgba(0,0,0,.5) inset',
@@ -61,11 +66,11 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     alignItems: 'baseline',
     width: 700,
-    marginTop: '20px'
+    marginTop: '20px',
   },
-  test:{
-    alignContent: 'center'
-  }
+  test: {
+    alignContent: 'center',
+  },
 });
 
 export default function SingleCampaign(props) {
@@ -100,29 +105,25 @@ export default function SingleCampaign(props) {
   return (
     <div className={classes.test}>
       {campaign.length ? (
-        <Loading/>
+        <Loading />
       ) : (
-        
         <Grid
           container
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          justify="center"
+          direction='column'
+          alignItems='center'
+          justifyContent='center'
+          justifyContent='center'
           spacing={0}
         >
-          <Link to={`/campaigns`}>
-          Back to All Campaigns
-        </Link>
+          <Link to={`/campaigns`}>Back to All Campaigns</Link>
           <Grid item>
-          
             <Card className={classes.content}>
               <CardContent>
                 <Typography
                   gutterBottom
-                  variant="h3"
-                  component="h2"
-                  fontWeight="bold"
+                  variant='h3'
+                  component='h2'
+                  fontWeight='bold'
                 >
                   {campaign.name}
                 </Typography>
@@ -134,37 +135,42 @@ export default function SingleCampaign(props) {
               />
 
               <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant='h5' component='h2'>
                   {campaign.title}
                 </Typography>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant='h5' component='h2' className={classes.info}>
                   {campaign.info}
                 </Typography>
+                {/* beginning of progress bar */}
+                
+                  <div className={classes.goal}>
+                    <Typography gutterBottom variant='h5' component='h2'>
+                      RAISED: {campaign.received} ETH
+                    </Typography>
+                    <Typography gutterBottom variant='h5' component='h2'>
+                      NEEDED: {campaign.needed} ETH
+                    </Typography>
+                  </div>
 
-                <div className={classes.goal}>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    RAISED: {campaign.received} ETH
-                  </Typography>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    NEEDED: {campaign.needed} ETH
-                  </Typography>
-                </div>
-
-                <div className={classes.glass}>
-                  <div
-                    className={classes.progress}
-                    style={{ width: `${width}%` }}
-                  ></div>
-                </div>
+                  <div className={classes.glass}>
+                    <div
+                      className={classes.progress}
+                      style={{ width: `${width}%` }}
+                    ></div>
+                  </div>
+                
               </CardContent>
 
               {props.donationEth ? (
-                <div className={classes.content} >
-                  <img src="/assets/heart.png" alt="heart image" height="50px" width="50px" />
+                <div className={classes.content}>
+                  <img
+                    src='/assets/heart.png'
+                    alt='heart image'
+                    height='50px'
+                    width='50px'
+                  />
                   <span>Thank you for your kind donation.</span>
-                  <span>
-                    Donation summary: {props.donationEth} ETH{" "}
-                  </span>
+                  <span>Donation summary: {props.donationEth} ETH </span>
                 </div>
               ) : (
                 <CardActions>
