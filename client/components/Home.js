@@ -16,6 +16,8 @@ import Paper from '@material-ui/core/Paper';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
+import Loading from './Loading.js';
+
 const colortheme = createTheme({
   palette: {
     primary: { main: "#00457C", contrastText: "#000" },
@@ -132,9 +134,7 @@ const classes = useStyles();
      </Typography>
     </Grid>
     </Grid>
-      {!campaigns.length ? (
-        <h1>No Campaign Yet</h1>
-      ) : (
+      {campaigns.length ?  (
         <div className={classes.root}>
           <Grid container spacing={2} justifyContent='center' >
           <Grid item xs={4} >
@@ -143,7 +143,7 @@ const classes = useStyles();
           <CardMedia
             component='img'
             alt='Campaign Image'
-            height='250'
+            height='400'
             className={classes.featuredImg}
             image={campaigns[random].photoUrl}
             title={campaigns[random].name}
@@ -168,7 +168,9 @@ const classes = useStyles();
           </Grid>
           </Grid>
         </div>
-      )}
+      ): (
+        <Loading/>
+      ) }
 
 
 
@@ -182,9 +184,7 @@ const classes = useStyles();
     </Grid>
     </Grid>
     </div>
-      {!campaigns.length ? (
-        <h1>No recent campaigns</h1>
-      ) : (
+      {campaigns.length ?   (
         <div >
           <Grid container spacing={2} className={classes.root}>
 
@@ -194,7 +194,7 @@ const classes = useStyles();
             <CardMedia
               component='img'
               alt='Campaign Image'
-              height='200'
+              height='400'
               image={campaigns[campaigns.length-1].photoUrl}
               title={campaigns[campaigns.length-1].name}
             />
@@ -223,7 +223,7 @@ const classes = useStyles();
             <CardMedia
               component='img'
               alt='Campaign Image'
-              height='200'
+              height='400'
               className={classes.submedia}
               image={campaigns[campaigns.length-2].photoUrl}
               title={campaigns[campaigns.length-2].name}
@@ -253,7 +253,7 @@ const classes = useStyles();
             <CardMedia
               component='img'
               alt='Campaign Image'
-              height='200'
+              height='400'
               className={classes.submedia}
               image={campaigns[campaigns.length-3].photoUrl}
               title={campaigns[campaigns.length-3].name}
@@ -278,6 +278,8 @@ const classes = useStyles();
             </Grid>
             </Grid>
         </div>
+      ) : (
+        <Loading/>
       )}
   </ThemeProvider>
   </div>
