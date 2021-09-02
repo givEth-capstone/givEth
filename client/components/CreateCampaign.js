@@ -6,17 +6,8 @@ import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
-<<<<<<< HEAD
-import {Redirect} from 'react-router-dom';
-
-=======
-<<<<<<< HEAD
 import {Redirect} from 'react-router-dom'
 
-=======
-import { Redirect } from 'react-router-dom';
->>>>>>> 1f791d4079199398010a3d92328874d06fb414ae
->>>>>>> main
 
 const colortheme = createTheme({
     palette: {
@@ -68,7 +59,7 @@ export function CreateCampaign(props) {
                 const { data } = await axios.post(`/api/campaigns/create`, body, { headers: { authorization: token } });
                 props.history.push('/campaigns');
             } else {
-                props.history.push('/login');
+                props.history.push('/profile');
             }
         } catch (err) {
             console.log(err);
@@ -79,20 +70,12 @@ export function CreateCampaign(props) {
 
         <div>
             <ThemeProvider theme={colortheme}>
-<<<<<<< HEAD
-            {!window.localStorage.token ?
-                <div>
-                    <Redirect to='/login'> </Redirect>
-                </div>
-                :
-=======
                 {
             /* {!isLoggedIn ?
                 <div>
                     <Redirect to='/profile'> </Redirect>
                 </div> */}
                 {/* : */}
->>>>>>> main
                 <div>
                     <Grid container>
                         <Grid item xs={12} m={6} >
