@@ -6,12 +6,8 @@ import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
-<<<<<<< HEAD
 import {Redirect} from 'react-router-dom'
 
-=======
-import { Redirect } from 'react-router-dom';
->>>>>>> 1f791d4079199398010a3d92328874d06fb414ae
 
 const colortheme = createTheme({
     palette: {
