@@ -94,15 +94,15 @@ const RecentCards = (props) => {
       <div className={classes.titleContainer} style={{ backgroundImage: `url('assets/paper-globe-plants.jpg')` }}>
       <div className={classes.overlay}/>
 
-      <Grid container spacing={3} alignItems="center" justifyContent="center" alignContent="center">
+      <Grid container spacing={3} alignItems="left" justifyContent="left" alignContent="left" >
         <Grid item className={classes.mainFeaturedPostContent} >
-            <Typography component="h1" variant="h3" color= 'inherit' align="center" gutterBottom >
+            <Typography component="h2" variant="h1" color= 'inherit' align="left" gutterBottom >
               givEth
             </Typography>
             <Typography variant="h5" color='inherit' align="center" gutterBottom>
             Anonymous, Ethereum-based Crowdfunding
             </Typography>
-            <Typography  align="center" >
+            <Typography  align="left" >
              <Link href="/about" color="inherit" underline="always" >
               Learn More
               </Link>

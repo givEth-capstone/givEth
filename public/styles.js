@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
 },
   titleContainer: {
     position: 'relative',
-    height:300,
+    height:750,
     backgroundColor: 'white',
     color: theme.palette.common.white,
     padding: theme.spacing(5),
@@ -34,8 +34,9 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     // margin: 'auto',
     marginTop: 40,
-    justifyContent: 'center',
-    alignItems:'center',
+     justifyContent: 'left',
+    // alignItems:'center-left',
+    padding: 2,
     zIndex: 3,
     },
   card: {
