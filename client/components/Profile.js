@@ -80,7 +80,6 @@ export function Profile(props) {
   fetchUser(token);
       }, []);
       
-
     let currentCampaigns = []
     let pastCampaigns = []
     if(campaigns.length) {
@@ -92,6 +91,7 @@ export function Profile(props) {
         }
       })
     }
+
     return( 
         <div>
           <ThemeProvider theme={colortheme}>
