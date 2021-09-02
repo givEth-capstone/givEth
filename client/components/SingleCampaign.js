@@ -30,7 +30,6 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     margin: '0 auto',
-    // maxWidth: 800,
   },
   media: {
     height: 400,
@@ -57,7 +56,6 @@ const useStyles = makeStyles({
     height: '20px',
     borderRadius: '6px',
     background: '#ee0e0',
-    // float: 'left',
     overflow: 'hidden',
     backgroundColor: '#dee0e0',
     boxShadow: '0 2px 3px rgba(0,0,0,.5) inset',
