@@ -50,8 +50,12 @@ router.post('/create', requireToken, async (req, res, next) => {
 router.put('/:id/success', async (req, res, next) => {
   try {
     const campaign = await Campaign.findByPk(req.params.id)
+    console.log('SUCCCESS', req.body)
     const updatedReceived = Number(campaign.received) + Number(req.body.receiveAmt)
     await campaign.update({received: updatedReceived})
+    if(updatedReceived >= campaign.needed){
+      await campaign.update({status:false})
+    }
     res.sendStatus(200)
   } catch (error) {
     next(error)
