@@ -6,16 +6,16 @@ import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const colortheme = createTheme({
     palette: {
-      primary: { main: "#00457C", contrastText: "#000" },
-      secondary: { main: "#0079C1", contrastText: "#000" },
-      black: {main: "#000000", contrastText:"FFF"},
-      white: "#FFFFFF",
+        primary: { main: "#00457C", contrastText: "#000" },
+        secondary: { main: "#0079C1", contrastText: "#000" },
+        black: { main: "#000000", contrastText: "FFF" },
+        white: "#FFFFFF",
     }
-  });
+});
 
 
 
@@ -32,7 +32,7 @@ export function CreateCampaign(props) {
 
     const token = window.localStorage.token;
 
-    function onChange (evt){
+    function onChange(evt) {
         setPhotoUrl(evt.target.value)
     }
 
@@ -69,69 +69,58 @@ export function CreateCampaign(props) {
 
         <div>
             <ThemeProvider theme={colortheme}>
-            {!isLoggedIn ?
+                {
+            /* {!isLoggedIn ?
                 <div>
                     <Redirect to='/profile'> </Redirect>
-                </div>
-                :
+                </div> */}
+                {/* : */}
                 <div>
                     <Grid container>
-                    <Grid item xs={12} m={6} >
-                    <Typography component="h2" variant="h4" align="center" color="primary" style={{ padding: 25 }} >
-                        Create Your Cause
-                    </Typography>
+                        <Grid item xs={12} m={6} >
+                            <Typography component="h2" variant="h4" align="center" color="primary" style={{ padding: 25 }} >
+                                Create Your Cause
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    </Grid>
-                    <div>
-                        <Container maxWidth="md">
-                            <FormControl >
-                                <Grid container spacing={2}>
-                                    <Grid item xs={6}>
-                                        <TextField
-                                            id="cause name"
-                                            variant="outlined"
-                                            size="small"
-                                            type="text"
-                                            name="name"
-                                            required
-                                            fullWidth
-                                            label="Cause Name"
-                                            onChange={(evt) => { setname(evt.target.value) }}
-                                        /> 
+                    <Container maxWidth="sm">
+                        <FormControl >
+                            <Grid container spacing={10}>
+                                <Grid item xs={6}>
                                     <TextField
-                                        id="outlined-basic"
+                                        id="cause name"
                                         variant="outlined"
                                         size="small"
                                         type="text"
+                                        margin="dense"
                                         name="name"
                                         required
+                                        fullWidth
+                                        label="Cause Name"
+                                        onChange={(evt) => { setname(evt.target.value) }}
+                                    />
+                                    <TextField
+                                        required
+                                        id="outlined-basic"
+                                        size="small"
+                                        type="text"
+                                        name="name"
+                                        margin="dense"
                                         fullWidth
                                         label="Location"
+                                        variant="outlined"
                                         onChange={(evt) => { setlocation(evt.target.value) }}
                                     />
-                                     <Grid item xs={6} >
-                                    <TextField 
-                                        id="outlined-basic"
-                                        variant="outlined"
-                                        size="small"
-                                        type="number"
-                                        name="name"
-                                        required
-                                        fullWidth
-                                        label="Amount Needed"
-                                        onChange={(evt) => { setNeeded(evt.target.value) }}
-                                    />
-                                    </Grid>
-                                    <Grid item xs={6}>
                                     <TextField
                                         required
                                         id="category"
                                         select
+                                        size="small"
                                         label="Category"
                                         fullWidth
-                                        margin="normal"
+                                        margin="dense"
                                         variant="outlined"
-                                        onChange={(evt) => { setCategory(evt.target.value)}}
+                                        onChange={(evt) => { setCategory(evt.target.value) }}
                                     >
                                         <MenuItem value="select">Select</MenuItem>
                                         <MenuItem value="Arts">Arts</MenuItem>
@@ -144,29 +133,47 @@ export function CreateCampaign(props) {
                                         <MenuItem value="Housing">Housing</MenuItem>
                                         <MenuItem value="Hunger">Hunger</MenuItem>
                                     </TextField>
-                                    </Grid>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                    <img src={photoUrl} width="150" height="150" />
-                                    <input onChange={(evt) => onChange(evt)}
-                                        type="text"
-                                        id="img"
-                                        placeholder="upload your image URL"
+                                    <TextField
+                                        id="outlined-basic"
+                                        variant="outlined"
+                                        size="small"
+                                        type="number"
+                                        name="name"
+                                        margin="dense"
+                                        required
+                                        fullWidth
+                                        label="Amount Needed"
+                                        onChange={(evt) => { evt.target.value < 0 ? (evt.target.value = 0) : setNeeded(evt.target.value) }}
                                     />
+                                </Grid>
+                                <Grid item xs={6} align='center'>
+                                    <img src={photoUrl} width="230" height="145" />
+                                    <TextField
+                                        variant="outlined"
+                                        size="small"
+                                        margin="normal"
+                                        type="text"
+                                        fullWidth
+                                        id="img"
+                                        placeholder="Image URL"
+                                        onChange={(evt) => onChange(evt)}
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={10}>
+                                <Grid item xs={12}>
                                     <TextField
                                         id="outlined-basic"
                                         variant="outlined"
                                         size="small"
                                         type="text"
+                                        margin="dense"
+                                        fullWidth
                                         name="name"
                                         required
                                         label="Input Wallet Id"
                                         onChange={(evt) => { setWalletID(evt.target.value) }}
                                     />
-                                      </Grid>
-
-                                    <Grid container spacing={2}>
-                                    <Grid item xs={12}>
                                     <TextField
                                         id="outlined-basic"
                                         variant="outlined"
@@ -174,39 +181,39 @@ export function CreateCampaign(props) {
                                         type="text"
                                         name="name"
                                         required
+                                        margin="dense"
                                         fullWidth
                                         multiline
-                                        rows={8}
+                                        rows={10}
                                         label="Description"
                                         onChange={(evt) => { setDescription(evt.target.value) }}
                                     />
-                                    </Grid>
-
-                                    <Grid container spacing={2}>
-                                     </Grid>
-                                    </Grid>
-                                     <Grid item xs={12} align='right'>
-                                    <Button 
-                                    variant="contained" 
-                                    color='primary' 
-                                    type="submit" 
-                                    style={{ color: '#FFFFFF'}}
-                                    onClick={(e) => onSubmit(e, token)}
-                                     >Create Cause
-                                     </Button>
-                                    </Grid>
                                 </Grid>
-                            </FormControl>
-                        </Container>
-                    </div>
-
-                    <div>
-                        <h4>
-                            Not sure where to start? Take a look at some <Link href="/campaigns" color="primary">examples</Link> here!
-                        </h4>
-                    </div>
+                            </Grid>
+                            <Grid container spacing={3}>
+                                <Grid item xs={12} align='center'style={{padding: '30px'}} >
+                                    <Button
+                                        variant="contained"
+                                        mt={3}
+                                        color='primary'
+                                        type="submit"
+                                        style={{ color: '#FFFFFF' }}
+                                        onClick={(e) => onSubmit(e, token)}
+                                    >Create Cause
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} align='center'>
+                            <Typography component="h10" variant="h10" align="center">
+                                Not sure where to start? Take a look at some <Link href="/campaigns" color="primary">examples</Link> here!
+                            </Typography>
+                        </Grid>
+                            </Grid>
+                        </FormControl>
+                       
+                    </Container>
                 </div>
- } </ThemeProvider>
+                {/* } */}
+            </ThemeProvider>
         </div >
     )
 }
