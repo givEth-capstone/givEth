@@ -171,7 +171,7 @@ export function CreateCampaign(props) {
                                         fullWidth
                                         name="name"
                                         required
-                                        label="Input Wallet Id"
+                                        label="Enter Wallet ID"
                                         onChange={(evt) => { setWalletID(evt.target.value) }}
                                     />
                                     <TextField
