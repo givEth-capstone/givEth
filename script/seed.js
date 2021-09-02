@@ -88,7 +88,7 @@ const [Nicky, Farha, Amber, Rachel] = users;
       status: false
     }),
     Campaign.create({
-      name: 'Safe shelther for LGBTQ youth',
+      name: 'Safe shelter for LGBTQ youth',
       walletId: '0xA809dC9335f4ADDD26AED1A94a553ea054aFA7b2', 
       location: 'Kabul',
       needed: 4,

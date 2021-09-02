@@ -62,7 +62,8 @@ export default function About() {
 
       {/* middle section*/}
 
-      <Grid container spacing={2} justifyContent='center' alignItems='center'>
+      <Grid container spacing={2} justifyContent='center' alignItems='center' >
+      {/* style={{backgroundColor:'lightgrey'}}  might add this + padding in the middle section instead of divider*/}
         <Divider style={{ width: '100%', marginTop: 50, marginBottom: 50 }} />
 
         <Grid item xs={4}>
