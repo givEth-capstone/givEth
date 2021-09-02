@@ -31,24 +31,88 @@ const colortheme = createTheme({
   }
 });
 
-export function Profile(props) {
+export default function Profile(props) {
   const token = window.localStorage.token;
-  const {isLoggedIn} = props
   let [user, setUser] = React.useState(); 
   const classes = useStyles();
   const [selectedTab,setSelectedTab] = React.useState(1);
   const [campaigns, setCampaigns] = React.useState([])
 
-
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
   }
 
+
+  
+  const ProfileCard = (props) => {
+    return (
+      <div>
+        
+          <Grid item className={classes.card}>
+            <Card key={props.campaigns.id} style={{width: 400, height: 400, display: 'flex', flexDirection: 'column', justifyContent: 'space-between'} }>
+
+                <CardMedia
+                  component="img"
+                  alt="Campaign Image"
+                  height="200"
+                  className={classes.media}
+                  image={props.campaigns.photoUrl}
+                  title={props.campaigns.name}
+                />
+         
+                <CardContent style={{height:180}}>
+                  <Typography gutterBottom variant="h6" component="h3">
+                    {props.campaigns.name}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    textOverflow="ellipsis"
+                  >
+                    {props.campaigns.info}
+                  </Typography>
+                </CardContent>
+
+                
+                <CardActionArea styles={{display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}>
+                <CardActions>
+                  <Link to={`/campaigns/${props.campaigns.id}`}>
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="primary"
+                      style={{ color: "#FFFFFF" }}
+                    >
+                      See More
+                    </Button>
+                  </Link>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={props.campaigns.status}
+                        onChange={(e) => handleToggle(props.campaigns.id, e)}
+                        name={`${props.name}`}
+                        color="primary"
+                      />
+                    }
+                    label={`${props.status}`}
+                  />
+                </CardActions>
+              </CardActionArea>
+            </Card>
+          </Grid>
+      </div>
+    );
+  };
+  
+
   async function handleToggle(id, event){
     const status =  {status: event.target.checked}
       try{
+ 
         const {data} = await axios.put(`/api/campaigns/${id}`, status );
         const campaignToUpdate = data
+        //need explanation for what is being doing. Can we use filter instead?
         setCampaigns(campaigns.map((campaign) => {
           if(campaign.id === campaignToUpdate.id) {
             return campaignToUpdate
@@ -56,30 +120,33 @@ export function Profile(props) {
             return campaign
           }
         }))
+
       }catch(err){
         console.log(err)
       }
-  };
+  }
   console.log("after TOGGLE REUPDATE", campaigns)
 
-  useEffect( () => {
+  useEffect(() => {
+    console.log("PROFILE USE EFFECT")
     async function fetchUser(token) {
-      try{
-        if(token){
-          const {data} = await axios.get(`/api/users`, {headers: { Authorization: token }});
-          setUser(data)
-          setCampaigns(data.campaigns) 
-        } 
-        else{
+      try {
+        if (token) {
+          const { data } = await axios.get(`/api/users`, {
+            headers: { Authorization: token },
+          });
+          setUser(data);
+          setCampaigns(data.campaigns);
+          console.log("COMPLETED GET USER")
+        } else {
           console.log("NOT LOGGED IN", window.localStorage);
         }
-      }catch(err){
-          console.log(err);
+      } catch (err) {
+        console.log(err);
       }
-  }
-  fetchUser(token);
-      }, []);
-      
+    }
+    fetchUser(token);
+  }, []);
 
     let currentCampaigns = []
     let pastCampaigns = []
@@ -95,13 +162,13 @@ export function Profile(props) {
     return( 
         <div>
           <ThemeProvider theme={colortheme}>
-            { !isLoggedIn ? 
+            { !window.localStorage.token?
             history.push({
               pathname: `/login`
             })
             :
             <div>
-              { campaigns.length ? 
+              { user ? 
                 <div>
                 <Typography component="h2" variant="h5" align="center" color="primary" className={classes.message}>
                   {user.username}
@@ -118,42 +185,15 @@ export function Profile(props) {
                       </Typography>
                       </div>
                       :
-                      currentCampaigns.map ((campaigns) => {
+                      <Grid container  className={classes.root}>
+                      {currentCampaigns.map ((campaigns) => {
                         return(
-                          <Grid container spacing={2} className={classes.root}>
-                          <Grid item xs={4} className={classes.card}>
-                          <Card key={campaigns.id}>
-                          <CardActionArea>
-                          <CardMedia
-                            component='img'
-                            alt='Campaign Image'
-                            height='200'
-                            className={classes.media}
-                            image={campaigns.photoUrl}
-                            title={campaigns.name}
-                          />
-                          <CardContent>
-                          <Typography gutterBottom variant='h6' component='h3'>
-                            {campaigns.name}
-                          </Typography>
-                          <Typography variant='body2' component='p' textOverflow="ellipsis">
-                            {campaigns.info}
-                          </Typography>
-                            </CardContent>
-                            <CardActions>
-                              <Link to={`/campaigns/${campaigns.id}`}>
-                                <Button size="small" variant='contained' color ='primary' style={{ color: '#FFFFFF'}}>
-                                  See More
-                                </Button>
-                              </Link>
-                              <FormControlLabel control={<Switch checked={campaigns.status} onChange={ e => handleToggle(campaigns.id,e)} name="active" color="primary" /> }label="Active"/>
-                            </CardActions>
-                            </CardActionArea>
-                            </Card>
-                            </Grid>
-                          </Grid>
+                          
+                          <ProfileCard campaigns={campaigns} name={"active"} status={"Active"}/>
+                          
                             ); 
-                          })
+                          })}
+                          </Grid>
                       :
                       pastCampaigns.length < 1 ? 
                         <div className={classes.message}>
@@ -162,42 +202,15 @@ export function Profile(props) {
                           </Typography>
                         </div>
                         :
-                        pastCampaigns.map ((campaigns) => {
+                        <Grid container spacing={2} className={classes.root}>
+                        {pastCampaigns.map ((campaigns) => {
                           return(
-                            <Grid container spacing={2} className={classes.root}>
-                              <Grid item xs={4} className={classes.card}>
-                              <Card key={campaigns.id}>
-                              <CardActionArea>
-                                <CardMedia
-                                  component='img'
-                                  alt='Campaign Image'
-                                  height='200'
-                                  className={classes.media}
-                                  image={campaigns.photoUrl}
-                                  title={campaigns.name}
-                                />
-                                <CardContent>
-                                  <Typography gutterBottom variant='h6' component='h3'>
-                                    {campaigns.name}
-                                  </Typography>
-                                  <Typography variant='body2' component='p' textOverflow="ellipsis">
-                                    {campaigns.info}
-                                  </Typography>
-                                </CardContent>
-                                <CardActions>
-                                <Link to={`/campaigns/${campaigns.id}`}>
-                                  <Button size="small" variant='contained' color ='primary' style={{ color: '#FFFFFF'}}>
-                                    See More
-                                  </Button>
-                                </Link>
-                                <FormControlLabel control={<Switch checked={campaigns.status} onChange={ e => handleToggle(campaigns.id,e)} name="inactive" color="primary" /> }label="Inactive"/>
-                                </CardActions>
-                              </CardActionArea>
-                              </Card>
-                              </Grid>
-                            </Grid>
+                            
+                            <ProfileCard campaigns={campaigns} name={"inactive"} status={"Inactive"}/>
+                            
                             ); 
-                          })
+                          })}
+                        </Grid>
                       }
                 </div>
                 :
@@ -210,13 +223,4 @@ export function Profile(props) {
     )
 }
 
-const mapState = state => {
-    return {
-      isLoggedIn: !!state.auth.id
-    }
-  }
 
-
-
-  export default connect(mapState, null)(Profile)
-  
