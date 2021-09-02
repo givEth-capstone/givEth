@@ -190,8 +190,8 @@ export function CreateCampaign(props) {
                                     />
                                 </Grid>
                             </Grid>
-                            <Grid container spacing={3}>
-                                <Grid item xs={12} align='center'style={{padding: '30px'}} >
+                            <Grid container>
+                                <Grid item xs={12} align='center'style={{margin: '25px'}} >
                                     <Button
                                         variant="contained"
                                         mt={3}
@@ -202,7 +202,7 @@ export function CreateCampaign(props) {
                                     >Create Cause
                                     </Button>
                                 </Grid>
-                                <Grid item xs={12} align='center'>
+                                <Grid item xs={12} align='center' style={{marginBottom: '50px'}}>
                             <Typography component="h10" variant="h10" align="center">
                                 Not sure where to start? Take a look at some <Link href="/campaigns" color="primary">examples</Link> here!
                             </Typography>
