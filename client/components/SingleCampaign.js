@@ -49,10 +49,8 @@ const useStyles = makeStyles({
       'inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08)',
   },
   info: {
-    // should this be the typography itself or a container div
     maxWidth: 700,
     textAlign: 'center'
-
   },
   glass: {
     width: 700,
