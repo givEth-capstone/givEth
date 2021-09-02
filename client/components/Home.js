@@ -29,7 +29,7 @@ const colortheme = createTheme({
 
 export const Home = props => {
   const [campaigns, setCampaigns] = useState([]);
-  
+    console.log("CAMPAIGNS", campaigns)
   useEffect(() => {
     async function fetchData() {
       try {
@@ -49,6 +49,44 @@ function randomFunc() {
 }
 randomFunc()
 const classes = useStyles();
+
+const recentCampaigns = [campaigns[campaigns.length-1], campaigns[campaigns.length-2], campaigns[campaigns.length-3]]
+console.log('RECENT ARR', recentCampaigns)
+
+const RecentCards = (props) => {
+  return(
+    <div>
+        <Grid item className={classes.card}>
+        <Card key={props.campaign.id} style={{width: 400, height: 400, display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}} >
+        <CardMedia
+        component='img'
+        alt='Campaign Image'
+        height='200'
+        image={props.campaign.photoUrl}
+        title={props.campaign.name}
+        />
+        <CardContent className={classes.cardContentHeight}>
+        <Typography gutterBottom variant='h6' component='h3'>
+          {props.campaign.name}
+        </Typography>
+        <Typography variant='body2' component='p' className={classes.overflow}>
+          {props.campaign.info}
+        </Typography>
+        </CardContent>
+        <CardActionArea styles={{display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}> 
+        <CardActions>
+        <Link href={`/campaigns/${props.campaign.id}`}>
+          <Button size="small" color='primary' variant='contained' style={{ color: '#FFFFFF'}}>
+            See More
+          </Button>
+        </Link>
+        </CardActions>
+        </CardActionArea>
+        </Card>
+        </Grid>
+    </div>
+  )
+}
 
   return (
     <div >
@@ -152,7 +190,7 @@ const classes = useStyles();
             <Typography gutterBottom variant='h5' component='h2'>
               {campaigns[random].name}
             </Typography>
-            <Typography variant='body2' component='p'>
+            <Typography variant='body2' component='p' className={classes.overflow}>
               {campaigns[random].info}
             </Typography>
           </CardContent>
@@ -173,7 +211,6 @@ const classes = useStyles();
       ) }
 
 
-
 {/* MOST RECENT CAMPAIGNS */}
     <div className={classes.root}>
     <Grid container spacing={3} >
@@ -184,103 +221,18 @@ const classes = useStyles();
     </Grid>
     </Grid>
     </div>
-      {campaigns.length ?   (
-        <div >
-          <Grid container spacing={2} className={classes.root}>
-
-            <Grid item xs={4}>
-            <Card className={classes.card}>
-            <CardActionArea>
-            <CardMedia
-              component='img'
-              alt='Campaign Image'
-              height='400'
-              image={campaigns[campaigns.length-1].photoUrl}
-              title={campaigns[campaigns.length-1].name}
-            />
-              <CardContent className={classes.cardContentHeight}>
-              <Typography gutterBottom variant='h6' component='h3'>
-                {campaigns[campaigns.length-1].name}
-              </Typography>
-              <Typography variant='body2' component='p' textOverflow="ellipsis">
-                {campaigns[campaigns.length-1].info}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Link href={`/campaigns/${campaigns[campaigns.length-1].id}`}>
-                <Button size="small" color='primary' variant='contained' style={{ color: '#FFFFFF'}}>
-                  See More
-                </Button>
-              </Link>
-            </CardActions>
-            </CardActionArea>
-            </Card>
-            </Grid>
-
-            <Grid item xs={4}>
-            <Card className={classes.card}>
-            <CardActionArea>
-            <CardMedia
-              component='img'
-              alt='Campaign Image'
-              height='400'
-              className={classes.submedia}
-              image={campaigns[campaigns.length-2].photoUrl}
-              title={campaigns[campaigns.length-2].name}
-            />
-              <CardContent className={classes.cardContentHeight}>
-              <Typography gutterBottom variant='h6' component='h3'>
-                {campaigns[campaigns.length-2].name}
-              </Typography>
-              <Typography variant='body2' component='p' textOverflow="ellipsis">
-                {campaigns[campaigns.length-2].info}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Link href={`/campaigns/${campaigns[campaigns.length-2].id}`}>
-                <Button size="small" color='primary' variant='contained' style={{ color: '#FFFFFF'}}>
-                  See More
-                </Button>
-              </Link>
-            </CardActions>
-            </CardActionArea>
-            </Card>
-            </Grid>
-
-            <Grid item xs={4}>
-            <Card className={classes.card}>
-            <CardActionArea>
-            <CardMedia
-              component='img'
-              alt='Campaign Image'
-              height='400'
-              className={classes.submedia}
-              image={campaigns[campaigns.length-3].photoUrl}
-              title={campaigns[campaigns.length-3].name}
-            />
-               <CardContent className={classes.cardContentHeight}>
-              <Typography gutterBottom variant='h6' component='h3'>
-                {campaigns[campaigns.length-3].name}
-              </Typography>
-              <Typography variant='body2' component='p' textOverflow="ellipsis">
-                {campaigns[campaigns.length-3].info}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Link href={`/campaigns/${campaigns[campaigns.length-3].id}`}>
-                <Button size="small" variant='contained' color ='primary' style={{ color:'#FFFFFF'}}>
-                  See More
-                </Button>
-              </Link>
-            </CardActions>
-            </CardActionArea>
-            </Card>
-            </Grid>
-            </Grid>
-        </div>
+    {campaigns.length ? 
+      (
+        <Grid container className={classes.root}>
+          {recentCampaigns.map((campaign) => {
+            return (
+           <RecentCards campaign={campaign} />
+            );
+        })}
+        </Grid>
       ) : (
         <Loading/>
-      )}
+    )}
   </ThemeProvider>
   </div>
   );

@@ -2,9 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'row',
     padding: theme.spacing(2),
-    padding: theme.spacing(3),
+    justifyContent: 'center',
+    alignItems:'center',
+    flexWrap: 'wrap',
 },
   titleContainer: {
     position: 'relative',
@@ -41,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'center',
       alignItems:'center',
       borderRadius: 12,
-      padding: 'auto',
-      minHeight: 400
+      padding: '30px',
+      height: 400,
   },
   steps: {
     display: 'flex',
@@ -70,6 +73,13 @@ const useStyles = makeStyles((theme) => ({
     featuredImg: {
       maxHeight: 350,
     },
-  }));
+    overflow: {
+      overflow: "hidden",
+      display: "-webkit-box",
+      WebkitLineClamp: 4,
+      WebkitBoxOrient: "vertical"
+    }
+  }
+  ));
   
   export default useStyles;

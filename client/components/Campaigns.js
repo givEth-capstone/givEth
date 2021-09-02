@@ -32,7 +32,6 @@ const useStyles = makeStyles(() => ({
   },
   container: {
     display: 'flex',
-    justifyContent: 'space-evenly',
     flexDirection: 'row',
     maxWidth: '100vw',
   },
@@ -44,7 +43,7 @@ const useStyles = makeStyles(() => ({
   formControl: {
     margin: 20,
     minWidth: 200,
-    padding: 20,
+    padding: 20
   },
   gridContainer: {
     justifyContent: 'flex-start',
@@ -84,6 +83,7 @@ export default function Campaigns() {
   const classes = useStyles();
   const [campaigns, setCampaigns] = useState([]);
   const [selectedCampaigns, setSelectedCampaigns] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [tag, setTag] = useState('All Campaigns');
 
   const tags = [
@@ -102,11 +102,11 @@ export default function Campaigns() {
   useEffect(() => {
     async function fetchData() {
       try {
-
-
+        setLoading(true)
         const response = await axios.get('/api/campaigns');
         setCampaigns(response.data);
         setSelectedCampaigns(response.data);
+        setLoading(false)
       } catch (err) {
         console.log(err);
       }
@@ -149,9 +149,13 @@ export default function Campaigns() {
       </div>
 
       <div className={classes.gridContainer}>
-        {selectedCampaigns.length ?  (
+        {loading ? 
+        (
+          <Loading/>
+        ):
+         (
           <Grid container>
-            {selectedCampaigns.map((campaign) => {
+            {selectedCampaigns.sort((a, b) => a.name.localeCompare(b.name)).map((campaign) => {
               return (
                 <Grid item key={campaign.id}>
                   <Card className={classes.root}>
@@ -180,10 +184,9 @@ export default function Campaigns() {
                   </Card>
                 </Grid>
               );
-            })}
+            })
+            }
           </Grid>
-        ): (
-          <Loading/>
         ) }
       </div>
       </ThemeProvider>
