@@ -27,3 +27,20 @@ If you're running the application locally in a testing environment, please downl
 * JSON Web Token  
 * Bcrypt  
 
+## Developers
+
+Amber Abreu:
+[LinkedIn](https://www.linkedin.com/in/amber-abreu/) /
+[GitHub](https://github.com/AmberAbreu)
+
+Farha Lina:
+[LinkedIn](https://www.linkedin.com/in/farhalina/) /
+[GitHub](https://github.com/farhalina)
+
+Rachel Kahtan:
+[LinkedIn](https://www.linkedin.com/in/rachel-kahtan/) /
+[GitHub](https://github.com/rkahtan)
+
+Nicky Zou:
+[LinkedIn](https://www.linkedin.com/in/nicky-zou/) /
+[GitHub](https://github.com/nicky-z)
