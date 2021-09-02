@@ -72,8 +72,6 @@ export default function Profile(props) {
                     {props.campaigns.info}
                   </Typography>
                 </CardContent>
-
-                
                 <CardActionArea styles={{display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}>
                 <CardActions>
                   <Link to={`/campaigns/${props.campaigns.id}`}>
