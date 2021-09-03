@@ -17,6 +17,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { LinearProgress } from '@material-ui/core/LinearProgress';
 import Loading from './Loading.js';
 
+import Confetti from 'react-dom-confetti';
+
 const useStyles = makeStyles({
   content: {
     display: 'flex',
@@ -78,6 +80,25 @@ export default function SingleCampaign(props) {
   const classes = useStyles();
   let [campaign, setCampaign] = React.useState([]);
   let [width, setWidth] = useState(0);
+  const [confetti, setConfetti] = useState(false)
+
+  const config = {
+    angle: "155",
+    spread: 360,
+    startVelocity: "96",
+    elementCount: "128",
+    dragFriction: "0.17",
+    duration: "5380",
+    stagger: "5",
+    width: "10px",
+    height: "16px",
+    perspective: "441px",
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a", "#00457C"]
+  };
+
+  useEffect(() => {
+    setConfetti(true)
+  })
 
   useEffect(() => {
     async function getCampaign(id) {
@@ -169,6 +190,7 @@ export default function SingleCampaign(props) {
                     height='50px'
                     width='50px'
                   />
+                  <Confetti active={ confetti } config={ config }/>
                   <span>Thank you for your kind donation.</span>
                   <span>Donation summary: {props.donationEth} ETH </span>
                 </div>

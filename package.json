@@ -38,6 +38,7 @@
     "node-polyfill-webpack-plugin": "^1.1.4",
     "pg": "^8.7.1",
     "prettier": "^2.3.2",
+    "react-dom-confetti": "^0.2.0",
     "sequelize": "^6.6.5",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
