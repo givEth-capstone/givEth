@@ -79,7 +79,7 @@ export default function About() {
             Step 1
           </TypographyColor>
           <Typography variant='h5' align='center'>
-            Install Metamask on your browser
+            Install MetaMask on your browser
           </Typography>
         </Grid>
 
