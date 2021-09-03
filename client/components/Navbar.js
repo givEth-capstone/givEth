@@ -13,10 +13,10 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    maxWidth: '100vw',
+    // maxWidth: '100vw',
     alignContent: 'space-between',
     height: 80,
-
+    width: '100%' 
   },
   img: {
     height: 60,
@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const classes = useStyles();
   return (
-    <div>
+    // <div>
       <nav className={classes.container}>
         <img className={classes.img} src='https://i.imgur.com/hPqLWJx.png'/>
         <div className={classes.navLinks}>
@@ -87,7 +87,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
           )}
         </div>
       </nav>
-    </div>
+    // </div>
   );
 };
 
