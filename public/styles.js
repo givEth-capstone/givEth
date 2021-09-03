@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: 12,
       padding: '30px',
       height: 400,
+      margin: '10px'
   },
   steps: {
     display: 'flex',
