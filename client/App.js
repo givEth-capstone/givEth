@@ -9,10 +9,10 @@ import { Web3ReactProvider } from '@web3-react/core'
 const App = () => {
   return (
     <Web3ReactProvider>
-      <div>
+      {/* <div> */}
         <Navbar />
           <Routes />
-      </div>
+      {/* </div> */}
     </Web3ReactProvider>
   ); 
 

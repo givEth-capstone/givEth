@@ -17,7 +17,8 @@ If you're running the application locally in a testing environment, please downl
 * MetaMask  
 * Truffle  
 * Ganache  
-* Redux  
+* Redux
+* Axios  
 
 **Back-End**
 

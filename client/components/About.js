@@ -26,7 +26,7 @@ export default function About() {
 
   return (
     <div className={classes.root}>
-      <Grid container justifyContent='center' alignItems='center'>
+      <Grid container style={{ width: '100%' }}>
         <Grid item xs={6} className={classes.container} m={10}>
           <TypographyColor
             component='h1'
@@ -34,6 +34,7 @@ export default function About() {
             align='center'
             m={10}
             spacing={2}
+            style={{ marginBottom: 30, marginTop: 50 }}
           >
             Why givEth?
           </TypographyColor>
@@ -47,24 +48,23 @@ export default function About() {
             our top priority.
           </Typography>
         </Grid>
-
-        <Grid item xs={6}>
+        <Grid item xs={6} align='right' className={classes.container}>
           <img
-            src='assets/paper-mache-globe-hands.jpg'
+            // src='assets/paper-mache-globe-hands.jpg'
+            src='assets/people.png'
+            // height='97.5%'
+            // width='93%'
             height='100%'
             width='100%'
             align='right'
-            className={classes.container}
-            m={5}
           ></img>
         </Grid>
       </Grid>
 
       {/* middle section*/}
 
-      <Grid container spacing={2} justifyContent='center' alignItems='center' >
-      {/* style={{backgroundColor:'lightgrey'}}  might add this + padding in the middle section instead of divider*/}
-        <Divider style={{ width: '100%', marginTop: 50, marginBottom: 50 }} />
+      <Grid container spacing={2} justifyContent='center' alignItems='center' style={{ backgroundColor: 'rgb(245, 247, 250)' }}>
+        <Divider style={{ width: '100%', backgroundColor: 'rgb(245, 247, 250)', marginTop: 5, marginBottom: 50 }} />
 
         <Grid item xs={4}>
           <Typography variant='h4' align='center' color='primary'>
@@ -116,19 +116,20 @@ export default function About() {
             Spread the word!
           </Typography>
         </Grid>
-        <Divider style={{ width: '100%', marginTop: 50, marginBottom: 50 }} />
+        <Divider style={{ width: '100%', backgroundColor: 'rgb(245, 247, 250)', marginTop: 50, marginBottom: 5 }} />
       </Grid>
 
       {/* bottom section */}
 
-      <Grid container className={classes.container} m={5} alignItems='center'>
+      <Grid container m={5} alignItems='center'>
         {/* center button horizontally */}
-        <Grid item xs={6} align='center'>
+        <Grid item xs={6} align='center' item xs={6} className={classes.container}>
           <div>
             <div>
               <img
-                src='assets/MetaMask-cropped.png'
-                align='right'
+                // src='assets/MetaMask-cropped.png'
+                src='assets/MetaMask-super-cropped.png'
+                align='center'
                 height='100%'
                 width='100%'
               ></img>
@@ -137,15 +138,14 @@ export default function About() {
             <div>
               <a href='https://metamask.io/download.html' target='_blank'>
 
-                <Button variant='contained'> Download MetaMask </Button>
+                <Button variant='contained' style={{backgroundColor:'#00457C', color: 'white'}} > Download MetaMask </Button>
               </a>
             </div>
           </div>
         </Grid>
 
-        <Grid item xs={6}>
-    
-          <TypographyColor component='h1' variant='h3' align='center'>
+        <Grid item xs={6} className={classes.container} m={10}>
+          <TypographyColor component='h1' variant='h3' align='center' style={{ marginBottom: 30 }}>
             How does givEth work?
           </TypographyColor>
           <Typography variant='body1' align='center'>
@@ -154,10 +154,12 @@ export default function About() {
             of the work to create an anonymous wallet for you. Once you have a
             wallet, you can connect it to a campaign you create, or use it to
             send funds to others. It's as simple as that.
+            <Typography style={{marginTop: 30}} align='center'>
+              100% of the donations are sent to the campaigns. givEth does not takEth any percentage of any contributions.
+            </Typography>
           </Typography>
         </Grid>
       </Grid>
-
       <Divider style={{ width: '100%' }} />
     </div>
   );
