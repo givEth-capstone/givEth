@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import {Redirect} from 'react-router-dom'
-
+import history from '../history'
 
 const colortheme = createTheme({
     palette: {
@@ -59,7 +59,7 @@ export function CreateCampaign(props) {
                 const { data } = await axios.post(`/api/campaigns/create`, body, { headers: { authorization: token } });
                 props.history.push('/campaigns');
             } else {
-                props.history.push('/profile');
+                props.history.push('/login');
             }
         } catch (err) {
             console.log(err);
@@ -70,12 +70,7 @@ export function CreateCampaign(props) {
 
         <div>
             <ThemeProvider theme={colortheme}>
-                {
-            /* {!isLoggedIn ?
-                <div>
-                    <Redirect to='/profile'> </Redirect>
-                </div> */}
-                {/* : */}
+            { (window.localStorage.token) ?  
                 <div>
                     <Grid container>
                         <Grid item xs={12} m={6} >
@@ -213,7 +208,10 @@ export function CreateCampaign(props) {
                        
                     </Container>
                 </div>
-                {/* } */}
+                : history.push({
+                    pathname: `/login`
+                  }) }
+
             </ThemeProvider>
         </div >
     )
