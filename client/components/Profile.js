@@ -19,7 +19,6 @@ import useStyles from '/public/styles.js';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Loading from './Loading.js';
-
 import history from '../history'
 
 const colortheme = createTheme({
