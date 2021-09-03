@@ -99,6 +99,7 @@ export default function Campaigns() {
     'Hunger',
   ];
 
+  //hook runs on first mount to fetch all campaigns and set campaigns AND selected campaigns
   useEffect(() => {
     async function fetchData() {
       try {
@@ -114,6 +115,7 @@ export default function Campaigns() {
     fetchData();
   }, []);
 
+  //hook runs when tag changes to set selected campaigns to the correct subset, or all campaigns
   useEffect(() => {
     if (tag === 'All Campaigns') {
       setSelectedCampaigns(campaigns);
@@ -127,6 +129,7 @@ export default function Campaigns() {
     <div className={classes.container}>
       <ThemeProvider theme={colortheme}>
       <div>
+         {/* dropdown menu of tag options */}
         <FormControl className={classes.formControl}>
           <InputLabel id='select-label'>
             Select a tag to view campaigns
@@ -147,7 +150,7 @@ export default function Campaigns() {
           </Select>
         </FormControl>
       </div>
-
+      {/* loading component OR display of selected campaigns sorted by name */}
       <div className={classes.gridContainer}>
         {loading ? 
         (
